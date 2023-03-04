@@ -1,0 +1,57 @@
+nav .navbar-brand{
+    margin-left: 30px;
+    width: 10px;
+    margin-right: 50px;
+}
+
+nav .pizza-logo{
+    width: 60px;
+    margin-right: 50px;
+}
+
+nav .nav-link {
+    margin-right: 70px;
+    margin-left:70px;
+    margin-top: 10px;
+    padding-bottom: 24px;
+    width:100px;
+    color:white;
+}
+nav .nav-link:hover{
+    color: #424242;
+}
+
+nav .nav-link:focus{
+    color: white;
+}
+
+nav .dropdown-menu{
+    background-color:#d54b43;
+}
+
+nav .nav-item{
+    font-weight: 450;
+    font-size:17px;
+}
+
+nav .navbar-nav {
+    margin-right: 30px;
+    margin-left:100px;
+    text-align: center;
+    font-size: 70px;
+}
+
+nav{
+    height: 60px;
+    background-color:#d54b43;
+}
+
+footer {
+    width: 80%;
+    position:fixed;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 20px;
+    bottom: 0;
+}
