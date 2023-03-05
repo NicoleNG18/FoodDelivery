@@ -1,0 +1,61 @@
+.delivery-image{
+    width: 600px;
+    margin-bottom: 20px;
+}
+
+body {
+    /* background-image: url('download\ \(1\).jfif');  */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    background-color: rgb(234, 153, 153);
+    margin-top: 120px;
+}
+
+.form-group{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.main-form{
+    background-color: #d54b43;
+    border-radius: 25px;
+    width:450px;
+    height: 340px;
+    margin-top: 80px;
+    margin-left: 15px;
+}
+
+.errors{
+    width:350px;
+    height: 26px;
+    background-color: rgb(234, 153, 153);
+    font-weight:600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    margin-top: 8px;
+    margin-left: 50px;
+    margin-right:50px;
+}
+
+.material-icons{
+    filter: brightness(100);
+    margin-left:30px;
+    width:10px;
+    margin-top:30px;
+    size: 150px;
+    color: aqua;
+}
+.btn{
+    background-color: white;
+    color:#424242;
+}
+
+.btn:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease
+}
+

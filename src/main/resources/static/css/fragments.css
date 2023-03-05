@@ -12,13 +12,17 @@ nav .pizza-logo{
 nav .nav-link {
     margin-right: 70px;
     margin-left:70px;
-    margin-top: 10px;
+    margin-top: 0;
+    height: 40px;
     padding-bottom: 24px;
     width:100px;
     color:white;
 }
 nav .nav-link:hover{
-    color: #424242;
+    color:white;
+    background-color: rgb(234, 153, 153);
+    opacity: 0.8;
+    border-radius: 25px;
 }
 
 nav .nav-link:focus{
@@ -27,6 +31,13 @@ nav .nav-link:focus{
 
 nav .dropdown-menu{
     background-color:#d54b43;
+}
+
+nav .dropdown-item:hover{
+    color:white;
+    background-color: rgb(234, 153, 153);
+    opacity: 0.8;
+    border-radius: 25px;
 }
 
 nav .nav-item{
