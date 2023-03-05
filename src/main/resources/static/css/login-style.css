@@ -1,5 +1,5 @@
 .delivery-image{
-    width: 600px;
+    width: 95%;
     margin-bottom: 20px;
 }
 
@@ -20,15 +20,15 @@ body {
 .main-form{
     background-color: #d54b43;
     border-radius: 25px;
-    width:450px;
-    height: 340px;
+    width:74%;
+    height: 77%;
     margin-top: 80px;
     margin-left: 15px;
 }
 
 .errors{
-    width:350px;
-    height: 26px;
+    width:77%;
+    height: 20%;
     background-color: rgb(234, 153, 153);
     font-weight:600;
     display: flex;
