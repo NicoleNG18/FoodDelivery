@@ -1,0 +1,55 @@
+body {
+    /* background-image: url('istockphoto-1358132613-170667a.jpg'); */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    background-color: rgb(234, 153, 153);
+    margin-top:70px;
+}
+
+.delivery-image{
+    width: 95%;
+    margin-bottom: 20px;
+    margin-top:50px;
+}
+
+.placeholder {
+    color: pink;
+}
+
+.main-form{
+    background-color: #d54b43;
+    border-radius: 25px;
+    margin-top: 50px;
+}
+
+.errors-register{
+    width:90%;
+    border-radius: 4px;
+    text-align: center;
+    font-weight:600;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(234, 153, 153);
+}
+
+.btn{
+    background-color: white;
+    color:#424242;
+}
+
+.btn:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease;
+}
+
+.form-label{
+    margin-top: 5px;
+}
+
+
+
+
