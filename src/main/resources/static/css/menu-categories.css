@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(234, 153, 153);
+    background-color: rgb(246, 241, 241);
 }
 
 .container{
@@ -30,7 +30,7 @@ body {
 
 
 .card{
-    background-color:#d54b43;
+    background-color: #eea9a8;
     width:70%;
     margin-left: 50px;
     margin-right: 50px;
