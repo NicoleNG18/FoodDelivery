@@ -1,0 +1,56 @@
+body {
+    background-color: rgb(234, 153, 153);
+}
+
+.container{
+    margin-top: 100px;
+}
+
+.navigate-to{
+    color:#424242;
+    border-radius: 8px;
+    border-color: white;
+    background-color: white;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-decoration: none;
+    margin-left: 8px;
+    margin-right: 8px;
+    text-align: center;
+}
+.card-img{
+    margin-top: 5px;
+}
+
+.navigate-to:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease
+}
+
+
+.card{
+    background-color:#d54b43;
+    width:70%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 35px;
+    height: 18rem;
+    padding-bottom: 10px;
+}
+
+.card-dessert{
+    background-color:#d54b43;
+}
+
+.row{
+    margin-left: 75px;
+    margin-right: 75px;
+}
+
+
+.card-title{
+    color: white;
+    font-weight: 500;
+    margin-left: 8px;
+}

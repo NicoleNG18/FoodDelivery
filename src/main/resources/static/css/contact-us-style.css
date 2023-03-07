@@ -36,9 +36,15 @@ body {
     border-color: white;
     color: black;
     font-weight: 500;
-    width: 30%;
+    width: 55%;
     height: 40%;
     margin-top: 25px;
     margin-bottom: 25px;
-    margin-left: 300px;
+    margin-left: 250px;
+}
+
+.send-button:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease
 }
