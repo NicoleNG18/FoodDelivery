@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile</title>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+
+<body>
+
+<div>
+    <th:block th:include="~{/fragments/navigation}"></th:block>
+</div>
+
+<div class="row profile-form d-flex justify-content-center align-items-center">
+    <div class="col mb-4 mb-lg-0">
+        <div class="main-card mb-3" style="border-radius: .5rem;">
+            <div class="row first-row g-0">
+                <div class="col-md-4 text-center"
+                     style="border-top-left-radius: .5rem;
+                     border-bottom-left-radius: .5rem;
+                     background-color: rgba(253, 160, 133, 1);">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                         alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
+                    <h5>Marie Horwitz</h5>
+                    <p>Web Designer</p>
+<!--                    <i class="far mb-5"></i>-->
+                  <button class="edit-button">Edit</button>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-4">
+                        <h4>Information</h4>
+                        <hr class="mt-0 mb-4">
+                        <div class="row pt-1">
+                            <div class="col-6 mb-3">
+                                <h5>Email</h5>
+                                <p class="text-muted" style="font-weight: 500">info@example.com</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h5>Phone</h5>
+                                <p class="text-muted" style="font-weight: 500">123 456 789</p>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-4">
+                        <div class="row pt-1">
+                            <div class="col-6 mb-3">
+                                <h5>Age</h5>
+                                <p class="text-muted" style="font-weight: 500">17</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h5>Gender</h5>
+                                <p class="text-muted" style="font-weight: 500">Female</p>
+                            </div>
+                        </div>
+                        <div class="d-flex eee justify-content-start">
+                            <a href="#"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                            <a href="#"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<th:block th:include="~{fragments/footer}"></th:block>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

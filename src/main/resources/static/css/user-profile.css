@@ -1,0 +1,24 @@
+body{
+    background-color: rgb(234, 153, 153);
+}
+
+.profile-form{
+    margin-top: 200px;
+}
+
+.main-card{
+    width: 100%;
+}
+
+.edit-button{
+    background-color: white;
+    width:30%;
+    border-color: white;
+    border-radius: 25px;
+}
+
+.edit-button:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease;
+}
