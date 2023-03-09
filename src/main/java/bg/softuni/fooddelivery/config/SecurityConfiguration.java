@@ -1,10 +1,13 @@
 package bg.softuni.fooddelivery.config;
 
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
+import bg.softuni.fooddelivery.repositories.UserRepository;
+import bg.softuni.fooddelivery.service.FoodDeliveryUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -41,5 +44,10 @@ public class SecurityConfiguration {
                 //TODO:logout and end of the configuration
 
         return httpSecurity.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository){
+        return new FoodDeliveryUserDetailsService(userRepository);
     }
 }

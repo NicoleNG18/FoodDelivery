@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.domain.entities;
 
-import bg.softuni.fooddelivery.domain.enums.Gender;
+import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -32,7 +32,8 @@ public class UserEntity extends BaseEntity{
     private String phoneNumber;
 
     @Column(nullable = false)
-    private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private GenderEnum gender;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRoleEntity> roles=new HashSet<>();
@@ -108,11 +109,11 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Gender getGender() {
+    public GenderEnum getGender() {
         return gender;
     }
 
-    public UserEntity setGender(Gender gender) {
+    public UserEntity setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
     }

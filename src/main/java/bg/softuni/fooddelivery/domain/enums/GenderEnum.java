@@ -1,5 +1,5 @@
 package bg.softuni.fooddelivery.domain.enums;
 
-public enum Gender {
+public enum GenderEnum {
     MALE , FEMALE
 }
