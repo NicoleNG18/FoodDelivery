@@ -34,8 +34,8 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private Gender gender;
 
-    @ManyToMany
-    private Set<UserRoleEntity> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<UserRoleEntity> roles=new HashSet<>();
 
     @OneToMany(mappedBy = "owner")
     private Set<OrderEntity> orders;

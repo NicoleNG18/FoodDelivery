@@ -19,7 +19,9 @@
 
 <div class="col-5 float-end">
 
-    <form method="POST" class="main-form d-flex flex-column">
+    <form th:method="POST"
+          th:action="@{/users/login}"
+          class="main-form d-flex flex-column">
 
         <div>
             <p class="text-center text-white mt-3 mb-2 display-6">Login</p>
@@ -36,7 +38,7 @@
             <div class="label-holder text-white d-flex justify-content-start">
                 <label for="password" class="form-label text-white">Password</label>
             </div>
-            <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"/>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"/>
         </div>
 
         <div class="login-12 text-center mt-4 mb-1">
