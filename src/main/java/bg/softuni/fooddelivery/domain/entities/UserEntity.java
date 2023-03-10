@@ -3,7 +3,9 @@ package bg.softuni.fooddelivery.domain.entities;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,13 +38,13 @@ public class UserEntity extends BaseEntity{
     private GenderEnum gender;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<UserRoleEntity> roles=new HashSet<>();
+    //losha ideq s eager
+    private List<UserRoleEntity> roles=new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")
     private Set<OrderEntity> orders;
 
     public UserEntity() {
-        this.roles=new HashSet<>();
         this.orders=new HashSet<>();
     }
 
@@ -118,11 +120,11 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Set<UserRoleEntity> getRoles() {
+    public List<UserRoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(Set<UserRoleEntity> roles) {
+    public UserEntity setRoles(List<UserRoleEntity> roles) {
         this.roles = roles;
         return this;
     }

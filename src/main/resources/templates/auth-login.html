@@ -19,7 +19,7 @@
 
 <div class="col-5 float-end">
 
-    <form th:method="POST"
+    <form th:method="post"
           th:action="@{/users/login}"
           class="main-form d-flex flex-column">
 
@@ -31,14 +31,22 @@
             <div class="label-holder text-white d-flex justify-content-start">
                 <label for="username" class="form-label text-white">Username</label>
             </div>
-            <input type="text" class="form-control" id="username" placeholder="Ex: ivaylo5@" name="username"/>
+            <input type="text"
+                   class="form-control"
+                   id="username"
+                   placeholder="Ex: ivaylo5@"
+                   name="username"/>
         </div>
 
         <div class="form-group mt-1">
             <div class="label-holder text-white d-flex justify-content-start">
                 <label for="password" class="form-label text-white">Password</label>
             </div>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"/>
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   placeholder="Enter password"
+                   name="password"/>
         </div>
 
         <div class="login-12 text-center mt-4 mb-1">
