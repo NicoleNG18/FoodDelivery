@@ -29,9 +29,9 @@ public class SecurityConfiguration {
                 //for the static resources
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 //visible for everyone
-                .requestMatchers("/","/users/login","/users/register").permitAll()
+                .requestMatchers("/", "/users/login", "/users/register").permitAll()
                 //history of restaurant orders
-                .requestMatchers("/orders/all").hasAnyRole(UserRoleEnum.WORKER.name(),UserRoleEnum.ADMIN.name())
+                .requestMatchers("/orders/all").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -41,8 +41,7 @@ public class SecurityConfiguration {
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/")
                 .failureForwardUrl("/users/login-error")
-                .and()
-                .logout()
+                .and().logout()
                 .logoutUrl("/users/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
@@ -51,7 +50,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository){
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new FoodDeliveryUserDetailsService(userRepository);
     }
 }
