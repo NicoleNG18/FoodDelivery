@@ -52,13 +52,15 @@
                    name="password"/>
         </div>
 
-        <div class="login-12 text-center mt-4 mb-1">
-            <button type="submit" class="btn">Login</button>
+        <div class="form-group mt-1">
+            <div class="label-holder text-white d-flex justify-content-start">
+                <p th:if="${bad_credentials}" class="errors alert-danger">Invalid username or password.</p>
+            </div>
         </div>
 
-        <p th:if="${bad_credentials}" class="errors alert-danger">
-            Invalid username or password.
-        </p>
+        <div class="login-12 text-center mt-2 mb-3">
+            <button type="submit" class="btn">Login</button>
+        </div>
 
     </form>
 
