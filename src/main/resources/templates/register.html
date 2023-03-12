@@ -19,7 +19,10 @@
 
 <div class="col-5 float-end">
 
-  <form method="POST" class="main-form mx-auto col-md-12 mt-5 d-flex flex-column my-lg-5">
+  <form th:method="POST"
+        th:action="@{/users/register}"
+        th:object="${registerDto}"
+        class="main-form mx-auto col-md-12 mt-5 d-flex flex-column my-lg-5">
 
     <h2 class="text-center text-white mt-3">Register User</h2>
 
@@ -27,18 +30,26 @@
 
       <div class="col-md-6">
         <label for="firstName" class="form-label text-white">First name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="First name">
-        <p class="errors-register alert-danger">
-          First name is required.
-        </p>
+        <input type="text"
+               th:field="*{firstName}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="firstName"
+               placeholder="First name">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('firstName')}"
+             th:text="${err}"/>
       </div>
 
       <div class="col-md-6">
         <label for="lastName" class="form-label text-white">Last name</label>
-        <input type="text" class="form-control" id="lastName" placeholder="Last name">
-        <p class="errors-register alert-danger">
-          Last name is required
-        </p>
+        <input type="text"
+               th:field="*{lastName}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="lastName"
+               placeholder="Last name">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('lastName')}"
+             th:text="${err}"/>
       </div>
     </div>
 
@@ -46,45 +57,50 @@
     <div class="row mt-1 mb-0  m-2">
       <div class="col-md-6">
         <label for="username" class="form-label text-white">Username</label>
-        <input type="text" class="form-control" id="username" placeholder="Ex: ivaylo5@">
-        <p class="errors-register alert-danger">
-          Username is required
-        </p>
-<!--        <p class="errors alert-danger">-->
-<!--          Username must be at least 8 characters-->
-<!--        </p>-->
+        <input type="text"
+               th:field="*{username}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="username"
+               placeholder="Ex: ivaylo5@">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('username')}"
+             th:text="${err}"/>
       </div>
 
       <div class="col-md-6">
         <label for="email" class="form-label text-white">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email">
-        <p class="errors-register alert-danger">
-          Email should contain @
-        </p>
-<!--        <p class="errors-register alert-danger">-->
-<!--          Email is required-->
-<!--        </p>-->
+        <input type="email"
+               th:field="*{email}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="email"
+               placeholder="Enter email">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('email')}"
+             th:text="${err}"/>
       </div>
     </div>
 
     <div class="row mt-1  mb-0  m-2">
       <div class="col-md-6">
         <label for="password" class="form-label text-white">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Enter password">
-<!--        <p class="errors-register alert-danger">-->
-<!--          Password should contain at least one digit and special symbol-->
-<!--        </p>-->
-        <p class="errors-register alert-danger">
-          Password is required
-        </p>
+        <input type="password"
+               th:field="*{password}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="password"
+               placeholder="Enter password">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('password')}"
+             th:text="${err}"/>
       </div>
 
       <div class="col-md-6">
         <label for="confirmPassword" class="form-label text-white"> Confirm Password</label>
-        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
-        <p class="errors-register alert-danger">
-          Invalid password
-        </p>
+        <input type="password"
+               th:field="*{confirmPassword}"
+               th:errorclass="is-invalid"
+               class="form-control" id="confirmPassword" placeholder="Confirm password">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('confirmPassword')}"
+             th:text="${err}"/>
       </div>
     </div>
 
@@ -92,31 +108,44 @@
     <div class="row mt-1  mb-0 m-2">
       <div class="col-md-9">
         <label for="phoneNumber" class="form-label text-white">Phone number</label>
-        <input type="text" class="form-control" id="phoneNumber" placeholder="Phone number">
-        <p class="errors-register alert-danger">
-          Phone number should be 10 characters long
-        </p>
-<!--        <p class="errors-register alert-danger">-->
-<!--          Phone number is required-->
-<!--        </p>-->
+        <input type="text"
+               th:field="*{phoneNumber}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="phoneNumber"
+               placeholder="Phone number">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('phoneNumber')}"
+             th:text="${err}"/>
       </div>
 
       <div class="col-md-3">
         <label for="age" class="form-label text-white">Age</label>
-        <input type="number" class="form-control" id="age" placeholder="Age">
-        <p class="errors-register alert-danger">
-          Age is required
-        </p>
+        <input type="number"
+               th:field="*{age}"
+               th:errorclass="is-invalid"
+               class="form-control"
+               id="age"
+               min="5"
+               max="100"
+               step="1"
+               placeholder="Age">
+        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('age')}"
+             th:text="${err}"/>
       </div>
 
       <div class="col text-center">
         <label for="gender" class="form-label float-start text-white">Gender</label>
-        <select id="gender" class="form-select text-secondary">
+        <select id="gender"
+                th:field="*{gender}"
+                th:errorclass="is-invalid"
+                class="form-select text-secondary">
           <option value="">Select gender</option>
-          <option>Male</option>
-          <option>Female</option>
+          <option th:each="g:${T(bg.softuni.fooddelivery.domain.enums.GenderEnum).values()}"
+                  th:text="${g.name()}"
+                  th:value="${g}">Male</option>
+
         </select>
-        <small class="errors-register alert-danger">Gender is required</small>
+        <small class="invalid-feedback errors-register alert-danger">Gender is required</small>
       </div>
 
       <div class="register-12 text-center mt-3 mb-3">
