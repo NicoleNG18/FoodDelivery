@@ -1,8 +1,7 @@
 package bg.softuni.fooddelivery.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import bg.softuni.fooddelivery.domain.enums.FoodCategoryEnum;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -10,8 +9,12 @@ import java.math.BigDecimal;
 @Table(name = "foods")
 public class FoodEntity extends ProductEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition = "TEXT")
     private String description;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private FoodCategoryEnum category;
 
     public FoodEntity() {
     }
@@ -22,6 +25,15 @@ public class FoodEntity extends ProductEntity {
 
     public FoodEntity setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public FoodCategoryEnum getCategory() {
+        return category;
+    }
+
+    public FoodEntity setCategory(FoodCategoryEnum category) {
+        this.category = category;
         return this;
     }
 }

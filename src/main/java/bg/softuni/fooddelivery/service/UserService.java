@@ -1,7 +1,7 @@
 package bg.softuni.fooddelivery.service;
 
-import bg.softuni.fooddelivery.domain.dto.UserModelDto;
-import bg.softuni.fooddelivery.domain.dto.UserRegistrationDTO;
+import bg.softuni.fooddelivery.domain.dto.model.UserModelDto;
+import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;

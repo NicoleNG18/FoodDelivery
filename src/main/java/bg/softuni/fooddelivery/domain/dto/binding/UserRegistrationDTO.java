@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.domain.dto;
+package bg.softuni.fooddelivery.domain.dto.binding;
 
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import bg.softuni.fooddelivery.validation.FieldMatch;

@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.domain.dto;
+package bg.softuni.fooddelivery.domain.dto.model;
 
 import java.time.LocalDateTime;
 

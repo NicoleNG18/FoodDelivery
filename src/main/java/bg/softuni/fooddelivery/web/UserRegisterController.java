@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.dto.UserRegistrationDTO;
+import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

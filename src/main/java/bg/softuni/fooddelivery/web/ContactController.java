@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.dto.ContactFormBindingDto;
+import bg.softuni.fooddelivery.domain.dto.binding.ContactFormBindingDto;
 import bg.softuni.fooddelivery.service.ContactService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

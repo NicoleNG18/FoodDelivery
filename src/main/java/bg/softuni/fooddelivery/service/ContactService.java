@@ -1,7 +1,7 @@
 package bg.softuni.fooddelivery.service;
 
-import bg.softuni.fooddelivery.domain.dto.ContactFormBindingDto;
-import bg.softuni.fooddelivery.domain.dto.ContactModelDto;
+import bg.softuni.fooddelivery.domain.dto.binding.ContactFormBindingDto;
+import bg.softuni.fooddelivery.domain.dto.model.ContactModelDto;
 import bg.softuni.fooddelivery.domain.entities.ContactEntity;
 import bg.softuni.fooddelivery.repositories.ContactRepository;
 import org.modelmapper.ModelMapper;

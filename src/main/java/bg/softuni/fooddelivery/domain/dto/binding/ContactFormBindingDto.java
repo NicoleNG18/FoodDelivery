@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.domain.dto;
+package bg.softuni.fooddelivery.domain.dto.binding;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
