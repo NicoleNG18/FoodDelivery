@@ -36,7 +36,8 @@
                class="form-control"
                id="firstName"
                placeholder="First name">
-        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('firstName')}"
+        <div class="invalid-feedback errors-register alert-danger"
+             th:each="err :${#fields.errors('firstName')}"
              th:text="${err}"/>
       </div>
 

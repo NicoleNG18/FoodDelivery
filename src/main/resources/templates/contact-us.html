@@ -13,7 +13,10 @@
   <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
-<form class="contact-form mb-4">
+<form class="contact-form mb-4"
+      th:action="@{/contact}"
+      th:method="POST"
+      th:object="${contactDto}">
 
 
   <h2 class="wrapper h1-responsive text-center text-white">Contact us</h2>
@@ -25,22 +28,33 @@
 
 
     <div class="col-md-9 mb-md-0 mb-5">
-      <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
         <div class="form-info">
-
 
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="name" name="name" class="form-control">
               <label for="name" class="">Your name</label>
+              <input type="text"
+                     th:field="*{name}"
+                     th:errorclass="is-invalid"
+                     id="name"
+                     name="name"
+                     class="form-control">
+              <div class="invalid-feedback errors-contact alert-danger"
+                   th:each="err :${#fields.errors('name')}"
+                   th:text="${err}"/>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="md-form mb-0">
-              <input type="text" id="email" name="email" class="form-control">
               <label for="email" class="">Your email</label>
+              <input type="email"
+                     th:field="*{email}"
+                     th:errorclass="is-invalid"
+                     id="email" name="email" class="form-control">
+              <div class="invalid-feedback errors-contact alert-danger"
+                   th:each="err :${#fields.errors('email')}"
+                   th:text="${err}"/>
             </div>
           </div>
 
@@ -49,8 +63,14 @@
         <div class="form-info">
           <div class="col-md-12">
             <div class="md-form mb-0">
-              <input type="text" id="subject" name="subject" class="form-control">
               <label for="subject" class="">Subject</label>
+              <input type="text"
+                     th:field="*{subject}"
+                     th:errorclass="is-invalid"
+                     id="subject" name="subject" class="form-control">
+              <div class="invalid-feedback errors-contact alert-danger"
+                   th:each="err :${#fields.errors('subject')}"
+                   th:text="${err}"/>
             </div>
           </div>
         </div>
@@ -60,14 +80,18 @@
           <div class="col-md-12">
 
             <div class="md-form">
-              <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
               <label for="message">Your message</label>
+              <textarea type="text"
+                        th:field="*{description}"
+                        th:errorclass="is-invalid"
+                        id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+              <div class="invalid-feedback errors-contact alert-danger"
+                   th:each="err :${#fields.errors('description')}"
+                   th:text="${err}"/>
             </div>
 
           </div>
         </div>
-
-      </form>
 
       <div class="text-center text-md-left">
         <button class="send-button justify-content-center">Send</button>

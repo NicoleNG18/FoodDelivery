@@ -30,6 +30,17 @@ body {
     margin-right: 30px;
 }
 
+.errors-contact{
+    width:100%;
+    border-radius: 4px;
+    text-align: center;
+    font-weight:600;
+    margin-top: 5px;
+    margin-left: 0;
+    margin-right: 10px;
+    background-color: rgb(234, 153, 153);
+}
+
 .send-button {
     background-color: white;
     border-radius: 25px;
