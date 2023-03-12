@@ -39,12 +39,12 @@ public class UserEntity extends BaseEntity{
 
     @ManyToMany(fetch = FetchType.EAGER)
 //    ,cascade = CascadeType.MERGE
-//    @Transient
+    @Transient
 //    @JoinTable(
 //            name = "users_roles",
 //            joinColumns = @JoinColumn(name = "user_id"),
 //            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<UserRoleEntity> roles;
+    private List<UserRoleEntity> roles=new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")
     private Set<OrderEntity> orders;

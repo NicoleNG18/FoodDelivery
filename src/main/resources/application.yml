@@ -6,6 +6,9 @@ logging:
 server:
   port: 8081
 spring:
+  sql:
+    init:
+      mode: never
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: '0000'

@@ -2,9 +2,10 @@ package bg.softuni.fooddelivery.domain.entities;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 
 import java.math.BigDecimal;
-
+@MappedSuperclass
 public abstract class ProductEntity extends BaseEntity{
 
     @Column(nullable = false)
