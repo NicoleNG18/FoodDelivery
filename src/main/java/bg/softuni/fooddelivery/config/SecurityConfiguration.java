@@ -29,7 +29,12 @@ public class SecurityConfiguration {
                 //for the static resources
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 //visible for everyone
-                .requestMatchers("/", "/users/login", "/users/register","/users/login-error","/contact").permitAll()
+                .requestMatchers("/",
+                        "/users/login",
+                        "/users/register",
+                        "/users/login-error",
+                        "/contact",
+                        "/menu").permitAll()
                 //history of restaurant orders
                 .requestMatchers("/orders/all").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
                 .anyRequest()
