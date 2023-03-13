@@ -38,12 +38,6 @@ public class UserEntity extends BaseEntity{
     private GenderEnum gender;
 
     @ManyToMany(fetch = FetchType.EAGER)
-//    ,cascade = CascadeType.MERGE
-    @Transient
-//    @JoinTable(
-//            name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<UserRoleEntity> roles=new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")

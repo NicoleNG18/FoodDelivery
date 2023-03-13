@@ -35,6 +35,7 @@ public class SecurityConfiguration {
                         "/users/login-error",
                         "/contact",
                         "/menu").permitAll()
+//                TODO:PERMIT LOGIN FOR AUTHENTICATED USER
                 //history of restaurant orders
                 .requestMatchers("/orders/all").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
                 .anyRequest()
