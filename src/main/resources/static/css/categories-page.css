@@ -1,3 +1,18 @@
 .category-heading{
     margin-top: 110px;
 }
+
+
+.products-table{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:40px;
+    border-color: white;
+}
+
+
+
+.th-sm{
+   text-align: center;
+    color: white;
+}
