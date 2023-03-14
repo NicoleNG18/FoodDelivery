@@ -19,7 +19,7 @@ public class OrderEntity extends BaseEntity {
 
     @ManyToMany
     private Set<FoodEntity> foods;
-
+//TODO:make list not set
     @ManyToMany
     private Set<DrinkEntity> drinks;
 

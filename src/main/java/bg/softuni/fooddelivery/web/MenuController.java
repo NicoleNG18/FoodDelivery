@@ -2,6 +2,8 @@ package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.service.MenuService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,17 +24,21 @@ public class MenuController {
     }
 
     @GetMapping("/menu/{category}")
-    public String getCategoryPage(@PathVariable
-                                      ProductCategoryEnum category,
-                                  Model model
-                                 /* Pageable pageable*/) {
+    public String getCategoryPage(@PathVariable("category")
+                                      String category,
+                                  Model model,
+                                  @PageableDefault(
+                                          page = 0,
+                                          size = 5)
+                                      Pageable pageable) {
 
         model.addAttribute("category",category);
-        model.addAttribute("foods",this.menuService.allFoodsByCategory(category));
-        model.addAttribute("drinks",this.menuService.allDrinks());
+//        model.addAttribute("foods",this.menuService.allFoodsByCategory(category,pageable));
+        model.addAttribute("drinks",this.menuService.allDrinks(pageable));
 
         return "categories-page";
     }
+
 
 
 }
