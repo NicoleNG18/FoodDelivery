@@ -8,6 +8,17 @@ import java.math.BigDecimal;
 
 public class ProductModelDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ProductModelDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     private String name;
     private BigDecimal price;
 

@@ -98,17 +98,17 @@ INSERT INTO `products` (name, price, description,category) VALUES ('White chocol
 INSERT INTO `products` (name, price, description,category) VALUES ('Ice cream',2.50,'Salted caramel','dessert');
 
 # drinks
-INSERT INTO `products` (name, price, description,category) VALUES ('Coca cola',1.99,'0.5','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Fanta',1.99,'0.5','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Sprite',1.99,'0.5','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Coca cola zero',1.99,'0.5','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy orange',1.99,'0.33','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy red orange',1.99,'0.33','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy green apple',1.99,'0.33','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy pineapple',1.99,'0.33','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy peach',1.99,'0.33','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Water',1.00,'0.5','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Water',2.50,'1.5','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy lemonade',2.99,'0.4','drink');
-INSERT INTO `products` (name, price, description,category) VALUES ('Cappy lemonade - lime',2.99,'0.4','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Coca cola',1.99,'0.5L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Fanta',1.99,'0.5L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Sprite',1.99,'0.5L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Coca cola zero',1.99,'0.5L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy orange',1.99,'0.330L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy red orange',1.99,'0.330L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy green apple',1.99,'0.330L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy pineapple',1.99,'0.330L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy peach',1.99,'0.330L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Water',1.00,'0.5L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Water',2.50,'1.5L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy lemonade',2.99,'0.4L','drink');
+INSERT INTO `products` (name, price, description,category) VALUES ('Cappy lemonade - lime',2.99,'0.4L','drink');
 

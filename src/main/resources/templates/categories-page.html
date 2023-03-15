@@ -24,9 +24,8 @@
     <td th:text="*{product.name}" style="font-weight: bold">Tiger Nixon</td>
     <td th:text="|*{product.price} &euro;|"></td>
     <td th:text="|*{product.description}|">Edinburgh</td>
-    <td sec:authorize="isAuthenticated()" style="margin-bottom: 10px;">
-    <td style="margin-bottom:10px"><a class="order-button text-center text-decoration-none"
-                                      th:href="@{/cart/add/{id}(id=${product.id})}"px;
+    <td sec:authorize="isAuthenticated()" style="margin-bottom:10px"><a class="order-button text-center text-decoration-none"
+                                      th:href="@{/cart/add/{id}(id=${product.id})}"
     >Add to cart</a></td>
   </tr>
   </tbody>

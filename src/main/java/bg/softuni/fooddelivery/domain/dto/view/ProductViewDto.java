@@ -6,6 +6,17 @@ import java.math.BigDecimal;
 
 public class ProductViewDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ProductViewDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     private String name;
     private BigDecimal price;
     private String description;

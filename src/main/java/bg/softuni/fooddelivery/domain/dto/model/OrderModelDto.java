@@ -9,6 +9,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderModelDto {
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public OrderModelDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
     private UserModelDto owner;
     private BigDecimal price;
     private CartModelDto cart;

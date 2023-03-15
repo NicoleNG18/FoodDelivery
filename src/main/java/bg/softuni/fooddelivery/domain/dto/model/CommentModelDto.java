@@ -5,6 +5,17 @@ import bg.softuni.fooddelivery.domain.entities.UserEntity;
 
 public class CommentModelDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public CommentModelDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     private String description;
 
     private UserModelDto user;

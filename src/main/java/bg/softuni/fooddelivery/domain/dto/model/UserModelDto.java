@@ -10,6 +10,17 @@ import java.util.Set;
 
 public class UserModelDto {
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserModelDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     private String firstName;
 
     private String lastName;

@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "cart")
 public class CartEntity extends BaseEntity {
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<ProductEntity> products;
 
     public CartEntity() {

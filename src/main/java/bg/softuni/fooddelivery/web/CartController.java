@@ -1,6 +1,7 @@
 package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.service.CartService;
+import bg.softuni.fooddelivery.service.OrderService;
 import bg.softuni.fooddelivery.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,23 @@ public class CartController {
 
     private final CartService cartService;
     private final ProductService productService;
+    private final OrderService orderService;
 
     public CartController(CartService cartService,
-                          ProductService productService) {
+                          ProductService productService,
+                          OrderService orderService) {
         this.cartService = cartService;
         this.productService = productService;
+        this.orderService = orderService;
+    }
+
+    @GetMapping("/cart")
+    public String getCart(Model model, Principal userDetails){
+
+
+        model.addAttribute("cartProducts",this.orderService.getProducts(userDetails));
+
+        return "order-cart";
     }
 
     @GetMapping("/cart/add/{id}")

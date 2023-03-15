@@ -1,10 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cart</title>
+    <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
+
 <body>
+
+<div>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
+</div>
+
 <div class="container bg-blur rounded mt-1 mb-4">
     <div class="row mt-1 mb-2">
         <div class="col-6 mt-1 mb-1">
@@ -23,40 +31,14 @@
                 </table>
             </div>
         </div>
-
-        <div class="col-6 mt-1 mb-1">
-            <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">All Other Posts</h3>
-            <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">total posts</h6>
-            <div class="bg-dark rounded m-auto" style="height: 68.5vh; overflow: auto">
-                <th:block>
-                    <br >
-<!--                    <ul class="list-group list-group-horizontal text-dark" th:each="po:${postByOther}" th:object="${po}">-->
-<!--                        <li class="list-group-item">-->
-<!--                            <table>-->
-<!--                                <tr>-->
-<!--                                    <td style="width: 15%" th:text="*{user.getUsername()}"><a> {username}: </a></td>-->
-<!--                                    <td>-->
-<!--                                        <a th:text="*{content}">{content}</a>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
-<!--                            </table>-->
-<!--                        </li>-->
-<!--                        <li class="list-group-item bg-gray">-->
-<!--                            <table>-->
-<!--                                <tr>-->
-<!--                                    <td style="width: 10%" th:text="*{mood}">Mood: {mood}</td>-->
-<!--                                    <td class="text-primary" th:text="*{countLikes}">{numberOfLikes} likes</td>-->
-<!--                                    <td th:unless="${po.matchesId(@currentUser.id)}"><a class="ml-3 text-danger"-->
-<!--                                                                                        th:href="@{/posts/likes/{id}(id=*{id})}"-->
-<!--                                    ><img src="/img/like.png" width="43px" height="40px"></a></td>-->
-<!--                                </tr>-->
-<!--                            </table>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-                </th:block>
-            </div>
-        </div>
     </div>
 </div>
+
+<th:block th:insert="~{fragments/footer}"></th:block>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

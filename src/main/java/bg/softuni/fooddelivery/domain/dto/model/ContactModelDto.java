@@ -3,6 +3,16 @@ package bg.softuni.fooddelivery.domain.dto.model;
 import java.time.LocalDateTime;
 
 public class ContactModelDto {
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ContactModelDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
     private String name;
     private String email;
     private String subject;

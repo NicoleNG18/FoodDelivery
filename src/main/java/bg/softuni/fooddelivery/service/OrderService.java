@@ -7,6 +7,7 @@ import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,15 +26,16 @@ public class OrderService {
         this.modelMapper = modelMapper;
     }
 
+    @Transactional
     public List<ProductViewDto> getProducts(Principal principal) {
 
-        final UserModelDto user = this.modelMapper.map(this.userService.getUserByUsername(principal.getName()),UserModelDto.class);
+        final UserEntity user = this.userService.getUserByUsername(principal.getName());
 
         return user
                 .getCart()
                 .getProducts()
                 .stream()
-                .map(p->this.modelMapper.map(p,ProductViewDto.class))
+                .map(p -> this.modelMapper.map(p, ProductViewDto.class))
                 .collect(Collectors.toList());
     }
 
