@@ -29,17 +29,17 @@ public class CartService {
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
-    @Transactional
-    public void addToCart(Long id,
+    public long addToCart(Long id,
                           Principal principal) {
 
         Optional<UserEntity> user = this.userRepository.findUserEntityByUsername(principal.getName());
         ProductEntity product = this.productRepository.findById(id).get();
 
-        if (!user.get().getShoppingCart().getProducts().contains(product)){
-            user.ifPresent(userEntity -> userEntity.getShoppingCart().addProduct(product));
-        }
+        user.ifPresent(userEntity -> userEntity.getShoppingCart().addProduct(product));
 
+        user.get().getShoppingCart().setCountProducts(user.get().getShoppingCart().getCountProducts()+1);
+
+        return user.get().getShoppingCart().getCountProducts();
     }
 
     public ShoppingCartEntity getNewCart() {

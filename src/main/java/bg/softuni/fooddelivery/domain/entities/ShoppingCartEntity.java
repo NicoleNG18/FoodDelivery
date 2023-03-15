@@ -1,7 +1,6 @@
 package bg.softuni.fooddelivery.domain.entities;
 
 import jakarta.persistence.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +9,10 @@ import java.util.List;
 @Table(name = "cart")
 public class ShoppingCartEntity extends BaseEntity {
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductEntity> products;
+
+    private long countProducts;
 
     public ShoppingCartEntity() {
         this.products = new ArrayList<>();
@@ -23,6 +24,15 @@ public class ShoppingCartEntity extends BaseEntity {
 
     public ShoppingCartEntity setProducts(List<ProductEntity> products) {
         this.products = products;
+        return this;
+    }
+
+    public long getCountProducts() {
+        return countProducts;
+    }
+
+    public ShoppingCartEntity setCountProducts(long countProducts) {
+        this.countProducts = countProducts;
         return this;
     }
 

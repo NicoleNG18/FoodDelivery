@@ -11,6 +11,7 @@ import bg.softuni.fooddelivery.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +42,7 @@ public class UserService {
 
         UserEntity userToSave = this.mapToUser(userToRegister);
         UserRoleEntity userRole = this.userRoleService.getRoleByType(UserRoleEnum.USER);
-        ShoppingCartEntity shoppingCart=this.cartService.getNewCart();
+        ShoppingCartEntity shoppingCart = this.cartService.getNewCart();
 
         userToSave.setPassword(passwordEncoder.encode(userToSave.getPassword()))
                 .setRoles(new ArrayList<>(Collections.singletonList(userRole)))
@@ -50,7 +51,7 @@ public class UserService {
         this.userRepository.saveAndFlush(userToSave);
     }
 
-    public UserEntity getUserByUsername(String username){
+    public UserEntity getUserByUsername(String username) {
         return this.userRepository.findUserEntityByUsername(username).orElse(null);
     }
 

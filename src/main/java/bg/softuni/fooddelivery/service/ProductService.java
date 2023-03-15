@@ -24,6 +24,10 @@ private final ProductRepository productRepository;
     public List<ProductEntity> allProducts(ProductCategoryEnum category) {
         return this.productRepository.findAllByCategory(category);
     }
+
+    public String getCategory(Long id){
+       return this.productRepository.findById(id).get().getCategory().name();
+    }
 }
 
 //    public Page<FoodViewDto> allFoodsByCategory(ProductCategoryEnum category,
