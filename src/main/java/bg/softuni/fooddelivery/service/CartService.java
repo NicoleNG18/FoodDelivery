@@ -1,16 +1,14 @@
 package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
-import bg.softuni.fooddelivery.domain.entities.ShoppingCartEntity;
+import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.security.Principal;
-import java.util.Optional;
+
 
 @Service
 public class CartService {
@@ -29,21 +27,16 @@ public class CartService {
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
-    public long addToCart(Long id,
-                          Principal principal) {
+    public void addToCart(Long id, Principal principal) {
 
-        Optional<UserEntity> user = this.userRepository.findUserEntityByUsername(principal.getName());
-        ProductEntity product = this.productRepository.findById(id).get();
+        UserEntity user = this.userRepository.findByUsername(principal.getName());
+        final ProductEntity product = this.productRepository.findProductEntityById(id);
 
-        user.ifPresent(userEntity -> userEntity.getShoppingCart().addProduct(product));
-
-        user.get().getShoppingCart().setCountProducts(user.get().getShoppingCart().getCountProducts()+1);
-
-        return user.get().getShoppingCart().getCountProducts();
+        user.getCart().addProduct(product);
     }
 
-    public ShoppingCartEntity getNewCart() {
-        ShoppingCartEntity shoppingCart = new ShoppingCartEntity();
+    public CartEntity getNewCart() {
+        CartEntity shoppingCart = new CartEntity();
         this.shoppingCartRepository.saveAndFlush(shoppingCart);
         return shoppingCart;
     }

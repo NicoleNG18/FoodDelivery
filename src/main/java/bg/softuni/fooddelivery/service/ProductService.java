@@ -1,18 +1,20 @@
 package bg.softuni.fooddelivery.service;
 
+import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
 public class ProductService {
 
-private final ProductRepository productRepository;
-
+    private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
 
     public ProductService(ProductRepository productRepository,
@@ -21,30 +23,20 @@ private final ProductRepository productRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<ProductEntity> allProducts(ProductCategoryEnum category) {
-        return this.productRepository.findAllByCategory(category);
+    public List<ProductViewDto> allProducts(ProductCategoryEnum category) {
+        return this.productRepository
+                .findAllByCategory(category)
+                .stream()
+                .map(this::mapToViewDto)
+                .collect(Collectors.toList());
     }
 
-    public String getCategory(Long id){
-       return this.productRepository.findById(id).get().getCategory().name();
+    private ProductViewDto mapToViewDto(ProductEntity productEntity) {
+        return this.modelMapper.map(productEntity,ProductViewDto.class);
     }
+
+    public String getCategoryName(Long id) {
+        return this.productRepository.findProductEntityById(id).getCategory().name();
+    }
+
 }
-
-//    public Page<FoodViewDto> allFoodsByCategory(ProductCategoryEnum category,
-//                                                   Pageable pageable){
-//       final List<FoodViewDto> foods = this.foodRepository.findAllByCategory(pageable, category)
-//                .stream().map(f -> this.modelMapper.map(f, FoodViewDto.class)).toList();
-//
-//       return new PageImpl<>(foods);
-//
-//    }
-//
-//    public Page<DrinkViewDto> allDrinks(Pageable pageable){
-//
-//        final List<DrinkViewDto> drinks = this.drinkRepository.findAll(pageable)
-//                .stream().map(d -> this.modelMapper.map(d, DrinkViewDto.class)).toList();
-//
-//        return new PageImpl<>(drinks);
-//    }
-
-//}

@@ -8,16 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    private final ShoppingCartRepository cartRepository;
-
-    public HomeController(ShoppingCartRepository cartRepository) {
-        this.cartRepository = cartRepository;
-    }
-
     @GetMapping("/")
-    public String getHome(Model model){
-
-        model.addAttribute("countPr",this.cartRepository.count());
+    public String getHome(){
         return "index";
     }
 }

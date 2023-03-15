@@ -7,14 +7,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "cart")
-public class ShoppingCartEntity extends BaseEntity {
+public class CartEntity extends BaseEntity {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductEntity> products;
 
-    private long countProducts;
-
-    public ShoppingCartEntity() {
+    public CartEntity() {
         this.products = new ArrayList<>();
     }
 
@@ -22,17 +20,8 @@ public class ShoppingCartEntity extends BaseEntity {
         return products;
     }
 
-    public ShoppingCartEntity setProducts(List<ProductEntity> products) {
+    public CartEntity setProducts(List<ProductEntity> products) {
         this.products = products;
-        return this;
-    }
-
-    public long getCountProducts() {
-        return countProducts;
-    }
-
-    public ShoppingCartEntity setCountProducts(long countProducts) {
-        this.countProducts = countProducts;
         return this;
     }
 

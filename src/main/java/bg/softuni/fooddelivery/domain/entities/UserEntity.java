@@ -1,8 +1,8 @@
 package bg.softuni.fooddelivery.domain.entities;
 
+import bg.softuni.fooddelivery.domain.dto.model.UserModelDto;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import jakarta.persistence.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,7 +45,7 @@ public class UserEntity extends BaseEntity {
     private Set<OrderEntity> orders;
 
     @OneToOne
-    private ShoppingCartEntity shoppingCart;
+    private CartEntity cart;
 
     public UserEntity() {
         this.orders = new HashSet<>();
@@ -78,12 +78,12 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public ShoppingCartEntity getShoppingCart() {
-        return shoppingCart;
+    public CartEntity getCart() {
+        return cart;
     }
 
-    public UserEntity setShoppingCart(ShoppingCartEntity shoppingCart) {
-        this.shoppingCart = shoppingCart;
+    public UserEntity setCart(CartEntity shoppingCart) {
+        this.cart = shoppingCart;
         return this;
     }
 

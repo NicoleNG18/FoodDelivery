@@ -1,7 +1,12 @@
 package bg.softuni.fooddelivery.domain.dto.model;
 
+import bg.softuni.fooddelivery.domain.entities.CartEntity;
+import bg.softuni.fooddelivery.domain.entities.OrderEntity;
+import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 public class UserModelDto {
 
@@ -21,6 +26,28 @@ public class UserModelDto {
 
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
+
+    private Set<OrderEntity> orders;
+
+    private CartModelDto cart;
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public UserModelDto setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
+        return this;
+    }
+
+    public CartModelDto getCart() {
+        return cart;
+    }
+
+    public UserModelDto setCart(CartModelDto cart) {
+        this.cart = cart;
+        return this;
+    }
 
     public UserModelDto() {
     }
@@ -95,5 +122,9 @@ public class UserModelDto {
     public UserModelDto setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
+    }
+
+    public UserModelDto toModel(UserEntity userEntity) {
+        return new UserModelDto();
     }
 }

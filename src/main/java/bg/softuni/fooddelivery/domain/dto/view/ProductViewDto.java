@@ -8,7 +8,6 @@ public class ProductViewDto {
 
     private String name;
     private BigDecimal price;
-    private ProductCategoryEnum category;
     private String description;
 
     public ProductViewDto() {
@@ -29,15 +28,6 @@ public class ProductViewDto {
 
     public ProductViewDto setPrice(BigDecimal price) {
         this.price = price;
-        return this;
-    }
-
-    public ProductCategoryEnum getCategory() {
-        return category;
-    }
-
-    public ProductViewDto setCategory(ProductCategoryEnum category) {
-        this.category = category;
         return this;
     }
 

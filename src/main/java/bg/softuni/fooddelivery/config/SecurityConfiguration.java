@@ -35,12 +35,9 @@ public class SecurityConfiguration {
                         "/users/login-error",
                         "/contact",
                         "/menu",
-                        "/menu/**",
-                        "/orders/**"
-               ).permitAll()
-                .requestMatchers( "/cart/add/**","/cart").authenticated()
+                        "/menu/**").permitAll()
+                .requestMatchers( "/cart/add/**","/cart").hasRole(UserRoleEnum.USER.name())
 //                TODO:PERMIT LOGIN FOR AUTHENTICATED USER
-                //history of restaurant orders
                 .requestMatchers("/orders/all").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
                 .anyRequest()
                 .authenticated()

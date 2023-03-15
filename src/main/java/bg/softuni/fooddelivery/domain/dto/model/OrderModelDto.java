@@ -1,49 +1,31 @@
-package bg.softuni.fooddelivery.domain.entities;
+package bg.softuni.fooddelivery.domain.dto.model;
 
-import jakarta.persistence.*;
+import bg.softuni.fooddelivery.domain.entities.CartEntity;
+import bg.softuni.fooddelivery.domain.entities.CommentEntity;
+import bg.softuni.fooddelivery.domain.entities.UserEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "orders")
-public class OrderEntity extends BaseEntity {
-
-    @ManyToOne
-    private UserEntity owner;
-
-    @Column(nullable = false)
+public class OrderModelDto {
+    private UserModelDto owner;
     private BigDecimal price;
-
-    @OneToOne
-    private CartEntity cart;
-
-    @Column(nullable = false)
+    private CartModelDto cart;
     private LocalDateTime createdOn;
-
-    @Column(nullable = false)
     private LocalDateTime deliveredOn;
-
-    @OneToMany
-    private List<CommentEntity> comments;
-
-    @Column(nullable = false)
+    private List<CommentModelDto> comments;
     private String contactNumber;
-
-    @Column(nullable = false)
     private Boolean isDelivered;
 
-    public OrderEntity() {
-        this.comments=new ArrayList<>();
+    public OrderModelDto() {
     }
 
-    public UserEntity getOwner() {
+    public UserModelDto getOwner() {
         return owner;
     }
 
-    public OrderEntity setOwner(UserEntity owner) {
+    public OrderModelDto setOwner(UserModelDto owner) {
         this.owner = owner;
         return this;
     }
@@ -52,17 +34,17 @@ public class OrderEntity extends BaseEntity {
         return price;
     }
 
-    public OrderEntity setPrice(BigDecimal price) {
+    public OrderModelDto setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
 
-    public CartEntity getCart(){
+    public CartModelDto getCart() {
         return cart;
     }
 
-    public OrderEntity setCart(CartEntity shoppingCart){
-        this.cart =shoppingCart;
+    public OrderModelDto setCart(CartModelDto cart) {
+        this.cart = cart;
         return this;
     }
 
@@ -70,7 +52,7 @@ public class OrderEntity extends BaseEntity {
         return createdOn;
     }
 
-    public OrderEntity setCreatedOn(LocalDateTime createdOn) {
+    public OrderModelDto setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
         return this;
     }
@@ -79,16 +61,16 @@ public class OrderEntity extends BaseEntity {
         return deliveredOn;
     }
 
-    public OrderEntity setDeliveredOn(LocalDateTime deliveredOn) {
+    public OrderModelDto setDeliveredOn(LocalDateTime deliveredOn) {
         this.deliveredOn = deliveredOn;
         return this;
     }
 
-    public List<CommentEntity> getComments() {
+    public List<CommentModelDto> getComments() {
         return comments;
     }
 
-    public OrderEntity setComments(List<CommentEntity> comments) {
+    public OrderModelDto setComments(List<CommentModelDto> comments) {
         this.comments = comments;
         return this;
     }
@@ -97,7 +79,7 @@ public class OrderEntity extends BaseEntity {
         return contactNumber;
     }
 
-    public OrderEntity setContactNumber(String contactNumber) {
+    public OrderModelDto setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
         return this;
     }
@@ -106,7 +88,7 @@ public class OrderEntity extends BaseEntity {
         return isDelivered;
     }
 
-    public OrderEntity setDelivered(Boolean delivered) {
+    public OrderModelDto setDelivered(Boolean delivered) {
         isDelivered = delivered;
         return this;
     }

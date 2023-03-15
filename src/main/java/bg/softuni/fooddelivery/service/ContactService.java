@@ -23,15 +23,15 @@ public class ContactService {
     }
 
     public ContactModelDto mapToModel(ContactFormBindingDto contactBinding) {
-        return this.modelMapper.map(contactBinding,ContactModelDto.class);
+        return this.modelMapper.map(contactBinding, ContactModelDto.class);
     }
 
     public void saveContactMessage(ContactModelDto contactModel) {
 
-        ContactEntity contactToSave=
-                this.modelMapper.map(contactModel,ContactEntity.class);
+        ContactEntity contactToSave =
+                this.modelMapper.map(contactModel, ContactEntity.class);
 
-        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         contactToSave.setCreatedOn(LocalDateTime.parse(dateTimeFormatter.format(LocalDateTime.now())));
 
         this.contactRepository.saveAndFlush(contactToSave);

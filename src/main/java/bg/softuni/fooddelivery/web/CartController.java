@@ -23,12 +23,11 @@ public class CartController {
 
     @GetMapping("/cart/add/{id}")
     public String addToCart(@PathVariable("id") Long id,
-                            Principal principal,
-                            Model model) {
+                            Principal principal) {
 
-        String category = this.productService.getCategory(id);
+        final String category = this.productService.getCategoryName(id);
 
-        long count = this.cartService.addToCart(id, principal);
+        this.cartService.addToCart(id, principal);
 
         return "redirect:/menu/" + category;
     }

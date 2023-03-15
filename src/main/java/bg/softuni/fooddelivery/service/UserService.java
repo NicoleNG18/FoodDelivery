@@ -2,16 +2,14 @@ package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.dto.model.UserModelDto;
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
-import bg.softuni.fooddelivery.domain.entities.ShoppingCartEntity;
+import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
-import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,12 +39,14 @@ public class UserService {
     public void registerUser(UserModelDto userToRegister) {
 
         UserEntity userToSave = this.mapToUser(userToRegister);
-        UserRoleEntity userRole = this.userRoleService.getRoleByType(UserRoleEnum.USER);
-        ShoppingCartEntity shoppingCart = this.cartService.getNewCart();
 
-        userToSave.setPassword(passwordEncoder.encode(userToSave.getPassword()))
+       final UserRoleEntity userRole = this.userRoleService.getRoleByType(UserRoleEnum.USER);
+       final CartEntity shoppingCart = this.cartService.getNewCart();
+
+        userToSave
+                .setPassword(passwordEncoder.encode(userToSave.getPassword()))
                 .setRoles(new ArrayList<>(Collections.singletonList(userRole)))
-                .setShoppingCart(shoppingCart);
+                .setCart(shoppingCart);
 
         this.userRepository.saveAndFlush(userToSave);
     }

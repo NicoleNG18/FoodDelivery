@@ -1,40 +1,41 @@
 package bg.softuni.fooddelivery.service;
 
+import bg.softuni.fooddelivery.domain.dto.model.ProductModelDto;
+import bg.softuni.fooddelivery.domain.dto.model.UserModelDto;
+import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
 
     private final UserService userService;
 
-    public OrderService(UserService userService) {
+    private final ModelMapper modelMapper;
+
+    public OrderService(UserService userService,
+                        ModelMapper modelMapper) {
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
-    public List<ProductEntity> getProducts(Principal principal) {
+    public List<ProductViewDto> getProducts(Principal principal) {
 
-        UserEntity user = this.userService.getUserByUsername(principal.getName());
+        final UserModelDto user = this.modelMapper.map(this.userService.getUserByUsername(principal.getName()),UserModelDto.class);
 
-        return user.getShoppingCart().getProducts();
+        return user
+                .getCart()
+                .getProducts()
+                .stream()
+                .map(p->this.modelMapper.map(p,ProductViewDto.class))
+                .collect(Collectors.toList());
     }
 
-//    public OrderModelDto initializeOrder(){
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
-//
-//        UserEntity owner=this.userService.getUserByUsername(currentPrincipalName);
-//
-//
-//        return new OrderModelDto().setOwner(owner);
-//    }
+
 }
