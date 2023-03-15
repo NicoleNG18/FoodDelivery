@@ -25,16 +25,16 @@ public class MenuController {
 
     @GetMapping("/menu/{category}")
     public String getCategoryPage(@PathVariable("category")
-                                      String category,
-                                  Model model,
-                                  @PageableDefault(
+                                      ProductCategoryEnum category,
+                                  Model model)
+                                  /*@PageableDefault(
                                           page = 0,
                                           size = 5)
-                                      Pageable pageable) {
+                                      Pageable pageable)*/ {
 
         model.addAttribute("category",category);
-//        model.addAttribute("foods",this.menuService.allFoodsByCategory(category,pageable));
-        model.addAttribute("drinks",this.menuService.allDrinks(pageable));
+        model.addAttribute("foods",this.menuService.allFoodsByCategory(category));
+        model.addAttribute("drinks",this.menuService.allDrinks());
 
         return "categories-page";
     }

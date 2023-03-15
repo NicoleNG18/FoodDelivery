@@ -1,18 +1,46 @@
-.category-heading{
+.category-heading {
     margin-top: 110px;
 }
 
 
-.products-table{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:40px;
-    border-color: white;
+.products-table {
+    background-color: #d54b43;;
+    margin-bottom: 100px;
+    width:70%;
+    margin-left:15%;
+    margin-right:15%;
+    margin-top: 20px;
+}
+
+tr{
+    border-bottom:#424242;
+    border-style: solid;
+}
+
+.table-col {
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
 }
 
 
-
-.th-sm{
-   text-align: center;
-    color: white;
+.table-head {
+    margin-bottom: 10px;
 }
+
+.order-button{
+    background-color: white;
+    color:#424242;
+    border-radius: 10px;
+    border:none;
+    float: right;
+    width: 30%;
+    height: 100%;
+}
+
+.order-button:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease
+}
+

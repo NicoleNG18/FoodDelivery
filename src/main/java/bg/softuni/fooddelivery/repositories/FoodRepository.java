@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface FoodRepository extends JpaRepository<FoodEntity, Long> {
 
-    List<FoodEntity> findAllByCategory(Pageable pageable, ProductCategoryEnum category);
+    List<FoodEntity> findAllByCategory(ProductCategoryEnum category);
 
 }

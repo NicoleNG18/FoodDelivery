@@ -32,21 +32,30 @@ public class MenuService {
         this.modelMapper = modelMapper;
     }
 
-    public Page<FoodViewDto> allFoodsByCategory(ProductCategoryEnum category,
-                                                   Pageable pageable){
-       final List<FoodViewDto> foods = this.foodRepository.findAllByCategory(pageable, category)
-                .stream().map(f -> this.modelMapper.map(f, FoodViewDto.class)).toList();
-
-       return new PageImpl<>(foods);
-
+    public List<FoodEntity> allFoodsByCategory(ProductCategoryEnum category) {
+        return this.foodRepository.findAllByCategory(category);
     }
 
-    public Page<DrinkViewDto> allDrinks(Pageable pageable){
-
-        final List<DrinkViewDto> drinks = this.drinkRepository.findAll(pageable)
-                .stream().map(d -> this.modelMapper.map(d, DrinkViewDto.class)).toList();
-
-        return new PageImpl<>(drinks);
+    public List<DrinkEntity> allDrinks() {
+        return this.drinkRepository.findAll();
     }
-
 }
+
+//    public Page<FoodViewDto> allFoodsByCategory(ProductCategoryEnum category,
+//                                                   Pageable pageable){
+//       final List<FoodViewDto> foods = this.foodRepository.findAllByCategory(pageable, category)
+//                .stream().map(f -> this.modelMapper.map(f, FoodViewDto.class)).toList();
+//
+//       return new PageImpl<>(foods);
+//
+//    }
+//
+//    public Page<DrinkViewDto> allDrinks(Pageable pageable){
+//
+//        final List<DrinkViewDto> drinks = this.drinkRepository.findAll(pageable)
+//                .stream().map(d -> this.modelMapper.map(d, DrinkViewDto.class)).toList();
+//
+//        return new PageImpl<>(drinks);
+//    }
+
+//}
