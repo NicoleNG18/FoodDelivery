@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,11 +19,13 @@ public class OrderEntity extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @ManyToMany
-    private Set<FoodEntity> foods;
-//TODO:make list not set
-    @ManyToMany
-    private Set<DrinkEntity> drinks;
+    @ManyToOne
+    private ShoppingCartEntity shoppingCart;
+
+//    @ManyToMany
+//    private List<FoodEntity> foods;
+//    @ManyToMany
+//    private List<DrinkEntity> drinks;
 
     @Column(nullable = false)
     private LocalDateTime createdOn;
@@ -30,7 +34,7 @@ public class OrderEntity extends BaseEntity {
     private LocalDateTime deliveredOn;
 
     @OneToMany
-    private Set<CommentEntity> comments;
+    private List<CommentEntity> comments;
 
     @Column(nullable = false)
     private String contactNumber;
@@ -39,9 +43,9 @@ public class OrderEntity extends BaseEntity {
     private Boolean isDelivered;
 
     public OrderEntity() {
-        this.foods = new HashSet<>();
-        this.drinks=new HashSet<>();
-        this.comments=new HashSet<>();
+//        this.foods = new ArrayList<>();
+//        this.drinks=new ArrayList<>();
+        this.comments=new ArrayList<>();
     }
 
     public UserEntity getOwner() {
@@ -62,23 +66,32 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public Set<FoodEntity> getFoods() {
-        return foods;
+    public ShoppingCartEntity getShoppingCart(){
+        return shoppingCart;
     }
 
-    public OrderEntity setFoods(Set<FoodEntity> foods) {
-        this.foods = foods;
+    public OrderEntity setShoppingCart(ShoppingCartEntity shoppingCart){
+        this.shoppingCart=shoppingCart;
         return this;
     }
 
-    public Set<DrinkEntity> getDrinks() {
-        return drinks;
-    }
-
-    public OrderEntity setDrinks(Set<DrinkEntity> drinks) {
-        this.drinks = drinks;
-        return this;
-    }
+//    public List<FoodEntity> getFoods() {
+//        return foods;
+//    }
+//
+//    public OrderEntity setFoods(List<FoodEntity> foods) {
+//        this.foods = foods;
+//        return this;
+//    }
+//
+//    public List<DrinkEntity> getDrinks() {
+//        return drinks;
+//    }
+//
+//    public OrderEntity setDrinks(List<DrinkEntity> drinks) {
+//        this.drinks = drinks;
+//        return this;
+//    }
 
     public LocalDateTime getCreatedOn() {
         return createdOn;
@@ -98,11 +111,11 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public Set<CommentEntity> getComments() {
+    public List<CommentEntity> getComments() {
         return comments;
     }
 
-    public OrderEntity setComments(Set<CommentEntity> comments) {
+    public OrderEntity setComments(List<CommentEntity> comments) {
         this.comments = comments;
         return this;
     }

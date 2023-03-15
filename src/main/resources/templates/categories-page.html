@@ -20,21 +20,13 @@
 
 <table id="dtBasicExample" class="products-table">
   <tbody>
-  <tr class="row mb-2 mt-2" th:each="food : ${foods}" th:if="${!#strings.equals(category,'drink')}">
-    <td th:text="*{food.name}" style="font-weight: bold">Tiger Nixon</td>
-    <td th:text="|*{food.price} &euro;|">System Architect</td>
-    <td th:text="*{food.description}">Edinburgh</td>
+  <tr  class="row mb-2 mt-2" th:each="product : ${products}">
+    <td th:text="*{product.name}" style="font-weight: bold">Tiger Nixon</td>
+    <td th:text="|*{product.price} &euro;|"></td>
+    <td th:text="|*{product.description}|">Edinburgh</td>
     <td sec:authorize="isAuthenticated()" style="margin-bottom: 10px;">
-      <button type="submit" class="order-button">Add to cart</button>
-    </td>
-  </tr>
-  <tr  class="row mb-2 mt-2" th:each="drink : ${drinks}" th:if="${#strings.equals(category,'drink')}">
-    <td th:text="*{drink.name}" style="font-weight: bold">Tiger Nixon</td>
-    <td th:text="|*{drink.price} &euro;|"></td>
-    <td th:text="|*{drink.quantity} L.|">Edinburgh</td>
-    <td sec:authorize="isAuthenticated()" style="margin-bottom: 10px;">
-      <button type="submit" class="order-button">Add to cart</button>
-    </td>
+    <td style="margin-bottom:10px"><a class="order-button text-center text-decoration-none" th:href="@{/cart/add/{id}(id=${product.id})}"px;
+    >Add to cart</a></td>
   </tr>
   </tbody>
 </table>

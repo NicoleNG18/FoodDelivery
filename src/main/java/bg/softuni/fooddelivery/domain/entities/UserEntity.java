@@ -2,6 +2,7 @@ package bg.softuni.fooddelivery.domain.entities;
 
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import jakarta.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity{
+public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String firstName;
@@ -18,10 +19,10 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -38,13 +39,16 @@ public class UserEntity extends BaseEntity{
     private GenderEnum gender;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRoleEntity> roles=new ArrayList<>();
+    private List<UserRoleEntity> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")
     private Set<OrderEntity> orders;
 
+    @OneToOne
+    private ShoppingCartEntity shoppingCart;
+
     public UserEntity() {
-        this.orders=new HashSet<>();
+        this.orders = new HashSet<>();
     }
 
     public String getFirstName() {
@@ -71,6 +75,15 @@ public class UserEntity extends BaseEntity{
 
     public UserEntity setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public ShoppingCartEntity getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public UserEntity setShoppingCart(ShoppingCartEntity shoppingCart) {
+        this.shoppingCart = shoppingCart;
         return this;
     }
 

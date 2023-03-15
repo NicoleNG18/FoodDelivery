@@ -4,21 +4,21 @@ import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 
 import java.math.BigDecimal;
 
-public class DrinkViewDto {
+public class ProductViewDto {
 
     private String name;
     private BigDecimal price;
     private ProductCategoryEnum category;
-    private Double quantity;
+    private String description;
 
-    public DrinkViewDto() {
+    public ProductViewDto() {
     }
 
     public String getName() {
         return name;
     }
 
-    public DrinkViewDto setName(String name) {
+    public ProductViewDto setName(String name) {
         this.name = name;
         return this;
     }
@@ -27,7 +27,7 @@ public class DrinkViewDto {
         return price;
     }
 
-    public DrinkViewDto setPrice(BigDecimal price) {
+    public ProductViewDto setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -36,17 +36,17 @@ public class DrinkViewDto {
         return category;
     }
 
-    public DrinkViewDto setCategory(ProductCategoryEnum category) {
+    public ProductViewDto setCategory(ProductCategoryEnum category) {
         this.category = category;
         return this;
     }
 
-    public Double getQuantity() {
-        return quantity;
+    public String getDescription() {
+        return description;
     }
 
-    public DrinkViewDto setQuantity(Double quantity) {
-        this.quantity = quantity;
+    public ProductViewDto setDescription(String description) {
+        this.description = description;
         return this;
     }
 }
