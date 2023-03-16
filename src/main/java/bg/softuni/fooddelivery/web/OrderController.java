@@ -36,6 +36,7 @@ public class OrderController {
 
 
         model.addAttribute("foodPrice",this.orderService.getProductsPrice(principal));
+        model.addAttribute("countBoxes",this.orderService.getProducts(principal).size());
 
         return "finalize-order";
     }
