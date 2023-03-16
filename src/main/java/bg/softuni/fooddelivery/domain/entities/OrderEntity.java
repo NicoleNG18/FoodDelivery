@@ -25,7 +25,7 @@ public class OrderEntity extends BaseEntity {
     private LocalDateTime deliveredOn;
 
     private String comment;
-
+    @Column(nullable = false)
     private String address;
 
     @Column(nullable = false)
@@ -64,12 +64,12 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public CartEntity getCart(){
+    public CartEntity getCart() {
         return cart;
     }
 
-    public OrderEntity setCart(CartEntity shoppingCart){
-        this.cart =shoppingCart;
+    public OrderEntity setCart(CartEntity shoppingCart) {
+        this.cart = shoppingCart;
         return this;
     }
 

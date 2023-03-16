@@ -1,6 +1,7 @@
 package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
+import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
@@ -14,6 +15,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,5 +79,28 @@ public class OrderService {
         this.orderRepository.saveAndFlush(order);
 
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
+    }
+
+    @Transactional
+    public List<OrderDetailViewDto> getOrdersByUser(Principal principal) {
+
+        final UserEntity user = this.userService.getUserByUsername(principal.getName());
+
+        return this.orderRepository
+                .findAllByOwner_Id(user.getId())
+                .stream()
+                .map(this::mapToOrderView)
+                .collect(Collectors.toList());
+    }
+
+    private OrderDetailViewDto mapToOrderView(OrderEntity orderEntity) {
+        return this.modelMapper.map(orderEntity, OrderDetailViewDto.class);
+    }
+
+    public OrderDetailViewDto getOrderById(Long id) {
+
+       final OrderEntity order = this.orderRepository.findOrderEntityById(id);
+
+       return mapToOrderView(order);
     }
 }

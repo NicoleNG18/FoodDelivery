@@ -1,0 +1,23 @@
+.container {
+    padding: 2rem 0rem;
+}
+
+h4 {
+    margin: 2rem 0rem 1rem;
+}
+
+
+.button-detail{
+    background-color: white;
+    color:#424242;
+    width: 70%;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button-detail:hover{
+    background-color:darkred;
+    color:white;
+    transition: all 2000ms ease;
+}
