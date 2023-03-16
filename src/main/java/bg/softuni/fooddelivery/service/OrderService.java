@@ -1,12 +1,18 @@
 package bg.softuni.fooddelivery.service;
+
+import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
+import bg.softuni.fooddelivery.domain.entities.OrderEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
+import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +21,16 @@ public class OrderService {
 
     private final UserService userService;
 
+    private final OrderRepository orderRepository;
+
     private final ModelMapper modelMapper;
 
 
     public OrderService(UserService userService,
+                        OrderRepository orderRepository,
                         ModelMapper modelMapper) {
         this.userService = userService;
+        this.orderRepository = orderRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -44,5 +54,28 @@ public class OrderService {
 
         return user.getCart().getProductsSum();
 
+    }
+
+    @Transactional
+    public void makeOrder(OrderBindingDto orderDto,
+                          Principal principal) {
+
+        OrderEntity order = new OrderEntity();
+
+        final UserEntity user = this.userService.getUserByUsername(principal.getName());
+
+        order
+                .setOwner(user)
+                .setPrice(user.getCart().getProductsSum())
+                .setCart(user.getCart())
+                .setCreatedOn(LocalDateTime.now())
+                .setComment(orderDto.getComment() != null ? orderDto.getComment() : "no comment")
+                .setAddress(orderDto.getAddress())
+                .setContactNumber(orderDto.getContactNumber())
+                .setDelivered(false);
+
+        this.orderRepository.saveAndFlush(order);
+
+        user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
     }
 }

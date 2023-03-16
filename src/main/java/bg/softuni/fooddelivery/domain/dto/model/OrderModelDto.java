@@ -1,9 +1,5 @@
 package bg.softuni.fooddelivery.domain.dto.model;
 
-import bg.softuni.fooddelivery.domain.entities.CartEntity;
-import bg.softuni.fooddelivery.domain.entities.CommentEntity;
-import bg.softuni.fooddelivery.domain.entities.UserEntity;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,9 +20,11 @@ public class OrderModelDto {
     private CartModelDto cart;
     private LocalDateTime createdOn;
     private LocalDateTime deliveredOn;
-    private List<CommentModelDto> comments;
+    private String comment;
     private String contactNumber;
     private Boolean isDelivered;
+
+    private String address;
 
     public OrderModelDto() {
     }
@@ -37,6 +35,15 @@ public class OrderModelDto {
 
     public OrderModelDto setOwner(UserModelDto owner) {
         this.owner = owner;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public OrderModelDto setAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -76,12 +83,12 @@ public class OrderModelDto {
         return this;
     }
 
-    public List<CommentModelDto> getComments() {
-        return comments;
+    public String getComment() {
+        return comment;
     }
 
-    public OrderModelDto setComments(List<CommentModelDto> comments) {
-        this.comments = comments;
+    public OrderModelDto setComment(String comment) {
+        this.comment = comment;
         return this;
     }
 

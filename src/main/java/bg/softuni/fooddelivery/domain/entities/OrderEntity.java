@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -23,11 +21,12 @@ public class OrderEntity extends BaseEntity {
     @Column(nullable = false)
     private LocalDateTime createdOn;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime deliveredOn;
 
-    @OneToMany
-    private List<CommentEntity> comments;
+    private String comment;
+
+    private String address;
 
     @Column(nullable = false)
     private String contactNumber;
@@ -36,7 +35,6 @@ public class OrderEntity extends BaseEntity {
     private Boolean isDelivered;
 
     public OrderEntity() {
-        this.comments=new ArrayList<>();
     }
 
     public UserEntity getOwner() {
@@ -45,6 +43,15 @@ public class OrderEntity extends BaseEntity {
 
     public OrderEntity setOwner(UserEntity owner) {
         this.owner = owner;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public OrderEntity setAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -84,12 +91,12 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public List<CommentEntity> getComments() {
-        return comments;
+    public String getComment() {
+        return comment;
     }
 
-    public OrderEntity setComments(List<CommentEntity> comments) {
-        this.comments = comments;
+    public OrderEntity setComment(String comments) {
+        this.comment = comments;
         return this;
     }
 

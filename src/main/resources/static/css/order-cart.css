@@ -45,8 +45,9 @@ body {
     border-style: none;
     background-color: white;
     color: #424242;
-    width: 15%;
-    height: 35%;
+    text-decoration: none;
+    display: flex;
+    width: 50%;
 }
 
 .finalize-order:hover {
