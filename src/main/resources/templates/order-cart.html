@@ -9,32 +9,49 @@
 
 <body>
 
-<div>
+<div class="row">
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
-
-<div class="container bg-blur rounded mt-1 mb-4">
-    <div class="row mt-1 mb-2">
-        <div class="col-6 mt-1 mb-1">
-            <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">My Posts</h3>
-            <h6 class="mySticky bg-gray text-dark  mb-0 mt-0" >Username: {username}</h6>
-            <div class="bg-dark rounded m-auto" style="height: 68.5vh; overflow: auto">
-                <table class="table table-striped table-dark">
+<div class="row">
+<div class="container-cart rounded">
+            <h3 class="cartHeader text-white text-center mb-3">Cart</h3>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+<!--            <div class="bg-dark rounded" style="height: 68.5vh; overflow: auto; width:70%; margin-left: auto; margin-right: auto;">-->
+                <table class="table table-cart table-striped table-dark" style="height: 68.5vh; overflow: auto; width:70%; margin-left: auto; margin-right: auto;">
                     <tr th:each="food:${cartProducts}" th:object="${food}">
-                        <td style="width: 5%" class="bg-info" th:text="*{name}">Name</td>
-                        <td class="bg-primary" style="width: 15%" th:text="*{description}">{numberOfLikes) likes</td>
-                        <td th:text="*{price}">{content}</td>
-<!--                        <td style="width: 15%"><a class="btn-danger btn"-->
-<!--                                                  th:href="@{/posts/remove/{id}(id=${p.id})}"-->
-<!--                        >Remove</a></td>-->
+                        <td class="bg-info product-name" th:text="*{name}">Name</td>
+                        <td class="bg-primary description" th:text="*{description}">{numberOfLikes) likes</td>
+                        <td th:text="*{price}" class="price text-center bg-info">{content}</td>
+                        <td class="text-center bg-primary"><a class="remove-button justify-content-center" th:href="@{/cart/remove/{id}(id = *{id})}">Remove</a></td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: end;">
+                            Total:
+                        </td>
+                        <td style=" text-align: center" th:text="${productsPrice}">
+                        </td>
+                        <td></td>
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td style="width: 100%"><a class="finalize-button text-end text-decoration-none"-->
+<!--                               th:href="@{/order}"-->
+<!--                        >Finalize order</a></td>-->
+<!--                    </tr>-->
                 </table>
-            </div>
-        </div>
     </div>
+                <div class="text-end">
+                    <button type="submit" class="finalize-order">Finalize order</button>
+                </div>
+
+<!--            </div>-->
+        </div>
 </div>
 
+<div class="row">
 <th:block th:insert="~{fragments/footer}"></th:block>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

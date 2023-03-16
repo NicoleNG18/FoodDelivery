@@ -1,3 +1,56 @@
 body {
-    background-color: rgb(246, 241, 241);
+    background-color: rgb(234, 153, 153);
+}
+
+.remove-button {
+    border-radius: 25px;
+    border-style: none;
+    text-decoration: none;
+    background-color: white;
+    color: #424242;
+    display: flex;
+}
+
+.price, .product-name {
+    width: 15%;
+}
+
+.description {
+    width: 55%;
+}
+
+.remove-button:hover {
+    background-color: darkred;
+    color: white;
+    transition: all 2000ms ease;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.container-cart {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.finalize-order {
+    margin-right: 200px;
+    border-radius: 25px;
+    border-style: none;
+    background-color: white;
+    color: #424242;
+    width: 15%;
+    height: 35%;
+}
+
+.finalize-order:hover {
+    background-color: darkred;
+    color: white;
+    transition: all 2000ms ease;
 }

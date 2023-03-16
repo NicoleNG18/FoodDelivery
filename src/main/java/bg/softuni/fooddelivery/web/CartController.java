@@ -26,10 +26,11 @@ public class CartController {
     }
 
     @GetMapping("/cart")
-    public String getCart(Model model, Principal userDetails){
+    public String getCart(Model model, Principal principal){
 
 
-        model.addAttribute("cartProducts",this.orderService.getProducts(userDetails));
+        model.addAttribute("cartProducts",this.orderService.getProducts(principal));
+        model.addAttribute("productsPrice",this.orderService.getProductsPrice(principal));
 
         return "order-cart";
     }
@@ -43,5 +44,14 @@ public class CartController {
         this.cartService.addToCart(id, principal);
 
         return "redirect:/menu/" + category;
+    }
+
+    @GetMapping("/cart/remove/{id}")
+    public String removeFromCart(@PathVariable("id") Long id,
+                                 Principal principal){
+
+        this.cartService.removeFromCart(id,principal);
+
+        return "redirect:/cart";
     }
 }
