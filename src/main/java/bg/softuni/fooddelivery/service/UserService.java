@@ -1,6 +1,5 @@
 package bg.softuni.fooddelivery.service;
 
-import bg.softuni.fooddelivery.domain.dto.model.UserModelDto;
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
 import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
@@ -36,7 +35,7 @@ public class UserService {
         this.cartService = cartService;
     }
 
-    public void registerUser(UserModelDto userToRegister) {
+    public void registerUser(UserRegistrationDTO userToRegister) {
 
         UserEntity userToSave = this.mapToUser(userToRegister);
 
@@ -55,11 +54,7 @@ public class UserService {
         return this.userRepository.findUserEntityByUsername(username).orElse(null);
     }
 
-    public UserModelDto mapToModel(UserRegistrationDTO user) {
-        return this.modelMapper.map(user, UserModelDto.class);
-    }
-
-    public UserEntity mapToUser(UserModelDto modelDto) {
+    public UserEntity mapToUser(UserRegistrationDTO modelDto) {
         return this.modelMapper.map(modelDto, UserEntity.class);
     }
 }

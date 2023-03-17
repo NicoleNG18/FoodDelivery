@@ -46,7 +46,7 @@ public class UserRegisterController {
 
         }
 
-        this.userService.registerUser(userService.mapToModel(registerDto));
+        this.userService.registerUser(registerDto);
 
         return "redirect:/users/login";
     }

@@ -46,7 +46,7 @@ public class ContactController {
 
         }
 
-        this.contactService.saveContactMessage(this.contactService.mapToModel(contactDto));
+        this.contactService.saveContactMessage(contactDto);
 
         return "redirect:/";
     }

@@ -69,7 +69,6 @@ public class OrderService {
         order
                 .setOwner(user)
                 .setPrice(user.getCart().getProductsSum())
-                .setCart(user.getCart())
                 .setCreatedOn(LocalDateTime.now())
                 .setComment(orderDto.getComment() != null ? orderDto.getComment() : "no comment")
                 .setAddress(orderDto.getAddress())

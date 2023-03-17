@@ -1,6 +1,5 @@
 package bg.softuni.fooddelivery.domain.entities;
 
-import bg.softuni.fooddelivery.domain.dto.model.UserModelDto;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import jakarta.persistence.*;
 

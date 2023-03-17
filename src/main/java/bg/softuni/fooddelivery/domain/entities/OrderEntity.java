@@ -15,9 +15,6 @@ public class OrderEntity extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @OneToOne
-    private CartEntity cart;
-
     @Column(nullable = false)
     private LocalDateTime createdOn;
 
@@ -61,15 +58,6 @@ public class OrderEntity extends BaseEntity {
 
     public OrderEntity setPrice(BigDecimal price) {
         this.price = price;
-        return this;
-    }
-
-    public CartEntity getCart() {
-        return cart;
-    }
-
-    public OrderEntity setCart(CartEntity shoppingCart) {
-        this.cart = shoppingCart;
         return this;
     }
 

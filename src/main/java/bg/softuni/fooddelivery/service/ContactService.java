@@ -1,7 +1,6 @@
 package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.dto.binding.ContactFormBindingDto;
-import bg.softuni.fooddelivery.domain.dto.model.ContactModelDto;
 import bg.softuni.fooddelivery.domain.entities.ContactEntity;
 import bg.softuni.fooddelivery.repositories.ContactRepository;
 import org.modelmapper.ModelMapper;
@@ -22,11 +21,8 @@ public class ContactService {
         this.contactRepository = contactRepository;
     }
 
-    public ContactModelDto mapToModel(ContactFormBindingDto contactBinding) {
-        return this.modelMapper.map(contactBinding, ContactModelDto.class);
-    }
 
-    public void saveContactMessage(ContactModelDto contactModel) {
+    public void saveContactMessage(ContactFormBindingDto contactModel) {
 
         ContactEntity contactToSave =
                 this.modelMapper.map(contactModel, ContactEntity.class);
