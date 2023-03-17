@@ -13,8 +13,45 @@
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
+<div class="container" style="background-color:#d54b43; margin-left: auto; margin-right: auto; width: 50%; margin-top: 150px;">
+<h1 class="text-center text-white mb-4">Order</h1>
+    <table class="table table-bordered" th:object="${order}" style="width: 60%; margin-left:auto; margin-right: auto;">
+        <tbody>
+        <tr>
+            <td class="text-center">Id</td>
+            <td class="text-center" th:text="*{id}">id</td>
+        </tr>
+        <tr>
+            <td class="text-center">Price</td>
+            <td class="text-center" th:text="|*{price} &euro;|">price</td>
+        </tr>
+        <tr>
+            <td class="text-center">Created on</td>
+            <td class="text-center" th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}">created on</td>
+        </tr>
+        <tr th:if="*{delivered}">
+            <td class="text-center">Status</td>
+            <td class="text-center">Delivered</td>
+        </tr>
+        <tr th:unless="*{delivered}">
+            <td class="text-center">Status</td>
+            <td class="text-center">In progress</td>
+        </tr>
+        <tr>
+            <td class="text-center">Address for delivery</td>
+            <td class="text-center" th:text="*{address}">address</td>
+        </tr>
+        <tr>
+            <td class="text-center">Contact number</td>
+            <td class="text-center" th:text="*{contactNumber}">contact number</td>
+        </tr>
+        </tbody>
+    </table>
 
-<p th:text="${order.address}"></p>
+
+</div>
+
+
 
 <th:block th:insert="~{fragments/footer}"></th:block>
 

@@ -23,6 +23,7 @@
           <th scope="col" class="text-center">Id</th>
           <th scope="col" class="text-center">Price</th>
           <th scope="col" class="text-center">Created on</th>
+          <th scope="col" class="text-center">Status</th>
           <th scope="col" class="text-center">More details</th>
         </tr>
         </thead>
@@ -31,6 +32,8 @@
           <th scope="row" th:text="*{id}" class="text-center">1</th>
           <td th:text="*{price}" class="text-center">0.00</td>
           <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center">01-01-2010</td>
+          <td th:if="*{delivered}" class="text-center">Delivered</td>
+          <td th:unless="*{delivered}" class="text-center">In progress</td>
           <td style="text-align: center;">
             <a type="button" class="button-detail" th:href="@{/orders/details/{id}(id=${order.id})}">Details</a>
           </td>
