@@ -19,6 +19,18 @@
 <!--            Notifications <span class="badge badge-light">4</span>-->
 <!--          </button>-->
         </li>
+<!--        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">-->
+<!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            My profile-->
+<!--          </a>-->
+<!--          <ul class="dropdown-menu">-->
+<!--            <li> <a class="dropdown-item text-white" th:href="@{/users/profile}">Personal information</a></li>-->
+<!--            <li><a class="dropdown-item text-white" th:href="@{/orders/history}">Orders history</a></li>-->
+<!--            <li><form class="dropdown-item text-white" th:method="post" th:action="@{/users/logout}">-->
+<!--              <input class="dropdown-item btn-link nav-link" type="submit" value="Logout">-->
+<!--            </form></li>-->
+<!--          </ul>-->
+<!--        </li>-->
         <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             My profile
