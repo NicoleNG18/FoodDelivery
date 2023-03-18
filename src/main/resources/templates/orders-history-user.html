@@ -14,7 +14,7 @@
 </div>
 
 
-<h5>All orders</h5>
+<h5>My orders</h5>
 
 <div class="container">
   <div class="row">
@@ -30,7 +30,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="order: ${allOrders}" th:object="${order}">
+        <tr th:each="order: ${orders}" th:object="${order}">
           <th scope="row" th:text="*{id}" class="text-center">1</th>
           <td th:text="*{price}" class="text-center">0.00</td>
           <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center">01-01-2010</td>
@@ -45,6 +45,7 @@
     </div>
   </div>
 </div>
+
 
 
 <th:block th:insert="~{fragments/footer}"></th:block>

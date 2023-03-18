@@ -80,6 +80,9 @@ public class OrderService {
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
     }
 
+    //TODO: start admin functuonalities - all orders,all users, adding/editing/deleting products, making users workers
+    //TODO: worker functionalities - delivering order, all orders history
+
     @Transactional
     public List<OrderDetailViewDto> getOrdersByUser(Principal principal) {
 
@@ -101,5 +104,9 @@ public class OrderService {
        final OrderEntity order = this.orderRepository.findOrderEntityById(id);
 
        return mapToOrderView(order);
+    }
+
+    public List<OrderDetailViewDto> getAllOrders() {
+        return this.orderRepository.findAll().stream().map(this::mapToOrderView).collect(Collectors.toList());
     }
 }

@@ -1,7 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
-import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
 import bg.softuni.fooddelivery.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -65,7 +64,7 @@ public class OrderController {
 
         model.addAttribute("orders",this.orderService.getOrdersByUser(principal));
 
-        return "orders-history";
+        return "orders-history-user";
     }
 
     @GetMapping("/details/{id}")
@@ -74,5 +73,13 @@ public class OrderController {
         model.addAttribute("order",this.orderService.getOrderById(id));
 
         return "order-details";
+    }
+
+    @GetMapping("/all/history")
+    public String getAllOrders(Model model){
+
+        model.addAttribute("allOrders",this.orderService.getAllOrders());
+
+        return "orders-history";
     }
 }

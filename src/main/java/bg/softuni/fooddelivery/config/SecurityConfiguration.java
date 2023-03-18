@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                         "/menu/**").permitAll()
                 .requestMatchers( "/cart/add/**","/cart","/orders/**").hasRole(UserRoleEnum.USER.name())
 //                TODO:PERMIT LOGIN FOR AUTHENTICATED USER
-                .requestMatchers("/orders/all").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
+                .requestMatchers("/orders/all/history").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
