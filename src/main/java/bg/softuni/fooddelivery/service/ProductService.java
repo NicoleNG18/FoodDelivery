@@ -1,5 +1,6 @@
 package bg.softuni.fooddelivery.service;
 
+import bg.softuni.fooddelivery.domain.dto.binding.ProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
@@ -39,4 +40,16 @@ public class ProductService {
         return this.productRepository.findProductEntityById(id).getCategory().name();
     }
 
+    public void addProduct(ProductBindingDto productDto) {
+
+        ProductEntity productToSave=new ProductEntity();
+
+        productToSave
+                .setName(productDto.getName())
+                .setCategory(productDto.getCategory())
+                .setDescription(productDto.getDescription())
+                .setPrice(productDto.getPrice());
+
+        this.productRepository.saveAndFlush(productToSave);
+    }
 }
