@@ -50,12 +50,24 @@ public class UserController {
 
     @GetMapping("/change/{id}")
     public String changeRoles(@PathVariable("id") Long id,Model model){
-
-        if(id!=1) {
             model.addAttribute("user", this.userService.getUserById(id));
 
             return "roles-change";
-        }
-        return "redirect:/users/all";
+    }
+
+    @GetMapping("/roles/remove/{id}/{name}")
+    public String removeRole(@PathVariable("id") Long id,@PathVariable("name") String roleName){
+
+        this.userService.removeRole(roleName,id);
+
+        return "redirect:/users/change/{id}";
+    }
+
+    @GetMapping("/roles/add/{id}/{name}")
+    public String addRole(@PathVariable("id") Long id,@PathVariable("name") String roleName){
+
+        this.userService.addRole(roleName,id);
+
+        return "redirect:/users/change/{id}";
     }
 }

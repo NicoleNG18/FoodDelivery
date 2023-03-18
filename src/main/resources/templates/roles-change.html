@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <title>Orders history</title>
@@ -11,6 +11,38 @@
 
 <div>
   <th:block th:insert="~{/fragments/navigation}"></th:block>
+</div>
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">Roles</th>
+          <th scope="col" class="text-center">Manage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="role: ${T(bg.softuni.fooddelivery.domain.enums.UserRoleEnum).values()}" th:object="${role}">
+          <th scope="row" th:text="${role.name()}" class="text-center">1</th>
+          <td style="text-align: center;" th:if="${#strings.equals(role.name(),'USER')}">
+            Not manageable
+          </td>
+          <td style="text-align: center;" th:if="${#strings.equals(role.name(),'ADMIN')}">
+            Cannot be admin
+          </td>
+          <td style="text-align: center;" th:if="${#strings.equals(role.name(),'WORKER')}">
+            <a type="button" class="button-detail" th:unless="${user.hasRoleWorker()}"
+               th:href="@{/users/roles/add/{id}/{name}(id=${user.id},name=${role.name()})}">Add role</a>
+            <a type="button" class="button-detail" th:if="${user.hasRoleWorker()}"
+               th:href="@{/users/roles/remove/{id}/{name}(id=${user.id},name=${role.name()})}">Remove role</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <th:block th:insert="~{fragments/footer}"></th:block>

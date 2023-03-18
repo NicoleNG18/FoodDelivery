@@ -7,6 +7,7 @@ import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
 import bg.softuni.fooddelivery.repositories.UserRepository;
+import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,17 +25,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserRoleService userRoleService;
 
+    private final UserRoleRepository userRoleRepository;
+
     private final CartService cartService;
 
     public UserService(ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder,
                        UserRepository userRepository,
                        UserRoleService userRoleService,
+                       UserRoleRepository userRoleRepository,
                        CartService cartService) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleService = userRoleService;
+        this.userRoleRepository = userRoleRepository;
         this.cartService = cartService;
     }
 
@@ -75,6 +80,26 @@ public class UserService {
     }
 
     public List<UserViewDto> getAllUsers(){
-        return this.userRepository.findAll().stream().map(this::mapToUserView).collect(Collectors.toList());
+       return this.userRepository.findAll().stream().map(this::mapToUserView).toList();
+    }
+
+    public void removeRole(String roleName,Long userId) {
+
+        UserEntity userById = this.userRepository.findUserEntityById(userId);
+
+        userById.getRoles().removeIf(userRoleEntity -> userRoleEntity.getRole().name().equals("WORKER"));
+
+        this.userRepository.save(userById);
+
+    }
+
+    public void addRole(String roleName, Long userId) {
+        final UserRoleEntity role=this.userRoleRepository.findByRole(UserRoleEnum.WORKER);
+        UserEntity userById = this.userRepository.findUserEntityById(userId);
+
+        userById.getRoles().add(role);
+
+        this.userRepository.save(userById);
+
     }
 }

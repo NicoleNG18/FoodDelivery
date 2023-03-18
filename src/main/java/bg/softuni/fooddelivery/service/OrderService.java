@@ -79,8 +79,8 @@ public class OrderService {
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
     }
 
-    //TODO: start admin functuonalities - all users, adding/editing/deleting products, making users workers
-    //TODO: worker functionalities - delivering order, all orders history
+    //TODO: start admin functuonalities - adding/editing/deleting products
+    //TODO: worker functionalities - delivering order
 
     @Transactional
     public List<OrderDetailViewDto> getOrdersByUser(Principal principal) {

@@ -109,4 +109,8 @@ public class UserViewDto {
         roles.forEach(r->names.add(r.getRole().name()));
         return names;
     }
+
+    public boolean hasRoleWorker(){
+        return getRolesNames().contains("WORKER");
+    }
 }
