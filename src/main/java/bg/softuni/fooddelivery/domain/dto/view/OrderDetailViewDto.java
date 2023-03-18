@@ -23,6 +23,8 @@ public class OrderDetailViewDto {
 
     private Boolean isDelivered;
 
+    private String client;
+
 
     public OrderDetailViewDto() {
     }
@@ -42,6 +44,15 @@ public class OrderDetailViewDto {
 
     public OrderDetailViewDto setPrice(BigDecimal price) {
         this.price = price;
+        return this;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public OrderDetailViewDto setClient(String client) {
+        this.client = client;
         return this;
     }
 

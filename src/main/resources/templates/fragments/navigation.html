@@ -19,8 +19,11 @@
 <!--            Notifications <span class="badge badge-light">4</span>-->
 <!--          </button>-->
         </li>
-        <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-          <a class="nav-link" th:href="@{/orders/all/history}">Orders history all</a>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
+          <a class="nav-link" th:href="@{/orders/all/history}">All orders history</a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+          <a class="nav-link" th:href="@{/users/all}">All users</a>
         </li>
 <!--        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">-->
 <!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->

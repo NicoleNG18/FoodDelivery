@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Orders history</title>
@@ -20,6 +20,10 @@
         <tr>
             <td class="text-center">Id</td>
             <td class="text-center" th:text="*{id}">id</td>
+        </tr>
+        <tr sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
+            <td class="text-center">Owner</td>
+            <td class="text-center" th:text="*{client}">owner name</td>
         </tr>
         <tr>
             <td class="text-center">Price</td>

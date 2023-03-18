@@ -15,7 +15,6 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,7 +79,7 @@ public class OrderService {
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
     }
 
-    //TODO: start admin functuonalities - all orders,all users, adding/editing/deleting products, making users workers
+    //TODO: start admin functuonalities - all users, adding/editing/deleting products, making users workers
     //TODO: worker functionalities - delivering order, all orders history
 
     @Transactional
@@ -96,7 +95,9 @@ public class OrderService {
     }
 
     private OrderDetailViewDto mapToOrderView(OrderEntity orderEntity) {
-        return this.modelMapper.map(orderEntity, OrderDetailViewDto.class);
+        OrderDetailViewDto orderDetail = this.modelMapper.map(orderEntity, OrderDetailViewDto.class);
+        orderDetail.setClient(orderEntity.getOwner().getUsername());
+        return orderDetail;
     }
 
     public OrderDetailViewDto getOrderById(Long id) {

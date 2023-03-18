@@ -1,6 +1,7 @@
 package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
+import bg.softuni.fooddelivery.domain.dto.view.UserViewDto;
 import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -50,11 +53,28 @@ public class UserService {
         this.userRepository.saveAndFlush(userToSave);
     }
 
-    public UserEntity getUserByUsername(String username) {
+    public UserEntity getUserByUsername(String username){
         return this.userRepository.findUserEntityByUsername(username).orElse(null);
+    }
+
+    public UserViewDto getUserViewByUsername(String username) {
+        return mapToUserView(this.userRepository.findByUsername(username));
+    }
+
+    public UserViewDto getUserById(Long id){
+        final UserEntity userById = this.userRepository.findUserEntityById(id);
+        return this.mapToUserView(userById);
     }
 
     public UserEntity mapToUser(UserRegistrationDTO modelDto) {
         return this.modelMapper.map(modelDto, UserEntity.class);
+    }
+
+    public UserViewDto mapToUserView(UserEntity userEntity) {
+        return this.modelMapper.map(userEntity, UserViewDto.class);
+    }
+
+    public List<UserViewDto> getAllUsers(){
+        return this.userRepository.findAll().stream().map(this::mapToUserView).collect(Collectors.toList());
     }
 }
