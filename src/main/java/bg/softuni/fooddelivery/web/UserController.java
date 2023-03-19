@@ -4,6 +4,7 @@ import bg.softuni.fooddelivery.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -55,7 +56,7 @@ public class UserController {
             return "roles-change";
     }
 
-    @GetMapping("/roles/remove/{id}/{name}")
+    @PatchMapping("/roles/remove/{id}/{name}")
     public String removeRole(@PathVariable("id") Long id,@PathVariable("name") String roleName){
 
         this.userService.removeRole(roleName,id);
@@ -63,7 +64,7 @@ public class UserController {
         return "redirect:/users/change/{id}";
     }
 
-    @GetMapping("/roles/add/{id}/{name}")
+    @PatchMapping("/roles/add/{id}/{name}")
     public String addRole(@PathVariable("id") Long id,@PathVariable("name") String roleName){
 
         this.userService.addRole(roleName,id);
