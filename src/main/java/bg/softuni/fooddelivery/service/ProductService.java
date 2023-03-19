@@ -72,4 +72,8 @@ public class ProductService {
         this.productRepository.save(productEntityById);
 
     }
+
+    public void deleteProduct(Long productId) {
+        this.productRepository.deleteById(productId);
+    }
 }

@@ -13,18 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
-
 @Controller
 public class ProductController {
 
     private final ProductService productService;
-    private final ShoppingCartRepository cartRepository;
 
-    public ProductController(ProductService menuService,
-                             ShoppingCartRepository cartRepository) {
+    public ProductController(ProductService menuService) {
         this.productService = menuService;
-        this.cartRepository = cartRepository;
     }
 
     @GetMapping("/menu")
@@ -49,7 +44,9 @@ public class ProductController {
     }
 
     @ModelAttribute("productDto")
-    public ProductBindingDto initBindingDto(){return new ProductBindingDto();}
+    public ProductBindingDto initBindingDto() {
+        return new ProductBindingDto();
+    }
 
     @ModelAttribute("editedProductDto")
     public EditProductBindingDto initEditProductBindingDto() {
@@ -77,18 +74,21 @@ public class ProductController {
     }
 
     @GetMapping("/products/edit/{id}")
-    public String editProduct(@PathVariable("id") Long productId,Model model) {
+    public String editProduct(@PathVariable("id") Long productId,
+                              Model model) {
 
-        model.addAttribute("product",this.productService.getProductById(productId));
+        model.addAttribute("product", this.productService.getProductById(productId));
 
         return "edit-product";
     }
 
 
     @PatchMapping("/products/edited/{id}")
-    public String editedProduct(@PathVariable("id") Long productId, @Valid
+    public String editedProduct(@PathVariable("id") Long productId,
+                                @Valid
                                 EditProductBindingDto editedProductDto,
-                                BindingResult bindingResult,RedirectAttributes redirectAttributes){
+                                BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
 
@@ -100,9 +100,21 @@ public class ProductController {
 
         }
 
-       this.productService.editProduct(productId,editedProductDto);
+        this.productService.editProduct(productId, editedProductDto);
 
-        return "redirect:/menu";
+        final String category = this.productService.getCategoryName(productId);
+
+        return "redirect:/menu/" + category;
+    }
+
+    @DeleteMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable("id") Long productId) {
+
+        final String category = this.productService.getCategoryName(productId);
+
+        this.productService.deleteProduct(productId);
+
+        return "redirect:/menu/" + category;
     }
 
 }
