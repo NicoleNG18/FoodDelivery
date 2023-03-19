@@ -21,6 +21,11 @@ public class ProductViewDto {
         return id;
     }
 
+    public ProductViewDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public ProductCategoryEnum getCategory() {
         return category;
     }

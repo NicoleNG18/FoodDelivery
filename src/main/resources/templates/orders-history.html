@@ -35,10 +35,9 @@
           <th scope="row" th:text="*{id}" class="text-center">1</th>
           <td th:text="*{price}" class="text-center">0.00</td>
           <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center">01-01-2010</td>
-          <td th:if="*{delivered}" class="text-center">Delivered</td>
-          <td th:unless="*{delivered}" class="text-center">In progress</td>
+          <td th:text="*{status.name()}" class="text-center">Delivered</td>
           <td style="text-align: center;" sec:authorize="hasAuthority('ROLE_WORKER')">
-            <form th:if="${!order.delivered}"
+            <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
                     th:method="PATCH"
                   th:action="@{/orders/finish/{id}(id=${order.id})}"
                   th:object="${order}">

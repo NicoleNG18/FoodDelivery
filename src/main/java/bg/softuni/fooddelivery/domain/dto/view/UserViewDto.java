@@ -22,6 +22,11 @@ public class UserViewDto {
     public UserViewDto() {
     }
 
+    public UserViewDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public List<UserRoleEntity> getRoles() {
         return roles;
     }

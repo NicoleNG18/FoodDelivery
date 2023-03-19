@@ -5,6 +5,7 @@ import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
+import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -84,7 +85,7 @@ public class OrderService {
                 .setComment(orderDto.getComment() != null ? orderDto.getComment() : NO_COMMENT)
                 .setAddress(orderDto.getAddress())
                 .setContactNumber(orderDto.getContactNumber())
-                .setDelivered(false);
+                .setStatus(OrderStatusEnum.IN_PROGRESS);
     }
 
     @Transactional
@@ -123,7 +124,7 @@ public class OrderService {
 
         OrderEntity orderEntity = this.orderRepository.findOrderEntityById(orderId);
 
-        orderEntity.setDelivered(true);
+        orderEntity.setStatus(OrderStatusEnum.DELIVERED);
 
         this.orderRepository.saveAndFlush(orderEntity);
     }

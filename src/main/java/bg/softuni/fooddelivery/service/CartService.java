@@ -39,7 +39,6 @@ public class CartService {
         user.getCart().addProduct(product);
         user.getCart().increaseProductsSum(product.getPrice());
 
-        //TODO:save user in the db?
     }
 
     public CartEntity getNewCart() {

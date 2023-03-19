@@ -86,7 +86,7 @@ public class ProductController {
                                 @Valid EditProductBindingDto editedProductDto,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes) {
-//TODO : errors?
+
         if (bindingResult.hasErrors()) {
 
             redirectAttributes.addFlashAttribute("editedProductDto", editedProductDto);

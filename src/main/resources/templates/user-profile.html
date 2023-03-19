@@ -24,7 +24,9 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                          alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
                     <h5 th:text="|*{firstName} *{lastName}|">name</h5>
-                  <button class="edit-button">Edit</button>
+                        <a class="edit-button-a text-center text-secondary" type="submit" style="text-decoration: none; "
+                           th:href="@{/users/edit/{id}(id=${user.id})}"
+                        >Edit</a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body p-4">

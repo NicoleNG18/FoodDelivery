@@ -1,6 +1,7 @@
 package bg.softuni.fooddelivery.domain.dto.view;
 
 import bg.softuni.fooddelivery.domain.entities.CartEntity;
+import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class OrderDetailViewDto {
 
     private CartEntity cart;
 
-    private Boolean isDelivered;
+    private OrderStatusEnum status;
 
     private String client;
 
@@ -31,6 +32,11 @@ public class OrderDetailViewDto {
 
     public Long getId() {
         return id;
+    }
+
+    public OrderDetailViewDto setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public BigDecimal getPrice() {
@@ -96,12 +102,14 @@ public class OrderDetailViewDto {
         return this;
     }
 
-    public Boolean getDelivered() {
-        return isDelivered;
-    }
-
-    public OrderDetailViewDto setDelivered(Boolean delivered) {
-        isDelivered = delivered;
+    public OrderDetailViewDto setStatus(OrderStatusEnum status) {
+        this.status = status;
         return this;
     }
+
+    public OrderStatusEnum getStatus() {
+        return status;
+    }
 }
+
+

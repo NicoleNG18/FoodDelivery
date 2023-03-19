@@ -1,5 +1,6 @@
 package bg.softuni.fooddelivery.domain.entities;
 
+import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -29,7 +30,8 @@ public class OrderEntity extends BaseEntity {
     private String contactNumber;
 
     @Column(nullable = false)
-    private Boolean isDelivered;
+    @Enumerated(EnumType.STRING)
+    private OrderStatusEnum status;
 
     public OrderEntity() {
     }
@@ -97,12 +99,12 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public Boolean getDelivered() {
-        return isDelivered;
+    public OrderEntity setStatus(OrderStatusEnum status) {
+        this.status = status;
+        return this;
     }
 
-    public OrderEntity setDelivered(Boolean delivered) {
-        isDelivered = delivered;
-        return this;
+    public OrderStatusEnum getStatus() {
+        return status;
     }
 }

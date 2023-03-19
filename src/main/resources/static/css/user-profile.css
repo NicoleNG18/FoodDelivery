@@ -10,14 +10,15 @@ body{
     width: 100%;
 }
 
-.edit-button{
+.edit-button-a{
     background-color: white;
-    width:30%;
     border-color: white;
     border-radius: 25px;
+    font-size: large;
+    width: 50%;
 }
 
-.edit-button:hover{
+.edit-button-a:hover{
     background-color:darkred;
     color:white;
     transition: all 2000ms ease;

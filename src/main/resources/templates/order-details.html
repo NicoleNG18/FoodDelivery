@@ -33,11 +33,11 @@
             <td class="text-center">Created on</td>
             <td class="text-center" th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}">created on</td>
         </tr>
-        <tr th:if="*{delivered}">
+        <tr th:if="*{#strings.equals(getStatus().name(),'DELIVERED')}">
             <td class="text-center">Status</td>
             <td class="text-center">Delivered</td>
         </tr>
-        <tr th:unless="*{delivered}">
+        <tr th:unless="*{#strings.equals(getStatus().name(),'DELIVERED')}">
             <td class="text-center">Status</td>
             <td class="text-center">In progress</td>
         </tr>

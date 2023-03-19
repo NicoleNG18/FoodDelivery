@@ -1,8 +1,11 @@
 package bg.softuni.fooddelivery.service;
 
+import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
+import bg.softuni.fooddelivery.domain.dto.binding.EditUserBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.UserViewDto;
 import bg.softuni.fooddelivery.domain.entities.CartEntity;
+import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
@@ -46,8 +49,8 @@ public class UserService {
 
         UserEntity userToSave = this.mapToUser(userToRegister);
 
-       final UserRoleEntity userRole = this.userRoleService.getRoleByType(UserRoleEnum.USER);
-       final CartEntity shoppingCart = this.cartService.getNewCart();
+        final UserRoleEntity userRole = this.userRoleService.getRoleByType(UserRoleEnum.USER);
+        final CartEntity shoppingCart = this.cartService.getNewCart();
 
         userToSave
                 .setPassword(passwordEncoder.encode(userToSave.getPassword()))
@@ -57,7 +60,7 @@ public class UserService {
         this.userRepository.saveAndFlush(userToSave);
     }
 
-    public UserEntity getUserByUsername(String username){
+    public UserEntity getUserByUsername(String username) {
         return this.userRepository.findUserEntityByUsername(username).orElse(null);
     }
 
@@ -65,7 +68,7 @@ public class UserService {
         return mapToUserView(this.userRepository.findByUsername(username));
     }
 
-    public UserViewDto getUserById(Long id){
+    public UserViewDto getUserById(Long id) {
         final UserEntity userById = this.userRepository.findUserEntityById(id);
         return this.mapToUserView(userById);
     }
@@ -78,11 +81,12 @@ public class UserService {
         return this.modelMapper.map(userEntity, UserViewDto.class);
     }
 
-    public List<UserViewDto> getAllUsers(){
-       return this.userRepository.findAll().stream().map(this::mapToUserView).toList();
+    public List<UserViewDto> getAllUsers() {
+        return this.userRepository.findAll().stream().map(this::mapToUserView).toList();
     }
 
-    public void removeRole(String roleName,Long userId) {
+    public void removeRole(String roleName,
+                           Long userId) {
 
         UserEntity userById = this.userRepository.findUserEntityById(userId);
 
@@ -92,8 +96,9 @@ public class UserService {
 
     }
 
-    public void addRole(String roleName, Long userId) {
-        final UserRoleEntity role=this.userRoleRepository.findByRole(UserRoleEnum.WORKER);
+    public void addRole(String roleName,
+                        Long userId) {
+        final UserRoleEntity role = this.userRoleRepository.findByRole(UserRoleEnum.WORKER);
         UserEntity userById = this.userRepository.findUserEntityById(userId);
 
         userById.getRoles().add(role);
@@ -101,4 +106,22 @@ public class UserService {
         this.userRepository.save(userById);
 
     }
+
+    public void editUser(Long id,
+                         EditUserBindingDto editedUser) {
+
+        UserEntity user = this.userRepository.findUserEntityById(id);
+
+        user
+                .setFirstName(editedUser.getFirstName())
+                .setLastName(editedUser.getLastName())
+                .setUsername(editedUser.getUsername())
+                .setAge(editedUser.getAge())
+                .setPhoneNumber(editedUser.getPhoneNumber())
+                .setEmail(editedUser.getEmail());
+
+        this.userRepository.saveAndFlush(user);
+
+    }
+
 }
