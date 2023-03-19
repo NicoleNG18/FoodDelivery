@@ -16,7 +16,7 @@ public class CartEntity extends BaseEntity {
     private BigDecimal productsSum;
 
     public CartEntity() {
-        this.productsSum=BigDecimal.ZERO;
+        this.productsSum = BigDecimal.ZERO;
         this.products = new ArrayList<>();
     }
 
@@ -42,17 +42,20 @@ public class CartEntity extends BaseEntity {
         this.products.add(product);
     }
 
-    public void increaseProductsSum(BigDecimal productPrice){
+    public void increaseProductsSum(BigDecimal productPrice) {
 
-        BigDecimal sum=this.getProductsSum();
+        BigDecimal sum = this.getProductsSum();
+
         this.setProductsSum(sum.add(productPrice));
 
     }
 
-    public void decreaseProductsSum(BigDecimal productPrice){
+    public void decreaseProductsSum(BigDecimal productPrice) {
 
-        BigDecimal sum=this.getProductsSum();
+        BigDecimal sum = this.getProductsSum();
+
         this.setProductsSum(sum.subtract(productPrice));
 
     }
+
 }

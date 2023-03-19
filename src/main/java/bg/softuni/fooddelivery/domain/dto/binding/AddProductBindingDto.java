@@ -9,26 +9,28 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-public class ProductBindingDto {
-    @NotEmpty(message = "Product name is required.")
+import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+
+public class AddProductBindingDto {
+    @NotEmpty(message = PRODUCT_NAME_REQUIRED)
     private String name;
-    @Positive(message = "Price must be positive.")
-    @NotNull(message = "Price is required.")
+    @Positive(message = POSITIVE_PRICE)
+    @NotNull(message = PRICE_REQUIRED)
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     @NotNull
     private ProductCategoryEnum category;
-    @NotEmpty(message = "Description is required.")
+    @NotEmpty(message = DESCRIPTION_REQUIRED)
     private String description;
 
-    public ProductBindingDto() {
+    public AddProductBindingDto() {
     }
 
     public String getName() {
         return name;
     }
 
-    public ProductBindingDto setName(String name) {
+    public AddProductBindingDto setName(String name) {
         this.name = name;
         return this;
     }
@@ -37,7 +39,7 @@ public class ProductBindingDto {
         return price;
     }
 
-    public ProductBindingDto setPrice(BigDecimal price) {
+    public AddProductBindingDto setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -46,7 +48,7 @@ public class ProductBindingDto {
         return category;
     }
 
-    public ProductBindingDto setCategory(ProductCategoryEnum category) {
+    public AddProductBindingDto setCategory(ProductCategoryEnum category) {
         this.category = category;
         return this;
     }
@@ -55,7 +57,7 @@ public class ProductBindingDto {
         return description;
     }
 
-    public ProductBindingDto setDescription(String description) {
+    public AddProductBindingDto setDescription(String description) {
         this.description = description;
         return this;
     }

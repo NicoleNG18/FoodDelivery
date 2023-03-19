@@ -8,6 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import static bg.softuni.fooddelivery.constants.Messages.INVALID_USERNAME;
+
 @Retention(RetentionPolicy.RUNTIME)
 //how long annotation can be retained
 @Target(ElementType.FIELD)
@@ -15,7 +17,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = UniqueUserUsernameValidator.class)
 public @interface UniqueUsername {
 
-    String message() default "Invalid username";
+    String message() default INVALID_USERNAME;
 
     Class<?>[] groups() default {};
 

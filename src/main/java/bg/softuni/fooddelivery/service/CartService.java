@@ -8,9 +8,8 @@ import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.security.Principal;
-import java.util.Optional;
+
 
 
 @Service
@@ -39,11 +38,16 @@ public class CartService {
 
         user.getCart().addProduct(product);
         user.getCart().increaseProductsSum(product.getPrice());
+
+        //TODO:save user in the db?
     }
 
     public CartEntity getNewCart() {
+
         CartEntity shoppingCart = new CartEntity();
+
         this.shoppingCartRepository.saveAndFlush(shoppingCart);
+
         return shoppingCart;
     }
 
@@ -53,7 +57,6 @@ public class CartService {
 
         UserEntity user = this.userRepository.findByUsername(principal.getName());
         final ProductEntity product = this.productRepository.findProductEntityById(id);
-
 
         user.getCart().getProducts().remove(product);
         user.getCart().decreaseProductsSum(product.getPrice());

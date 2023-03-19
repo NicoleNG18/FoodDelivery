@@ -41,13 +41,13 @@ public class UserEntity extends BaseEntity {
     private List<UserRoleEntity> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")
-    private Set<OrderEntity> orders;
+    private List<OrderEntity> orders;
 
     @OneToOne
     private CartEntity cart;
 
     public UserEntity() {
-        this.orders = new HashSet<>();
+        this.orders = new ArrayList<>();
     }
 
     public String getFirstName() {
@@ -140,11 +140,11 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public Set<OrderEntity> getOrders() {
+    public List<OrderEntity> getOrders() {
         return orders;
     }
 
-    public UserEntity setOrders(Set<OrderEntity> orders) {
+    public UserEntity setOrders(List<OrderEntity> orders) {
         this.orders = orders;
         return this;
     }

@@ -7,14 +7,18 @@ import java.math.BigDecimal;
 public class ProductViewDto {
 
     private Long id;
+    private String name;
+
+    private ProductCategoryEnum category;
+
+    private BigDecimal price;
+    private String description;
+
+    public ProductViewDto() {
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public ProductViewDto setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public ProductCategoryEnum getCategory() {
@@ -24,16 +28,6 @@ public class ProductViewDto {
     public ProductViewDto setCategory(ProductCategoryEnum category) {
         this.category = category;
         return this;
-    }
-
-    private String name;
-
-    private ProductCategoryEnum category;
-
-    private BigDecimal price;
-    private String description;
-
-    public ProductViewDto() {
     }
 
     public String getName() {

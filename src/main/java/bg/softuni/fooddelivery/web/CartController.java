@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
 @Controller
+@RequestMapping("/cart")
 public class CartController {
 
     private final CartService cartService;
@@ -25,7 +27,7 @@ public class CartController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/cart")
+    @GetMapping
     public String getCart(Model model, Principal principal){
 
 
@@ -35,7 +37,7 @@ public class CartController {
         return "order-cart";
     }
 
-    @GetMapping("/cart/add/{id}")
+    @GetMapping("/add/{id}")
     public String addToCart(@PathVariable("id") Long id,
                             Principal principal) {
 
@@ -46,7 +48,7 @@ public class CartController {
         return "redirect:/menu/" + category;
     }
 
-    @GetMapping("/cart/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String removeFromCart(@PathVariable("id") Long id,
                                  Principal principal){
 

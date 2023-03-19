@@ -33,11 +33,6 @@ public class OrderDetailViewDto {
         return id;
     }
 
-    public OrderDetailViewDto setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }

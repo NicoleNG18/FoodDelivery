@@ -1,15 +1,16 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
+import static bg.softuni.fooddelivery.constants.ErrorMessages.ADDRESS_REQUIRED;
+import static bg.softuni.fooddelivery.constants.ErrorMessages.CONTACT_NUMBER_REQUIRED;
 
 public class OrderBindingDto {
 
     private String comment;
-    @NotEmpty(message = "Address is required.")
+    @NotEmpty(message = ADDRESS_REQUIRED)
     private String address;
-    @NotEmpty(message = "Contact number is required.")
+    @NotEmpty(message = CONTACT_NUMBER_REQUIRED)
     private String contactNumber;
 
     public OrderBindingDto() {

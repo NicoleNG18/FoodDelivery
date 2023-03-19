@@ -1,10 +1,8 @@
 package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
-import bg.softuni.fooddelivery.domain.dto.binding.ProductBindingDto;
-import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
+import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
-import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
 import bg.softuni.fooddelivery.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -44,8 +42,8 @@ public class ProductController {
     }
 
     @ModelAttribute("productDto")
-    public ProductBindingDto initBindingDto() {
-        return new ProductBindingDto();
+    public AddProductBindingDto initBindingDto() {
+        return new AddProductBindingDto();
     }
 
     @ModelAttribute("editedProductDto")
@@ -54,7 +52,7 @@ public class ProductController {
     }
 
     @PostMapping("/products/add")
-    public String postAddProduct(@Valid ProductBindingDto productDto,
+    public String postAddProduct(@Valid AddProductBindingDto productDto,
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
 
@@ -85,18 +83,17 @@ public class ProductController {
 
     @PatchMapping("/products/edited/{id}")
     public String editedProduct(@PathVariable("id") Long productId,
-                                @Valid
-                                EditProductBindingDto editedProductDto,
+                                @Valid EditProductBindingDto editedProductDto,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes) {
-
+//TODO : errors?
         if (bindingResult.hasErrors()) {
 
             redirectAttributes.addFlashAttribute("editedProductDto", editedProductDto);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedProductDto"
                     , bindingResult);
 
-            return "redirect:/products/edited/{id}";
+            return "redirect:/products/edit/{id}";
 
         }
 

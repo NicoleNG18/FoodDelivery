@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.dto.binding.ContactFormBindingDto;
+import bg.softuni.fooddelivery.domain.dto.binding.ContactBindingDto;
 import bg.softuni.fooddelivery.service.ContactService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -22,8 +22,8 @@ public class ContactController {
     }
 
     @ModelAttribute("contactDto")
-    public ContactFormBindingDto initBindingDto() {
-        return new ContactFormBindingDto();
+    public ContactBindingDto initBindingDto() {
+        return new ContactBindingDto();
     }
 
     @GetMapping
@@ -32,7 +32,7 @@ public class ContactController {
     }
 
     @PostMapping
-    public String postContact(@Valid ContactFormBindingDto contactDto,
+    public String postContact(@Valid ContactBindingDto contactDto,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
 
@@ -50,4 +50,5 @@ public class ContactController {
 
         return "redirect:/";
     }
+
 }

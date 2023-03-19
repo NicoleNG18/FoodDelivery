@@ -1,12 +1,11 @@
 package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
-import bg.softuni.fooddelivery.domain.dto.binding.ProductBindingDto;
+import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +41,7 @@ public class ProductService {
         return this.productRepository.findProductEntityById(id).getCategory().name();
     }
 
-    public void addProduct(ProductBindingDto productDto) {
+    public void addProduct(AddProductBindingDto productDto) {
 
         ProductEntity productToSave = new ProductEntity();
 

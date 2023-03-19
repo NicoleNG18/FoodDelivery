@@ -1,10 +1,8 @@
 package bg.softuni.fooddelivery.domain.entities;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 

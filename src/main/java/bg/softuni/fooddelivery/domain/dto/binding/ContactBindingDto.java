@@ -4,25 +4,27 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-public class ContactFormBindingDto {
-    @Size(min = 2, max = 15, message = "Name must be between 2 and 15 symbols.")
+import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+
+public class ContactBindingDto {
+    @Size(min = 2, max = 15, message = NAME_BETWEEN)
     private String name;
-    @NotEmpty(message = "Email should be provided.")
-    @Email(message = "Email should be valid")
+    @NotEmpty(message = EMAIL_REQUIRED)
+    @Email(message = EMAIL_VALID)
     private String email;
-    @Size(min = 3, message = "Subject must be at least 3 symbols.")
+    @Size(min = 3, message = SUBJECT_MINIMUM)
     private String subject;
-    @Size(min = 5, max = 2000, message = "Description must be between 5 and 2000 symbols.")
+    @Size(min = 5, max = 2000, message = DESCRIPTION_BETWEEN)
     private String description;
 
-    public ContactFormBindingDto() {
+    public ContactBindingDto() {
     }
 
     public String getName() {
         return name;
     }
 
-    public ContactFormBindingDto setName(String name) {
+    public ContactBindingDto setName(String name) {
         this.name = name;
         return this;
     }
@@ -31,7 +33,7 @@ public class ContactFormBindingDto {
         return email;
     }
 
-    public ContactFormBindingDto setEmail(String email) {
+    public ContactBindingDto setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -40,7 +42,7 @@ public class ContactFormBindingDto {
         return subject;
     }
 
-    public ContactFormBindingDto setSubject(String subject) {
+    public ContactBindingDto setSubject(String subject) {
         this.subject = subject;
         return this;
     }
@@ -49,7 +51,7 @@ public class ContactFormBindingDto {
         return description;
     }
 
-    public ContactFormBindingDto setDescription(String description) {
+    public ContactBindingDto setDescription(String description) {
         this.description = description;
         return this;
     }

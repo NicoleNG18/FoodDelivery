@@ -7,6 +7,9 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import static bg.softuni.fooddelivery.constants.Messages.FIELDS_MATCH;
+
 @Retention(RetentionPolicy.RUNTIME)
 //how long annotation can be retained
 @Target(ElementType.TYPE)
@@ -18,7 +21,7 @@ public @interface FieldMatch {
 
     String secondField();
 
-    String message() default "Fields should match";
+    String message() default FIELDS_MATCH;
 
     Class<?>[] groups() default {};
 

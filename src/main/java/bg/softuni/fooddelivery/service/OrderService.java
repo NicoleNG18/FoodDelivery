@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static bg.softuni.fooddelivery.constants.Messages.NO_COMMENT;
+
 @Service
 public class OrderService {
 
@@ -65,18 +67,24 @@ public class OrderService {
 
         final UserEntity user = this.userService.getUserByUsername(principal.getName());
 
-        order
-                .setOwner(user)
-                .setPrice(user.getCart().getProductsSum())
-                .setCreatedOn(LocalDateTime.now())
-                .setComment(orderDto.getComment() != null ? orderDto.getComment() : "no comment")
-                .setAddress(orderDto.getAddress())
-                .setContactNumber(orderDto.getContactNumber())
-                .setDelivered(false);
+        buildOrder(orderDto, order, user);
 
         this.orderRepository.saveAndFlush(order);
 
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
+    }
+
+    private static void buildOrder(OrderBindingDto orderDto,
+                                  OrderEntity order,
+                                  UserEntity user) {
+        order
+                .setOwner(user)
+                .setPrice(user.getCart().getProductsSum())
+                .setCreatedOn(LocalDateTime.now())
+                .setComment(orderDto.getComment() != null ? orderDto.getComment() : NO_COMMENT)
+                .setAddress(orderDto.getAddress())
+                .setContactNumber(orderDto.getContactNumber())
+                .setDelivered(false);
     }
 
     @Transactional
@@ -87,13 +95,16 @@ public class OrderService {
         return this.orderRepository
                 .findAllByOwner_Id(user.getId())
                 .stream()
-                .map(this::mapToOrderView)
+                .map(this::mapToOrderViewDto)
                 .collect(Collectors.toList());
     }
 
-    private OrderDetailViewDto mapToOrderView(OrderEntity orderEntity) {
+    private OrderDetailViewDto mapToOrderViewDto(OrderEntity orderEntity) {
+
         OrderDetailViewDto orderDetail = this.modelMapper.map(orderEntity, OrderDetailViewDto.class);
+
         orderDetail.setClient(orderEntity.getOwner().getUsername());
+
         return orderDetail;
     }
 
@@ -101,11 +112,11 @@ public class OrderService {
 
        final OrderEntity order = this.orderRepository.findOrderEntityById(id);
 
-       return mapToOrderView(order);
+       return mapToOrderViewDto(order);
     }
 
     public List<OrderDetailViewDto> getAllOrders() {
-        return this.orderRepository.findAll().stream().map(this::mapToOrderView).collect(Collectors.toList());
+        return this.orderRepository.findAll().stream().map(this::mapToOrderViewDto).collect(Collectors.toList());
     }
 
     public void finishOrder(Long orderId) {

@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.service;
 
-import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
+import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.UserViewDto;
 import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -43,7 +42,7 @@ public class UserService {
         this.cartService = cartService;
     }
 
-    public void registerUser(UserRegistrationDTO userToRegister) {
+    public void registerUser(UserRegistrationBindingDto userToRegister) {
 
         UserEntity userToSave = this.mapToUser(userToRegister);
 
@@ -71,7 +70,7 @@ public class UserService {
         return this.mapToUserView(userById);
     }
 
-    public UserEntity mapToUser(UserRegistrationDTO modelDto) {
+    public UserEntity mapToUser(UserRegistrationBindingDto modelDto) {
         return this.modelMapper.map(modelDto, UserEntity.class);
     }
 

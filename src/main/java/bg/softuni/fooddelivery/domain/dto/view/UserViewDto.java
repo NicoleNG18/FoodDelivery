@@ -2,7 +2,6 @@ package bg.softuni.fooddelivery.domain.dto.view;
 
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
-import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,11 +96,6 @@ public class UserViewDto {
 
     public Long getId() {
         return id;
-    }
-
-    public UserViewDto setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public List<String> getRolesNames(){

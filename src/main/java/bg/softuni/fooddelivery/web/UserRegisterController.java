@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
+import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationBindingDto;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -22,8 +22,8 @@ public class UserRegisterController {
     }
 
     @ModelAttribute("registerDto")
-    public UserRegistrationDTO initBindingDto() {
-        return new UserRegistrationDTO();
+    public UserRegistrationBindingDto initBindingDto() {
+        return new UserRegistrationBindingDto();
     }
 
     @GetMapping("/register")
@@ -32,7 +32,7 @@ public class UserRegisterController {
     }
 
     @PostMapping("/register")
-    public String postRegister(@Valid UserRegistrationDTO registerDto,
+    public String postRegister(@Valid UserRegistrationBindingDto registerDto,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
 

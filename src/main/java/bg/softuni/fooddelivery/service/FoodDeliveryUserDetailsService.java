@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
+import static bg.softuni.fooddelivery.constants.Messages.ROLE;
+
 public class FoodDeliveryUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -49,6 +51,6 @@ public class FoodDeliveryUserDetailsService implements UserDetailsService {
     }
 
     private GrantedAuthority  mapRole(UserRoleEntity userRoleEntity) {
-        return new SimpleGrantedAuthority("ROLE_"+userRoleEntity.getRole().name());
+        return new SimpleGrantedAuthority(ROLE +userRoleEntity.getRole().name());
     }
 }

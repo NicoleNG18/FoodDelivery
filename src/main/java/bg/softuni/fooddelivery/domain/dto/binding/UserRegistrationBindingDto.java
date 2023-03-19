@@ -7,49 +7,52 @@ import bg.softuni.fooddelivery.validation.UniqueUsername;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-@FieldMatch(firstField = "password",
-        secondField = "confirmPassword",
-        message = "Passwords should match.")
-public class UserRegistrationDTO {
+import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+import static bg.softuni.fooddelivery.constants.Messages.*;
 
-    @Size(min =2,max = 15,message = "First name must be between 2 and 15 symbols.")
+@FieldMatch(firstField = PASSWORD,
+        secondField = CONFIRM_PASSWORD,
+        message = MATCHING_PASSWORDS)
+public class UserRegistrationBindingDto {
+
+    @Size(min =2,max = 15,message = FIRST_NAME_BETWEEN)
     private String firstName;
 
-    @Size(min =2,max = 15,message = "Last name must be between 2 and 15 symbols.")
+    @Size(min =2,max = 15,message = LAST_NAME_BETWEEN)
     private String lastName;
 
-    @UniqueUsername(message = "Username should be unique.")
-    @Size(min =2,message = "Username must be at least 5 symbols.")
+    @UniqueUsername(message = UNIQUE_USERNAME)
+    @Size(min =2,message = USERNAME_MINIMUM)
     private String username;
 
-    @NotEmpty(message = "Email should be provided.")
-    @UniqueUserEmail(message = "Email should be unique.")
+    @NotEmpty(message = EMAIL_REQUIRED)
+    @UniqueUserEmail(message = EMAIL_UNIQUE)
     private String email;
 
-    @Size(min =8,message = "Password must be at least 8 symbols.")
+    @Size(min =8,message = PASSWORD_MINIMUM)
     private String password;
 
     private String confirmPassword;
 
     @Positive
-    @NotNull(message = "Age should be provided.")
+    @NotNull(message = AGE_PROVIDED)
     private Integer age;
 
-    @NotEmpty(message = "Phone number should be provided")
+    @NotEmpty(message = PHONE_NUMBER_PROVIDED)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     @NotNull
     private GenderEnum gender;
 
-    public UserRegistrationDTO() {
+    public UserRegistrationBindingDto() {
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public UserRegistrationDTO setFirstName(String firstName) {
+    public UserRegistrationBindingDto setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -58,7 +61,7 @@ public class UserRegistrationDTO {
         return lastName;
     }
 
-    public UserRegistrationDTO setLastName(String lastName) {
+    public UserRegistrationBindingDto setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -67,7 +70,7 @@ public class UserRegistrationDTO {
         return username;
     }
 
-    public UserRegistrationDTO setUsername(String username) {
+    public UserRegistrationBindingDto setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -76,7 +79,7 @@ public class UserRegistrationDTO {
         return email;
     }
 
-    public UserRegistrationDTO setEmail(String email) {
+    public UserRegistrationBindingDto setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -85,7 +88,7 @@ public class UserRegistrationDTO {
         return password;
     }
 
-    public UserRegistrationDTO setPassword(String password) {
+    public UserRegistrationBindingDto setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -94,7 +97,7 @@ public class UserRegistrationDTO {
         return confirmPassword;
     }
 
-    public UserRegistrationDTO setConfirmPassword(String confirmPassword) {
+    public UserRegistrationBindingDto setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
         return this;
     }
@@ -103,7 +106,7 @@ public class UserRegistrationDTO {
         return age;
     }
 
-    public UserRegistrationDTO setAge(Integer age) {
+    public UserRegistrationBindingDto setAge(Integer age) {
         this.age = age;
         return this;
     }
@@ -112,7 +115,7 @@ public class UserRegistrationDTO {
         return phoneNumber;
     }
 
-    public UserRegistrationDTO setPhoneNumber(String phoneNumber) {
+    public UserRegistrationBindingDto setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
@@ -121,7 +124,7 @@ public class UserRegistrationDTO {
         return gender;
     }
 
-    public UserRegistrationDTO setGender(GenderEnum gender) {
+    public UserRegistrationBindingDto setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
     }

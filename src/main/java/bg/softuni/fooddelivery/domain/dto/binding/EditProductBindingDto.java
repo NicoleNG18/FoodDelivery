@@ -6,11 +6,13 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
+import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+
 public class EditProductBindingDto {
-    @NotEmpty(message = "Cannot remove description.")
+    @NotEmpty(message = DESCRIPTION_NOT_EMPTY)
     private String description;
-    @Positive(message = "Price must be positive.")
-    @NotNull(message = "Price is required.")
+    @Positive(message = POSITIVE_PRICE)
+    @NotNull(message = PRICE_REQUIRED)
     private BigDecimal price;
 
     public EditProductBindingDto() {
