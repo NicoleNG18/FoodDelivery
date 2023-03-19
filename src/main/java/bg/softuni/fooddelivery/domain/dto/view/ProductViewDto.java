@@ -17,7 +17,19 @@ public class ProductViewDto {
         return this;
     }
 
+    public ProductCategoryEnum getCategory() {
+        return category;
+    }
+
+    public ProductViewDto setCategory(ProductCategoryEnum category) {
+        this.category = category;
+        return this;
+    }
+
     private String name;
+
+    private ProductCategoryEnum category;
+
     private BigDecimal price;
     private String description;
 

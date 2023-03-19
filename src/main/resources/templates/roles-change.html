@@ -36,14 +36,14 @@
             <form th:method="PATCH"
                   th:action="@{/users/roles/add/{id}/{name}(id=${user.id},name=${role.name()})}"
                   th:object="${user}">
-            <button class="button-detail" style="border-color: white" th:unless="${user.hasRoleWorker()}"
+            <button class="button-detail" type="submit" style="border-color: white" th:unless="${user.hasRoleWorker()}"
             >Add role</button>
             </form>
 
             <form th:method="PATCH"
                   th:action="@{/users/roles/remove/{id}/{name}(id=${user.id},name=${role.name()})}"
                   th:object="${user}">
-            <button class="button-detail" style="border-color: white" th:if="${user.hasRoleWorker()}"
+            <button class="button-detail" type="submit" style="border-color: white" th:if="${user.hasRoleWorker()}"
                >Remove role</button>
             </form>
           </td>

@@ -79,7 +79,7 @@ public class OrderService {
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
     }
 
-    //TODO: start admin functuonalities - adding/editing/deleting products roles - patch mapping
+    //TODO: start admin functuonalities -deleting products
     //TODO: worker functionalities - delivering order
 
     @Transactional

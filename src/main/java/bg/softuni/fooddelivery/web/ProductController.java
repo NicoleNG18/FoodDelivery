@@ -1,5 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
+import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.ProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationDTO;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
@@ -9,11 +10,10 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
 
 @Controller
 public class ProductController {
@@ -44,25 +44,28 @@ public class ProductController {
     }
 
     @GetMapping("/products/add")
-    public String addProduct(){
+    public String addProduct() {
         return "add-product";
     }
 
     @ModelAttribute("productDto")
-    public ProductBindingDto initBindingDto() {
-        return new ProductBindingDto();
+    public ProductBindingDto initBindingDto(){return new ProductBindingDto();}
+
+    @ModelAttribute("editedProductDto")
+    public EditProductBindingDto initEditProductBindingDto() {
+        return new EditProductBindingDto();
     }
 
     @PostMapping("/products/add")
     public String postAddProduct(@Valid ProductBindingDto productDto,
                                  BindingResult bindingResult,
-                                 RedirectAttributes redirectAttributes){
+                                 RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
 
-            redirectAttributes.addFlashAttribute("productDto",productDto);
+            redirectAttributes.addFlashAttribute("productDto", productDto);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productDto"
-                    ,bindingResult);
+                    , bindingResult);
 
             return "redirect:/products/add";
 
@@ -73,5 +76,33 @@ public class ProductController {
         return "redirect:/";
     }
 
+    @GetMapping("/products/edit/{id}")
+    public String editProduct(@PathVariable("id") Long productId,Model model) {
+
+        model.addAttribute("product",this.productService.getProductById(productId));
+
+        return "edit-product";
+    }
+
+
+    @PatchMapping("/products/edited/{id}")
+    public String editedProduct(@PathVariable("id") Long productId, @Valid
+                                EditProductBindingDto editedProductDto,
+                                BindingResult bindingResult,RedirectAttributes redirectAttributes){
+
+        if (bindingResult.hasErrors()) {
+
+            redirectAttributes.addFlashAttribute("editedProductDto", editedProductDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedProductDto"
+                    , bindingResult);
+
+            return "redirect:/products/edited/{id}";
+
+        }
+
+       this.productService.editProduct(productId,editedProductDto);
+
+        return "redirect:/menu";
+    }
 
 }
