@@ -79,9 +79,6 @@ public class OrderService {
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
     }
 
-    //TODO: start admin functuonalities -deleting products
-    //TODO: worker functionalities - delivering order
-
     @Transactional
     public List<OrderDetailViewDto> getOrdersByUser(Principal principal) {
 
@@ -109,5 +106,14 @@ public class OrderService {
 
     public List<OrderDetailViewDto> getAllOrders() {
         return this.orderRepository.findAll().stream().map(this::mapToOrderView).collect(Collectors.toList());
+    }
+
+    public void finishOrder(Long orderId) {
+
+        OrderEntity orderEntity = this.orderRepository.findOrderEntityById(orderId);
+
+        orderEntity.setDelivered(true);
+
+        this.orderRepository.saveAndFlush(orderEntity);
     }
 }

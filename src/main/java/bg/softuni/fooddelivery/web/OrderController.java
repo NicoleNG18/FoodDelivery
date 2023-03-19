@@ -82,4 +82,12 @@ public class OrderController {
 
         return "orders-history";
     }
+
+    @PatchMapping("/finish/{id}")
+    public String finishOrder(@PathVariable ("id") Long orderId) {
+
+        this.orderService.finishOrder(orderId);
+
+        return "redirect:/orders/all/history";
+    }
 }

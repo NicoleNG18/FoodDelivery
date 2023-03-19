@@ -10,10 +10,10 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/menu}">Menu</a>
         </li>
-        <li class="nav-item" sec:authorize="!hasAuthority('ROLE_ADMIN')">
+        <li class="nav-item" sec:authorize="!hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
           <a class="nav-link" th:href="@{/contact}">Contact us</a>
         </li>
-        <li class="nav-item" sec:authorize="isAuthenticated() && !hasAuthority('ROLE_ADMIN')">
+        <li class="nav-item" sec:authorize="isAuthenticated() && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
           <a class="nav-link" th:href="@{/cart}">Order cart</a>
         </li>
         <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
@@ -43,7 +43,7 @@
           </a>
           <ul class="dropdown-menu">
             <li> <a class="dropdown-item text-white" th:href="@{/users/profile}">Personal information</a></li>
-            <li><a class="dropdown-item text-white" th:href="@{/orders/history}" sec:authorize="!hasAuthority('ROLE_ADMIN')">Orders history</a></li>
+            <li><a class="dropdown-item text-white" th:href="@{/orders/history}" sec:authorize="!hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">Orders history</a></li>
             <li><form class="dropdown-item text-white" th:method="post" th:action="@{/users/logout}">
               <input class="dropdown-item btn-link nav-link" type="submit" value="Logout">
             </form></li>
