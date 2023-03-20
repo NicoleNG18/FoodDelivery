@@ -71,8 +71,9 @@ public class OrderController {
     public String orderDetails(@PathVariable("id") Long id,Model model){
 
         model.addAttribute("order",this.orderService.getOrderById(id));
+        model.addAttribute("idAtr",id);
 
-        return "orders-details-api";
+        return "test";
     }
 
     @GetMapping("/all/history")
