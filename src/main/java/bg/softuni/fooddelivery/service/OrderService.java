@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static bg.softuni.fooddelivery.constants.Messages.NO_COMMENT;
@@ -76,8 +77,8 @@ public class OrderService {
     }
 
     private static void buildOrder(OrderBindingDto orderDto,
-                                  OrderEntity order,
-                                  UserEntity user) {
+                                   OrderEntity order,
+                                   UserEntity user) {
         order
                 .setOwner(user)
                 .setPrice(user.getCart().getProductsSum())
@@ -111,9 +112,9 @@ public class OrderService {
 
     public OrderDetailViewDto getOrderById(Long id) {
 
-       final OrderEntity order = this.orderRepository.findOrderEntityById(id);
+        final OrderEntity order = this.orderRepository.findOrderEntityById(id);
 
-       return mapToOrderViewDto(order);
+        return mapToOrderViewDto(order);
     }
 
     public List<OrderDetailViewDto> getAllOrders() {

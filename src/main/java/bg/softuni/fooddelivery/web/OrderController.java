@@ -72,7 +72,7 @@ public class OrderController {
 
         model.addAttribute("order",this.orderService.getOrderById(id));
 
-        return "order-details";
+        return "orders-details-api";
     }
 
     @GetMapping("/all/history")

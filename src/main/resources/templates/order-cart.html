@@ -22,7 +22,17 @@
                         <td class="bg-info product-name" th:text="*{name}">Name</td>
                         <td class="bg-primary description" th:text="*{description}">{numberOfLikes) likes</td>
                         <td th:text="*{price}" class="price text-center bg-info">{content}</td>
-                        <td class="text-center bg-primary"><a class="remove-button justify-content-center" th:href="@{/cart/remove/{id}(id = *{id})}">Remove</a></td>
+                        <td class="text-center bg-primary">
+
+                            <form th:method="PATCH"
+                                  th:action="@{/cart/remove/{id}(id = *{id})}"
+                                  th:object="${food}">
+                                <button class="remove-button justify-content-center" type="submit" style="border-color: white"
+                                >Remove</button>
+                            </form>
+
+<!--                            <a class="remove-button justify-content-center" th:href="@{/cart/remove/{id}(id = *{id})}">Remove</a>-->
+                        </td>
                     </tr>
                     <tr>
                         <td></td>

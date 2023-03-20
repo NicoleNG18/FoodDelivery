@@ -43,7 +43,9 @@
           </a>
           <ul class="dropdown-menu">
             <li> <a class="dropdown-item text-white" th:href="@{/users/profile}">Personal information</a></li>
-            <li><a class="dropdown-item text-white" th:href="@{/orders/history}" sec:authorize="!hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">Orders history</a></li>
+<!--            /*th:href="@{api/orders/history}"-->
+            <li><a class="dropdown-item text-white" th:href="@{/orders/history}"
+                   sec:authorize="!hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">Orders history</a></li>
             <li><form class="dropdown-item text-white" th:method="post" th:action="@{/users/logout}">
               <input class="dropdown-item btn-link nav-link" type="submit" value="Logout">
             </form></li>

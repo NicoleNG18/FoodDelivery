@@ -24,9 +24,14 @@
     <td th:text="*{product.name}" style="font-weight: bold">Tiger Nixon</td>
     <td th:text="|*{product.price} &euro;|"></td>
     <td th:text="|*{product.description}|">Edinburgh</td>
-    <td sec:authorize="isAuthenticated() && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')" style="margin-bottom:10px"><a class="order-button text-center text-decoration-none"
-                                      th:href="@{/cart/add/{id}(id=${product.id})}"
-    >Add to cart</a></td>
+    <td sec:authorize="isAuthenticated() && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')" style="margin-bottom:10px">
+      <form th:method="PATCH"
+            th:action="@{/cart/add/{id}(id=${product.id})}"
+            th:object="${product}">
+        <button class="order-button text-center text-decoration-none" type="submit" style="border-color: white"
+        >Add to cart</button>
+      </form>
+    </td>
     <td sec:authorize="hasAuthority('ROLE_ADMIN')" style="margin-bottom:10px">
       <a class="order-button text-center text-decoration-none"
          th:href="@{/products/edit/{id}(id=${product.id})}"
