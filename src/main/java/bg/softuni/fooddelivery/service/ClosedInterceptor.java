@@ -23,9 +23,13 @@ public class ClosedInterceptor implements HandlerInterceptor {
 
             if (now.getHour() > 21 || now.getHour() < 11) {
 
-                response.sendRedirect("/closed");
+                var requestURI1= request.getRequestURI();
 
-                return false;
+                if(requestURI1.equals("/orders/finalize")){
+                    response.sendRedirect("/closed");
+                }
+
+                return true;
             }
 
         }
