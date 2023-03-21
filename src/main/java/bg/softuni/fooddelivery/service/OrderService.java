@@ -126,6 +126,7 @@ public class OrderService {
         OrderEntity orderEntity = this.orderRepository.findOrderEntityById(orderId);
 
         orderEntity.setStatus(OrderStatusEnum.DELIVERED);
+        orderEntity.setDeliveredOn(LocalDateTime.now());
 
         this.orderRepository.saveAndFlush(orderEntity);
     }

@@ -10,22 +10,23 @@
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 <div class="container"
-     style="background-color:#d54b43; margin-left: auto; margin-right: auto; width: 50%; margin-top: 150px;">
+     style="background-color:#d54b43; margin-left: auto; margin-right: auto; width: 50%; margin-top: 200px;">
 
 
     <button type="submit" id="orderButton"
-            style="border-radius: 25px; border-color: white; margin-left: 325px; margin-right: 150px">Load tests
+            style="border-radius: 25px; border-color: white; margin-left: 325px; margin-right: 150px">Load order details
     </button>
     <input type="hidden" name="orderId" id="orderId" th:value="${idAtr}">
-    <hr>
-    <table class="table table-bordered" style="width: 60%; margin-left:auto; margin-right: auto;">
+
+    <table class="table table-bordered mt-4" style="width: 60%; margin-left:auto; margin-right: auto;">
         <thead>
         <tr>
-            <th class="text-center">Phone number</th>
+            <th class="text-center">Id</th>
             <th class="text-center">Client</th>
             <th class="text-center">Price</th>
             <th class="text-center">Status</th>
             <th class="text-center">Address</th>
+            <th class="text-center">Phone number</th>
         </tr>
         </thead>
         <tbody id="orderTableBody"></tbody>

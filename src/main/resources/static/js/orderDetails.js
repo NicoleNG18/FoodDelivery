@@ -15,24 +15,26 @@ function onLoadTest() {
 
             let row = document.createElement('tr');
 
-
             let idCol = document.createElement('td');
+            let clientCol = document.createElement('td');
             let priceCol = document.createElement('td');
             let statusCol = document.createElement('td');
             let addressCol = document.createElement('td');
-            let nameCol = document.createElement('td');
+            let contactNumberCol = document.createElement('td');
 
-            idCol.textContent = order.contactNumber;
-            nameCol.textContent = order.client;
-            priceCol.textContent=order.price;
-            statusCol.textContent=order.status;
-            addressCol.textContent=order.address;
+            idCol.textContent = id;
+            clientCol.textContent = order.client;
+            priceCol.textContent = order.price;
+            statusCol.textContent = order.status;
+            addressCol.textContent = order.address;
+            contactNumberCol.textContent = order.contactNumber;
 
             row.appendChild(idCol);
-            row.appendChild(nameCol);
+            row.appendChild(clientCol);
             row.appendChild(priceCol);
             row.appendChild(statusCol);
             row.appendChild(addressCol);
+            row.appendChild(contactNumberCol);
 
             testCtrl.appendChild(row);
         })
