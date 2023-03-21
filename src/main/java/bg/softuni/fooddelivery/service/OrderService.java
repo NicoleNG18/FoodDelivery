@@ -113,6 +113,9 @@ public class OrderService {
     public OrderDetailViewDto getOrderById(Long id) {
 
         final OrderEntity order = this.orderRepository.findOrderEntityById(id);
+        if(order.getComment().equals("")){
+            order.setComment("There is no comment on this order");
+        }
 
         return mapToOrderViewDto(order);
     }

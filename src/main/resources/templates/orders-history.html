@@ -25,6 +25,7 @@
           <th scope="col" class="text-center">Id</th>
           <th scope="col" class="text-center">Price</th>
           <th scope="col" class="text-center">Created on</th>
+          <th scope="col" class="text-center">Delivered on</th>
           <th scope="col" class="text-center">Status</th>
           <th scope="col" class="text-center" sec:authorize="hasAuthority('ROLE_WORKER')">Finish</th>
           <th scope="col" class="text-center">More details</th>
@@ -34,7 +35,8 @@
         <tr th:each="order: ${allOrders}" th:object="${order}">
           <th scope="row" th:text="*{id}" class="text-center">1</th>
           <td th:text="*{price}" class="text-center">0.00</td>
-          <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center">01-01-2010</td>
+          <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center">01-01-2010</td>
+          <td th:text="*{#temporals.format(deliveredOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center">01-01-2010</td>
           <td th:text="*{status.name()}" class="text-center">Delivered</td>
           <td style="text-align: center;" sec:authorize="hasAuthority('ROLE_WORKER')">
             <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"

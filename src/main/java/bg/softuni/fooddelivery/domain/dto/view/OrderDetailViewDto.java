@@ -26,8 +26,19 @@ public class OrderDetailViewDto {
 
     private String client;
 
+    private String comment;
+
 
     public OrderDetailViewDto() {
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public OrderDetailViewDto setComment(String comment) {
+        this.comment = comment;
+        return this;
     }
 
     public Long getId() {

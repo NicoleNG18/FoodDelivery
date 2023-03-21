@@ -21,6 +21,7 @@ function onLoadTest() {
             let statusCol = document.createElement('td');
             let addressCol = document.createElement('td');
             let contactNumberCol = document.createElement('td');
+            let commentCol = document.createElement('td');
 
             idCol.textContent = id;
             clientCol.textContent = order.client;
@@ -28,6 +29,7 @@ function onLoadTest() {
             statusCol.textContent = order.status;
             addressCol.textContent = order.address;
             contactNumberCol.textContent = order.contactNumber;
+            commentCol.textContent = order.comment;
 
             row.appendChild(idCol);
             row.appendChild(clientCol);
@@ -35,6 +37,7 @@ function onLoadTest() {
             row.appendChild(statusCol);
             row.appendChild(addressCol);
             row.appendChild(contactNumberCol);
+            row.appendChild(commentCol);
 
             testCtrl.appendChild(row);
         })
