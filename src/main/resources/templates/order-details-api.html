@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{/fragments/head}"></th:block>
+    <title>Order details</title>
+</head>
+<body>
+
+<div>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
+</div>
+<div class="container"
+     style="background-color:#d54b43; margin-left: auto; margin-right: auto; width: 50%; margin-top: 150px;">
+
+
+    <button type="submit" id="orderButton"
+            style="border-radius: 25px; border-color: white; margin-left: 325px; margin-right: 150px">Load tests
+    </button>
+    <input type="hidden" name="orderId" id="orderId" th:value="${idAtr}">
+    <hr>
+    <table class="table table-bordered" style="width: 60%; margin-left:auto; margin-right: auto;">
+        <thead>
+        <tr>
+            <th class="text-center">Phone number</th>
+            <th class="text-center">Client</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Address</th>
+        </tr>
+        </thead>
+        <tbody id="orderTableBody"></tbody>
+    </table>
+</div>
+<script src="/js/orderDetails.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<th:block th:insert="~{fragments/footer}"></th:block>
+</body>
+
+</html>

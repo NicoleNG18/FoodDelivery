@@ -26,7 +26,7 @@ public class ClosedInterceptor implements HandlerInterceptor {
                 var secondRequestURI= request.getRequestURI();
 
                 if(secondRequestURI.equals("/orders/finalize")){
-                    response.sendRedirect("/closed");
+//                    response.sendRedirect("/closed");
                 }
 
                 return true;
