@@ -6,6 +6,7 @@ import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
+import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -112,7 +113,9 @@ public class OrderService {
 
     public OrderDetailViewDto getOrderById(Long id) {
 
-        final OrderEntity order = this.orderRepository.findOrderEntityById(id);
+        OrderEntity order = this.orderRepository.findById(id)
+                .orElseThrow(()->new ObjectNotFoundException("Order with id "+id+" was not found."));
+
         if(order.getComment().equals("")){
             order.setComment("There is no comment on this order");
         }

@@ -100,7 +100,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedUser"
                     , bindingResult);
 
-            return "redirect:/users/edit/{id}";
+            return "redirect:/users/profile/{id}";
 
         }
 

@@ -1,11 +1,31 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
+import bg.softuni.fooddelivery.validation.UniqueUserEmail;
+import bg.softuni.fooddelivery.validation.UniqueUsername;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
+import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+import static bg.softuni.fooddelivery.constants.ErrorMessages.USERNAME_MINIMUM;
+
 public class EditUserBindingDto {
+
+    @Size(min =2,max = 15,message = FIRST_NAME_BETWEEN)
     private String firstName;
+    @Size(min =2,max = 15,message = LAST_NAME_BETWEEN)
     private String lastName;
+    @UniqueUsername(message = UNIQUE_USERNAME)
+    @Size(min =2,message = USERNAME_MINIMUM)
     private String username;
+    @NotEmpty(message = EMAIL_REQUIRED)
+    @UniqueUserEmail(message = EMAIL_UNIQUE)
     private String email;
+    @Positive
+    @NotNull(message = AGE_PROVIDED)
     private Integer age;
+    @NotEmpty(message = PHONE_NUMBER_PROVIDED)
     private String phoneNumber;
 
     public EditUserBindingDto() {
