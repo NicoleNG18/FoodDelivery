@@ -3,13 +3,18 @@ package bg.softuni.fooddelivery.web;
 import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
+import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Arrays;
 
 @Controller
 public class ProductController {
@@ -27,13 +32,23 @@ public class ProductController {
 
     @GetMapping("/menu/{category}")
     public String getCategoryPage(@PathVariable("category")
-                                  ProductCategoryEnum category,
+                                  String category,
                                   Model model) {
 
-        model.addAttribute("category", category);
-        model.addAttribute("products", this.productService.allProducts(category));
+        model.addAttribute("category", this.productService.findCategory(category));
+        model.addAttribute("products", this.productService.allProducts(ProductCategoryEnum.valueOf(category)));
 
         return "categories-page";
+    }
+
+    @ExceptionHandler(WrongCategoryException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView onProductNotFound(WrongCategoryException productNotFoundException) {
+        ModelAndView modelAndView = new ModelAndView("category-does-not-exist");
+
+        modelAndView.addObject("category", productNotFoundException.getCategory());
+
+        return modelAndView;
     }
 
     @GetMapping("/products/add")

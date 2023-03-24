@@ -114,7 +114,7 @@ public class OrderService {
     public OrderDetailViewDto getOrderById(Long id) {
 
         OrderEntity order = this.orderRepository.findById(id)
-                .orElseThrow(()->new ObjectNotFoundException("Order with id "+id+" was not found."));
+                .orElseThrow(()->new ObjectNotFoundException(id,"Order"));
 
         if(order.getComment().equals("")){
             order.setComment("There is no comment on this order");

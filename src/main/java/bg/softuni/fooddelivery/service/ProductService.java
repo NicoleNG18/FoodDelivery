@@ -5,10 +5,13 @@ import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
+import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.util.EnumUtils;
 
+import javax.xml.catalog.CatalogException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,5 +77,16 @@ public class ProductService {
 
     public void deleteProduct(Long productId) {
         this.productRepository.deleteById(productId);
+    }
+
+    public ProductCategoryEnum findCategory(String category) {
+
+        for (ProductCategoryEnum categoryEnum : ProductCategoryEnum.values()) {
+            if(categoryEnum.name().equals(category)){
+                return categoryEnum;
+            }
+        }
+
+        throw new WrongCategoryException(category);
     }
 }
