@@ -129,7 +129,7 @@ public class OrderService {
 
     public void finishOrder(Long orderId) {
 
-        OrderEntity orderEntity = this.orderRepository.findOrderEntityById(orderId);
+        OrderEntity orderEntity = this.orderRepository.findById(orderId).orElseThrow(()-> new ObjectNotFoundException(orderId,"Order"));
 
         orderEntity.setStatus(OrderStatusEnum.DELIVERED);
         orderEntity.setDeliveredOn(LocalDateTime.now());

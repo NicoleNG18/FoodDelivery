@@ -5,6 +5,7 @@ import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
+import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
@@ -58,7 +59,7 @@ public class ProductService {
     }
 
     public ProductViewDto getProductById(Long productId) {
-        ProductEntity productEntity = this.productRepository.findProductEntityById(productId);
+        ProductEntity productEntity = this.productRepository.findById(productId).orElseThrow(() -> new ObjectNotFoundException(productId, "Product"));
         return this.modelMapper.map(productEntity, ProductViewDto.class);
     }
 
@@ -82,7 +83,7 @@ public class ProductService {
     public ProductCategoryEnum findCategory(String category) {
 
         for (ProductCategoryEnum categoryEnum : ProductCategoryEnum.values()) {
-            if(categoryEnum.name().equals(category)){
+            if (categoryEnum.name().equals(category)) {
                 return categoryEnum;
             }
         }

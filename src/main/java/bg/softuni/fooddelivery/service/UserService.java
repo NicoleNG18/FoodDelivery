@@ -9,6 +9,7 @@ import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
+import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
@@ -69,7 +70,7 @@ public class UserService {
     }
 
     public UserViewDto getUserById(Long id) {
-        final UserEntity userById = this.userRepository.findUserEntityById(id);
+        final UserEntity userById = this.userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "User"));
         return this.mapToUserView(userById);
     }
 

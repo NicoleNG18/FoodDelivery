@@ -4,7 +4,10 @@ logging:
     org: WARN
     org.hibernate.SQL: DEBUG
 server:
-  port: 8081
+    error:
+      whitelabel:
+        enabled: false
+    port: 8081
 spring:
   sql:
     init:
