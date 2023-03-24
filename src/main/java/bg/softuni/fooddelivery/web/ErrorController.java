@@ -13,6 +13,7 @@ public class ErrorController {
     @ExceptionHandler(ObjectNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ModelAndView onProductNotFound(ObjectNotFoundException objectNotFoundException){
+
         ModelAndView modelAndView=new ModelAndView("object-not-found");
 
         modelAndView.addObject("objectId",objectNotFoundException.getObjectId());

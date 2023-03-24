@@ -35,7 +35,7 @@ public class ContactService {
 
     }
 
-    public ContactEntity mapToEntity(ContactBindingDto contactBinding){
+    public ContactEntity mapToEntity(ContactBindingDto contactBinding) {
         return this.modelMapper.map(contactBinding, ContactEntity.class);
     }
 

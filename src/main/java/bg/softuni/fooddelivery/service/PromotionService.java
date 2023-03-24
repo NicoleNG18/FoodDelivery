@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 
+import static bg.softuni.fooddelivery.constants.Messages.*;
+
 @Service
 public class PromotionService {
 
@@ -19,37 +21,37 @@ public class PromotionService {
 
     public void makePromotions(DayOfWeek dayOfWeek) {
 
-        ProductEntity margherita = this.productRepository.findByName("Margherita");
-        ProductEntity chickenBurger = this.productRepository.findByName("Chicken Burger");
-        ProductEntity mrCheesy = this.productRepository.findByName("Mr. Cheesy");
-        ProductEntity satoshi = this.productRepository.findByName("Satoshi");
-        ProductEntity blackAngus = this.productRepository.findByName("Black Angus");
-        ProductEntity ranchFries = this.productRepository.findByName("Ranch fries");
-        ProductEntity carbonara = this.productRepository.findByName("Carbonara");
-        ProductEntity brownie = this.productRepository.findByName("Brownie");
-        ProductEntity mousse = this.productRepository.findByName("White chocolate mousse");
-        ProductEntity doughnuts = this.productRepository.findByName("Doughnuts");
+        ProductEntity margherita = this.productRepository.findByName(MARGHERITA);
+        ProductEntity chickenBurger = this.productRepository.findByName(CHICKEN_BURGER);
+        ProductEntity mrCheesy = this.productRepository.findByName(MR_CHEESY);
+        ProductEntity satoshi = this.productRepository.findByName(SATOSHI);
+        ProductEntity blackAngus = this.productRepository.findByName(BLACK_ANGUS);
+        ProductEntity ranchFries = this.productRepository.findByName(RANCH_FRIES);
+        ProductEntity carbonara = this.productRepository.findByName(CARBONARA);
+        ProductEntity brownie = this.productRepository.findByName(BROWNIE);
+        ProductEntity mousse = this.productRepository.findByName(CHOCOLATE_MOUSSE);
+        ProductEntity doughnuts = this.productRepository.findByName(DOUGHNUTS);
 
-        switch (dayOfWeek.name()) {
-            case "MONDAY" -> {
+        switch (dayOfWeek) {
+            case MONDAY -> {
                 monday(margherita, mousse, doughnuts);
             }
-            case "TUESDAY" -> {
+            case TUESDAY -> {
                 tuesday(margherita, chickenBurger);
             }
-            case "WEDNESDAY" -> {
+            case WEDNESDAY -> {
                 wednesday(chickenBurger, mrCheesy);
             }
-            case "THURSDAY" -> {
+            case THURSDAY -> {
                 thursday(mrCheesy, satoshi);
             }
-            case "FRIDAY" -> {
+            case FRIDAY -> {
                 friday(satoshi, blackAngus, ranchFries);
             }
-            case "SATURDAY" -> {
+            case SATURDAY -> {
                 saturday(blackAngus, ranchFries, carbonara, brownie);
             }
-            case "SUNDAY" -> {
+            case SUNDAY -> {
                 sunday(carbonara, brownie, mousse, doughnuts);
             }
         }

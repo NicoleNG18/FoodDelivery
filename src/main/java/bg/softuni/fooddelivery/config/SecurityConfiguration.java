@@ -38,8 +38,10 @@ public class SecurityConfiguration {
                         "/menu/**",
                         "/api/order/details/all",
                         "/closed").permitAll()
+                //for users
                 .requestMatchers( "/cart/add/**","/cart","/orders/**").hasRole(UserRoleEnum.USER.name())
 //                TODO:PERMIT LOGIN FOR AUTHENTICATED USER
+                //for workers and admin
                 .requestMatchers("/orders/all/history").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
                 .anyRequest()
                 .authenticated()

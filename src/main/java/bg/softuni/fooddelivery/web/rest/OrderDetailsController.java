@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.rest;
+package bg.softuni.fooddelivery.web.rest;
 
 import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
 import bg.softuni.fooddelivery.service.OrderService;

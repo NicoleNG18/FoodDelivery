@@ -11,16 +11,13 @@ import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static bg.softuni.fooddelivery.constants.Messages.NO_COMMENT;
+import static bg.softuni.fooddelivery.constants.Messages.*;
 
 @Service
 public class OrderService {
@@ -114,22 +111,28 @@ public class OrderService {
     public OrderDetailViewDto getOrderById(Long id) {
 
         OrderEntity order = this.orderRepository.findById(id)
-                .orElseThrow(()->new ObjectNotFoundException(id,"Order"));
+                .orElseThrow(() -> new ObjectNotFoundException(id, ORDER));
 
-        if(order.getComment().equals("")){
-            order.setComment("There is no comment on this order");
+        if (order.getComment().equals("")) {
+            order.setComment(NO_COMMENT_MESSAGE);
         }
 
         return mapToOrderViewDto(order);
     }
 
     public List<OrderDetailViewDto> getAllOrders() {
-        return this.orderRepository.findAll().stream().map(this::mapToOrderViewDto).collect(Collectors.toList());
+        return this.orderRepository
+                .findAll()
+                .stream()
+                .map(this::mapToOrderViewDto)
+                .collect(Collectors.toList());
     }
 
     public void finishOrder(Long orderId) {
 
-        OrderEntity orderEntity = this.orderRepository.findById(orderId).orElseThrow(()-> new ObjectNotFoundException(orderId,"Order"));
+        OrderEntity orderEntity = this.orderRepository
+                .findById(orderId)
+                .orElseThrow(() -> new ObjectNotFoundException(orderId, ORDER));
 
         orderEntity.setStatus(OrderStatusEnum.DELIVERED);
         orderEntity.setDeliveredOn(LocalDateTime.now());

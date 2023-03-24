@@ -25,6 +25,26 @@ public class ProductController {
         this.productService = menuService;
     }
 
+    @ModelAttribute("productDto")
+    public AddProductBindingDto initBindingDto() {
+        return new AddProductBindingDto();
+    }
+
+    @ModelAttribute("editedProductDto")
+    public EditProductBindingDto initEditProductBindingDto() {
+        return new EditProductBindingDto();
+    }
+
+    @ExceptionHandler(WrongCategoryException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView onProductNotFound(WrongCategoryException productNotFoundException) {
+        ModelAndView modelAndView = new ModelAndView("category-does-not-exist");
+
+        modelAndView.addObject("category", productNotFoundException.getCategory());
+
+        return modelAndView;
+    }
+
     @GetMapping("/menu")
     public String getMenu() {
         return "menu-categories";
@@ -41,29 +61,9 @@ public class ProductController {
         return "categories-page";
     }
 
-    @ExceptionHandler(WrongCategoryException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ModelAndView onProductNotFound(WrongCategoryException productNotFoundException) {
-        ModelAndView modelAndView = new ModelAndView("category-does-not-exist");
-
-        modelAndView.addObject("category", productNotFoundException.getCategory());
-
-        return modelAndView;
-    }
-
     @GetMapping("/products/add")
     public String addProduct() {
         return "add-product";
-    }
-
-    @ModelAttribute("productDto")
-    public AddProductBindingDto initBindingDto() {
-        return new AddProductBindingDto();
-    }
-
-    @ModelAttribute("editedProductDto")
-    public EditProductBindingDto initEditProductBindingDto() {
-        return new EditProductBindingDto();
     }
 
     @PostMapping("/products/add")

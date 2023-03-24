@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static bg.softuni.fooddelivery.constants.Messages.USER;
+import static bg.softuni.fooddelivery.constants.Messages.WORKER;
+
 @Service
 public class UserService {
 
@@ -70,7 +73,10 @@ public class UserService {
     }
 
     public UserViewDto getUserById(Long id) {
-        final UserEntity userById = this.userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "User"));
+        final UserEntity userById = this.userRepository
+                .findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id, USER));
+
         return this.mapToUserView(userById);
     }
 
@@ -91,7 +97,7 @@ public class UserService {
 
         UserEntity userById = this.userRepository.findUserEntityById(userId);
 
-        userById.getRoles().removeIf(userRoleEntity -> userRoleEntity.getRole().name().equals("WORKER"));
+        userById.getRoles().removeIf(userRoleEntity -> userRoleEntity.getRole().name().equals(WORKER));
 
         this.userRepository.save(userById);
 

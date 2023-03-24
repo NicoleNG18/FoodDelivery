@@ -10,11 +10,11 @@ import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.util.EnumUtils;
 
-import javax.xml.catalog.CatalogException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static bg.softuni.fooddelivery.constants.Messages.PRODUCT;
 
 
 @Service
@@ -59,14 +59,18 @@ public class ProductService {
     }
 
     public ProductViewDto getProductById(Long productId) {
-        ProductEntity productEntity = this.productRepository.findById(productId).orElseThrow(() -> new ObjectNotFoundException(productId, "Product"));
+        ProductEntity productEntity = this.productRepository
+                .findById(productId)
+                .orElseThrow(() -> new ObjectNotFoundException(productId, PRODUCT));
+
         return this.modelMapper.map(productEntity, ProductViewDto.class);
     }
 
     public void editProduct(Long productId,
                             EditProductBindingDto editedProductDto) {
 
-        ProductEntity productEntityById = this.productRepository.findProductEntityById(productId);
+        ProductEntity productEntityById = this.productRepository
+                .findProductEntityById(productId);
 
         productEntityById
                 .setDescription(editedProductDto.getDescription())

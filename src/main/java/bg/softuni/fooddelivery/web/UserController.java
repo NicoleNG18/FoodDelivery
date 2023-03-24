@@ -5,6 +5,7 @@ import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.EditUserBindingDto;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,23 @@ public class UserController {
     @ModelAttribute("editedUser")
     public EditUserBindingDto initBindingDto() {
         return new EditUserBindingDto();
+    }
+
+    @GetMapping("/login")
+    public String getLogin(){
+        return "auth-login";
+    }
+
+    @PostMapping("/login-error")
+    public String failedLogin(
+            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+            String username,
+            RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("username", username);
+        redirectAttributes.addFlashAttribute("bad_credentials", true);
+
+        return "redirect:/users/login";
     }
 
     @GetMapping("/profile")
