@@ -14,12 +14,13 @@ spring:
       mode: never
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: '0000'
+    password: ${DB_DEF_PASS}
     url: jdbc:mysql://localhost:3306/food_delivery?createDatabaseIfNotExist=true
     username: root
   jpa:
     hibernate:
       ddl-auto: update
+    defer-datasource-initialization: true
     open-in-view: false
     properties:
       hibernate:

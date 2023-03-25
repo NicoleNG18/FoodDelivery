@@ -13,12 +13,17 @@ import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static bg.softuni.fooddelivery.constants.Messages.USER;
 import static bg.softuni.fooddelivery.constants.Messages.WORKER;
@@ -114,21 +119,27 @@ public class UserService {
 
     }
 
-    public void editUser(Long id,
-                         EditUserBindingDto editedUser) {
+    public boolean editUser(Long id,
+                            EditUserBindingDto editedUser,
+                            Principal principal) {
 
         UserEntity user = this.userRepository.findUserEntityById(id);
 
-        user
-                .setFirstName(editedUser.getFirstName())
-                .setLastName(editedUser.getLastName())
-                .setUsername(editedUser.getUsername())
-                .setAge(editedUser.getAge())
-                .setPhoneNumber(editedUser.getPhoneNumber())
-                .setEmail(editedUser.getEmail());
+        Optional<UserEntity> byUsername = this.userRepository.findUserEntityByUsername(editedUser.getUsername());
 
-        this.userRepository.saveAndFlush(user);
+        if (byUsername.isPresent()) {
+            if (byUsername.get().getId().equals(id)) {
+                return false;
+            }
+        }
 
+        if (byUsername.isEmpty()) {
+            user.setUsername(editedUser.getUsername());
+            this.userRepository.save(user);
+            return false;
+        }
+
+        return true;
     }
 
 }

@@ -110,7 +110,7 @@ public class UserController {
     public String editedProduct(@PathVariable("id") Long id,
                                 @Valid EditUserBindingDto editedUser,
                                 BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes) {
+                                RedirectAttributes redirectAttributes,Principal principal) {
 
         if (bindingResult.hasErrors()) {
 
@@ -118,11 +118,18 @@ public class UserController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedUser"
                     , bindingResult);
 
-            return "redirect:/users/profile/{id}";
+            return "redirect:/users/edit/{id}";
 
         }
 
-        this.userService.editUser(id, editedUser);
+        if(this.userService.editUser(id, editedUser,principal)){
+
+//            redirectAttributes.addFlashAttribute("editedUser", editedUser);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedUser"
+//                    , bindingResult);
+
+            return "redirect:/users/edit/{id}";
+        }
 
         return "redirect:/users/profile/{id}";
     }

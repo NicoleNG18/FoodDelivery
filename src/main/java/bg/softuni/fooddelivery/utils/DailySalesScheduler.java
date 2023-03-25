@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 
 @Component
 public class DailySalesScheduler {
-
-
     private final PromotionService promotionService;
     private final Logger LOGGER = LoggerFactory.getLogger(DailySalesScheduler.class);
 
