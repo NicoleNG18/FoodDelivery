@@ -19,7 +19,6 @@ import static bg.softuni.fooddelivery.constants.Messages.ROLE;
 public class FoodDeliveryUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    @Autowired
     public FoodDeliveryUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -39,19 +38,14 @@ public class FoodDeliveryUserDetailsService implements UserDetailsService {
         return new User(
                 userEntity.getUsername(),
                 userEntity.getPassword(),
-                extractAuthorities(userEntity)
-        );
-    }
+                extractAuthorities(userEntity));}
 
     private List<GrantedAuthority> extractAuthorities(UserEntity userEntity) {
         return userEntity
                 .getRoles()
                 .stream()
-                .map(this::mapRole)
-                .toList();
-    }
+                .map(this::mapRole).toList();}
 
     private GrantedAuthority mapRole(UserRoleEntity userRoleEntity) {
-        return new SimpleGrantedAuthority(ROLE + userRoleEntity.getRole().name());
-    }
+        return new SimpleGrantedAuthority(ROLE + userRoleEntity.getRole().name());}
 }

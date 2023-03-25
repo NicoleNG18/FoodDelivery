@@ -11,9 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.opentest4j.AssertionFailedError;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +37,7 @@ public class FoodDeliveryUserDetailsServiceTest {
 
     @Test
     void testLoadUserByUsername_UserExists() {
-//arrange
+        //arrange
         UserEntity testUser = new UserEntity()
                 .setUsername("admin")
                 .setPassword("topsecret")
@@ -57,12 +60,24 @@ public class FoodDeliveryUserDetailsServiceTest {
         UserDetails userDetails = serviceToTest.loadUserByUsername(testUser.getUsername());
 
         //assert
+        Assertions.assertNotNull(userDetails);
 
         Assertions.assertEquals(testUser.getUsername(), userDetails.getUsername());
+        Assertions.assertEquals(testUser.getPassword(), userDetails.getPassword());
 
-//        UserDetails userDetails = serviceToTest.loadUserByUsername("admin");
-//
-//        Assertions.assertNotNull(userDetails);
+        Assertions.assertEquals(3,userDetails.getAuthorities().size());
+        assertRole(userDetails.getAuthorities(), "ROLE_ADMIN");
+        assertRole(userDetails.getAuthorities(), "ROLE_WORKER");
+        assertRole(userDetails.getAuthorities(), "ROLE_USER");
+    }
+
+    private void assertRole(Collection<? extends GrantedAuthority> authorities,
+                            String role) {
+        authorities.
+                stream().
+                filter(a -> role.equals(a.getAuthority())).
+                findAny().
+                orElseThrow(() -> new AssertionFailedError("Role " + role + " not found!"));
     }
 
     @Test

@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String getLogin(){
+    public String getLogin() {
         return "auth-login";
     }
 
@@ -58,7 +58,8 @@ public class UserController {
     }
 
     @GetMapping("/profile/{id}")
-    public String getProfileById(@PathVariable("id") Long id, Model model) {
+    public String getProfileById(@PathVariable("id") Long id,
+                                 Model model) {
 
 
         model.addAttribute("user", this.userService.getUserById(id));
@@ -76,32 +77,39 @@ public class UserController {
     }
 
     @GetMapping("/change/{id}")
-    public String changeRoles(@PathVariable("id") Long id,Model model){
-            model.addAttribute("user", this.userService.getUserById(id));
+    public String changeRoles(@PathVariable("id") Long id,
+                              Model model) {
+        model.addAttribute("user", this.userService.getUserById(id));
 
-            return "roles-change";
+        return "roles-change";
     }
 
     @PatchMapping("/roles/remove/{id}/{name}")
-    public String removeRole(@PathVariable("id") Long id,@PathVariable("name") String roleName){
+    public String removeRole(@PathVariable("id") Long id,
+                             @PathVariable("name") String roleName) {
 
-        this.userService.removeRole(roleName,id);
+        this.userService.removeRole(roleName, id);
 
         return "redirect:/users/change/{id}";
     }
 
     @PatchMapping("/roles/add/{id}/{name}")
-    public String addRole(@PathVariable("id") Long id,@PathVariable("name") String roleName){
+    public String addRole(@PathVariable("id") Long id,
+                          @PathVariable("name") String roleName) {
 
-        this.userService.addRole(roleName,id);
+        this.userService.addRole(roleName, id);
 
         return "redirect:/users/change/{id}";
     }
 
     @GetMapping("/edit/{id}")
-    public String getEditUser(@PathVariable("id")Long id,Model model){
+    public String getEditUser(@PathVariable("id") Long id,
+                              Model model) {
 
-        model.addAttribute("user",this.userService.getUserById(id));
+        model.addAttribute("user", this.userService.getUserById(id));
+//        if(!model.containsAttribute("errorUser")) {
+//            model.addAttribute("errorUser", false);
+//        }
 
         return "edit-user";
     }
@@ -110,7 +118,9 @@ public class UserController {
     public String editedProduct(@PathVariable("id") Long id,
                                 @Valid EditUserBindingDto editedUser,
                                 BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes,Principal principal) {
+                                RedirectAttributes redirectAttributes,
+                                Principal principal,
+                                Model model) {
 
         if (bindingResult.hasErrors()) {
 
@@ -122,13 +132,15 @@ public class UserController {
 
         }
 
-        if(this.userService.editUser(id, editedUser,principal)){
+        if (this.userService.editUser(id, editedUser, principal)) {
 
 //            redirectAttributes.addFlashAttribute("editedUser", editedUser);
 //            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedUser"
 //                    , bindingResult);
 
-            return "redirect:/users/edit/{id}";
+//            model.addAttribute("errorUser", true);
+
+            return "redirect:/users/edit/" + id;
         }
 
         return "redirect:/users/profile/{id}";
