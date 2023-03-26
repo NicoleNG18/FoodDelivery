@@ -1,7 +1,5 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
-import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
@@ -15,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -70,14 +67,14 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
-    void testAddProduct() throws Exception {
+    void testGetAddProductWorksCorrectly() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/products/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("add-product"));
     }
 
     @Test
-    void testGetMenuCategoriesWorks() throws Exception {
+    void testGetMenuCategoriesShowsUp() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/menu/pizza"))
                 .andExpect(view().name("categories-page"))
                 .andExpect(status().isOk())
@@ -108,7 +105,7 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
-    void testAddProductNotCorrectly() throws Exception {
+    void testAddProductWithInvalidData() throws Exception {
 
         mockMvc.perform(post("/products/add")
                         .param("name", "")
@@ -123,7 +120,7 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
-    void testGetEditShowsUp() throws Exception {
+    void testGetEditProductShowsUp() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/1"))
                 .andExpect(status().isOk())
@@ -133,7 +130,7 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
-    void testGetEditShowsUpException() throws Exception {
+    void testGetEditProductThrowsException() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/28"))
                 .andExpect(status().is4xxClientError())
@@ -143,7 +140,7 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN", "WORKER", "USER"})
-    void testDeleteProductSuccessful() throws Exception {
+    void testDeleteProductWorksCorrectly() throws Exception {
 
         String deletedMonitorItemID = String.valueOf(3);
 
@@ -158,7 +155,7 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "WORKER", "ADMIN"})
-    void testUpdateProductSuccessful() throws Exception {
+    void testUpdateProductWorksCorrectly() throws Exception {
         String deletedMonitorItemID = String.valueOf(1);
 
         mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedMonitorItemID)
@@ -172,7 +169,7 @@ public class ProductControllerIT {
 
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "WORKER", "ADMIN"})
-    void testUpdateProductNotSuccessful() throws Exception {
+    void testUpdateProductWithInvalidData() throws Exception {
         String deletedMonitorItemID = String.valueOf(1);
 
         mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedMonitorItemID)

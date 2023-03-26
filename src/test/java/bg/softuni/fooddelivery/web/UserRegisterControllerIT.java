@@ -26,7 +26,7 @@ public class UserRegisterControllerIT {
     }
 
     @Test
-    void testRegistration() throws Exception {
+    void testRegistrationWorksCorrectly() throws Exception {
         mockMvc.perform(post("/users/register")
                 .param("firstName", "Petur")
                 .param("lastName", "Petrov")
@@ -44,7 +44,7 @@ public class UserRegisterControllerIT {
     }
 
     @Test
-    void testRegistrationNotCorrect() throws Exception {
+    void testRegistrationWithInvalidData() throws Exception {
         mockMvc.perform(post("/users/register")
                         .param("firstName", "")
                         .param("lastName", "Petrov")
