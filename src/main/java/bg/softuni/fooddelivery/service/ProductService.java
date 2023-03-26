@@ -42,7 +42,7 @@ public class ProductService {
     }
 
     public String getCategoryName(Long id) {
-        return this.productRepository.findProductEntityById(id).getCategory().name();
+            return this.productRepository.findProductEntityById(id).getCategory().name();
     }
 
     public void addProduct(AddProductBindingDto productDto) {
