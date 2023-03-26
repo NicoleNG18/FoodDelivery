@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 
 @Controller
 public class ProductController {
@@ -57,7 +56,6 @@ public class ProductController {
 
         model.addAttribute("category", this.productService.findCategory(category));
         model.addAttribute("products", this.productService.allProducts(ProductCategoryEnum.valueOf(category)));
-
         return "categories-page";
     }
 

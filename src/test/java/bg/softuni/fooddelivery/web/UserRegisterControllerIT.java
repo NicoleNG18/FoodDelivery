@@ -43,5 +43,23 @@ public class UserRegisterControllerIT {
 
     }
 
+    @Test
+    void testRegistrationNotCorrect() throws Exception {
+        mockMvc.perform(post("/users/register")
+                        .param("firstName", "")
+                        .param("lastName", "Petrov")
+                        .param("username", "peturr")
+                        .param("email", "pesho@example")
+                        .param("password", "topsecret")
+                        .param("confirmPassword", "topsecret")
+                        .param("age", "25")
+                        .param("phoneNumber", "07894563210")
+                        .param("gender", "FEMALE")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/users/register"));
+
+    }
+
 
 }

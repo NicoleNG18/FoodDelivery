@@ -4,6 +4,7 @@ import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
 import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.service.OrderService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }

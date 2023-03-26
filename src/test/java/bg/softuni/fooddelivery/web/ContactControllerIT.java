@@ -8,20 +8,22 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerIT {
+public class ContactControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void testGetLoginShowsUp() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/login")
-                        .with(csrf())).andExpect(status().isOk())
-                .andExpect(view().name("auth-login"));
+    void testGetContactFormShowsUp() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/contact").with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("contact-us"));
     }
 
 }
+
