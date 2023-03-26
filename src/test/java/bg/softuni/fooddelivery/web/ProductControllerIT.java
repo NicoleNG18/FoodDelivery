@@ -29,9 +29,6 @@ public class ProductControllerIT {
     @Autowired
     private ProductRepository mockProductRepository;
 
-    public ProductControllerIT() {
-    }
-
     @BeforeEach
     void setUp() {
         ProductEntity testProduct1 = new ProductEntity()
@@ -142,11 +139,11 @@ public class ProductControllerIT {
     @WithMockUser(username = "admin", authorities = {"ADMIN", "WORKER", "USER"})
     void testDeleteProductWorksCorrectly() throws Exception {
 
-        String deletedMonitorItemID = String.valueOf(3);
+        String deletedProductId = String.valueOf(3);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/products/delete/{id}", deletedMonitorItemID)
-                        .param("id", deletedMonitorItemID)
+                        .delete("/products/delete/{id}", deletedProductId)
+                        .param("id", deletedProductId)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/menu/pizza"));
@@ -156,9 +153,9 @@ public class ProductControllerIT {
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "WORKER", "ADMIN"})
     void testUpdateProductWorksCorrectly() throws Exception {
-        String deletedMonitorItemID = String.valueOf(1);
+        String deletedProductId = String.valueOf(1);
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedMonitorItemID)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedProductId)
                         .with(csrf())
                         .param("description", "new descriptionnn")
                         .param("price", "600"))
@@ -170,14 +167,14 @@ public class ProductControllerIT {
     @Test
     @WithMockUser(username = "admin", authorities = {"USER", "WORKER", "ADMIN"})
     void testUpdateProductWithInvalidData() throws Exception {
-        String deletedMonitorItemID = String.valueOf(1);
+        String deletedProductId = String.valueOf(1);
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedMonitorItemID)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedProductId)
                         .with(csrf())
                         .param("description", "dddddd")
                         .param("price", "-600"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/products/edit/" + deletedMonitorItemID));
+                .andExpect(redirectedUrl("/products/edit/" + deletedProductId));
 
     }
 

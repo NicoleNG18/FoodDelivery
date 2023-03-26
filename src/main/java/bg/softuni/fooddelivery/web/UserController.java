@@ -1,7 +1,5 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
-import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.EditUserBindingDto;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
@@ -31,6 +29,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String getLogin() {
+
         return "auth-login";
     }
 
@@ -53,7 +52,6 @@ public class UserController {
 
         model.addAttribute("user", this.userService.getUserViewByUsername(principal.getName()));
 
-
         return "user-profile";
     }
 
@@ -61,18 +59,14 @@ public class UserController {
     public String getProfileById(@PathVariable("id") Long id,
                                  Model model) {
 
-
         model.addAttribute("user", this.userService.getUserById(id));
-
 
         return "user-profile";
     }
 
     @GetMapping("/all")
     public String getAllUsers(Model model) {
-
         model.addAttribute("users", this.userService.getAllUsers());
-
         return "all-users";
     }
 

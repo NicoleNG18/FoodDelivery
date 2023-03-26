@@ -3,6 +3,7 @@ package bg.softuni.fooddelivery.web;
 import bg.softuni.fooddelivery.service.CartService;
 import bg.softuni.fooddelivery.service.OrderService;
 import bg.softuni.fooddelivery.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class CartController {
     private final ProductService productService;
     private final OrderService orderService;
 
+    @Autowired
     public CartController(CartService cartService,
                           ProductService productService,
                           OrderService orderService) {
@@ -26,11 +28,12 @@ public class CartController {
     }
 
     @GetMapping
-    public String getCart(Model model, Principal principal){
+    public String getCart(Model model,
+                          Principal principal) {
 
 
-        model.addAttribute("cartProducts",this.orderService.getProducts(principal));
-        model.addAttribute("productsPrice",this.orderService.getProductsPrice(principal));
+        model.addAttribute("cartProducts", this.orderService.getProducts(principal));
+        model.addAttribute("productsPrice", this.orderService.getProductsPrice(principal));
 
         return "order-cart";
     }
@@ -48,9 +51,9 @@ public class CartController {
 
     @PatchMapping("/remove/{id}")
     public String removeFromCart(@PathVariable("id") Long id,
-                                 Principal principal){
+                                 Principal principal) {
 
-        this.cartService.removeFromCart(id,principal);
+        this.cartService.removeFromCart(id, principal);
 
         return "redirect:/cart";
     }
