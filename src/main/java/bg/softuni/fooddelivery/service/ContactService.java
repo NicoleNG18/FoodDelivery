@@ -4,6 +4,7 @@ import bg.softuni.fooddelivery.domain.dto.binding.ContactBindingDto;
 import bg.softuni.fooddelivery.domain.entities.ContactEntity;
 import bg.softuni.fooddelivery.repositories.ContactRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class ContactService {
 
     private final ModelMapper modelMapper;
     private final ContactRepository contactRepository;
-
+    @Autowired
     public ContactService(ModelMapper modelMapper,
                           ContactRepository contactRepository) {
         this.modelMapper = modelMapper;

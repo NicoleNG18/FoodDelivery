@@ -18,7 +18,7 @@ import static bg.softuni.fooddelivery.constants.Messages.ROLE;
 
 public class FoodDeliveryUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
-
+    @Autowired
     public FoodDeliveryUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

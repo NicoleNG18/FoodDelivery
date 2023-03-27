@@ -6,6 +6,7 @@ import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
 import bg.softuni.fooddelivery.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
@@ -20,7 +21,7 @@ public class CartService {
     private final ProductRepository productRepository;
 
     private final ShoppingCartRepository shoppingCartRepository;
-
+    @Autowired
     public CartService(UserRepository userRepository,
                        ProductRepository productRepository,
                        ShoppingCartRepository shoppingCartRepository) {
@@ -38,7 +39,6 @@ public class CartService {
 
         user.getCart().addProduct(product);
         user.getCart().increaseProductsSum(product.getPrice());
-
     }
 
     public CartEntity getNewCart() {

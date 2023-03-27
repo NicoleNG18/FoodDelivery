@@ -3,6 +3,7 @@ package bg.softuni.fooddelivery.web;
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationBindingDto;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserRegisterController {
 
     private final UserService userService;
-
+    @Autowired
     public UserRegisterController(UserService userService) {
         this.userService = userService;
     }

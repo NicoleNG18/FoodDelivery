@@ -3,13 +3,14 @@ package bg.softuni.fooddelivery.service;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserRoleService {
 
     private final UserRoleRepository userRoleRepository;
-
+    @Autowired
     public UserRoleService(UserRoleRepository userRoleRepository) {
         this.userRoleRepository = userRoleRepository;
     }

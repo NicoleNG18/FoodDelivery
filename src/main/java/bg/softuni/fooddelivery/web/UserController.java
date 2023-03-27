@@ -3,6 +3,7 @@ package bg.softuni.fooddelivery.web;
 import bg.softuni.fooddelivery.domain.dto.binding.EditUserBindingDto;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }

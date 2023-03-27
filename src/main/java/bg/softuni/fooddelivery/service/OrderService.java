@@ -9,6 +9,7 @@ import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
@@ -28,7 +29,7 @@ public class OrderService {
 
     private final ModelMapper modelMapper;
 
-
+    @Autowired
     public OrderService(UserService userService,
                         OrderRepository orderRepository,
                         ModelMapper modelMapper) {

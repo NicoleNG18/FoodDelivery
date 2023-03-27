@@ -44,7 +44,7 @@ public class CartController {
 
         final String category = this.productService.getCategoryName(id);
 
-        this.cartService.addToCart(id, principal);
+       this.cartService.addToCart(id, principal);
 
         return "redirect:/menu/" + category;
     }

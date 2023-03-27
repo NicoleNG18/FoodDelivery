@@ -13,6 +13,7 @@ import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +41,7 @@ public class UserService {
 
     private final CartService cartService;
 
+    @Autowired
     public UserService(ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder,
                        UserRepository userRepository,

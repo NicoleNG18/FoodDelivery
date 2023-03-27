@@ -6,6 +6,7 @@ import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductController {
 
     private final ProductService productService;
-
+    @Autowired
     public ProductController(ProductService menuService) {
         this.productService = menuService;
     }

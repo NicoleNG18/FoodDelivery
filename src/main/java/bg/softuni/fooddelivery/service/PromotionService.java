@@ -2,6 +2,7 @@ package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ import static bg.softuni.fooddelivery.constants.Messages.*;
 public class PromotionService {
 
     private final ProductRepository productRepository;
-
+    @Autowired
     public PromotionService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }

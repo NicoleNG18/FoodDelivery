@@ -9,6 +9,7 @@ import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public ProductService(ProductRepository productRepository,
                           ModelMapper modelMapper) {
         this.productRepository = productRepository;
@@ -42,7 +44,10 @@ public class ProductService {
     }
 
     public String getCategoryName(Long id) {
-            return this.productRepository.findProductEntityById(id).getCategory().name();
+        return this.productRepository
+                .findProductEntityById(id)
+                .getCategory()
+                .name();
     }
 
     public void addProduct(AddProductBindingDto productDto) {
