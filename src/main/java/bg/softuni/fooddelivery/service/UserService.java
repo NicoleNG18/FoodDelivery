@@ -97,8 +97,7 @@ public class UserService {
         return this.userRepository.findAll().stream().map(this::mapToUserView).toList();
     }
 
-    public void removeRole(String roleName,
-                           Long userId) {
+    public void removeRole(Long userId) {
 
         UserEntity userById = this.userRepository.findUserEntityById(userId);
 
@@ -108,20 +107,18 @@ public class UserService {
 
     }
 
-    public void addRole(String roleName,
-                        Long userId) {
-        final UserRoleEntity role = this.userRoleRepository.findByRole(UserRoleEnum.WORKER);
+    public void addRole(Long userId) {
+
         UserEntity userById = this.userRepository.findUserEntityById(userId);
 
-        userById.getRoles().add(role);
+        userById.getRoles().add(userRoleRepository.findByRole(UserRoleEnum.WORKER));
 
         this.userRepository.save(userById);
 
     }
 
     public boolean editUser(Long id,
-                            EditUserBindingDto editedUser,
-                            Principal principal) {
+                            EditUserBindingDto editedUser) {
 
         UserEntity user = this.userRepository.findUserEntityById(id);
 

@@ -78,20 +78,18 @@ public class UserController {
         return "roles-change";
     }
 
-    @PatchMapping("/roles/remove/{id}/{name}")
-    public String removeRole(@PathVariable("id") Long id,
-                             @PathVariable("name") String roleName) {
+    @PatchMapping("/roles/remove/{id}")
+    public String removeRole(@PathVariable("id") Long id) {
 
-        this.userService.removeRole(roleName, id);
+        this.userService.removeRole(id);
 
         return "redirect:/users/change/{id}";
     }
 
-    @PatchMapping("/roles/add/{id}/{name}")
-    public String addRole(@PathVariable("id") Long id,
-                          @PathVariable("name") String roleName) {
+    @PatchMapping("/roles/add/{id}")
+    public String addRole(@PathVariable("id") Long id) {
 
-        this.userService.addRole(roleName, id);
+        this.userService.addRole(id);
 
         return "redirect:/users/change/{id}";
     }
@@ -112,9 +110,7 @@ public class UserController {
     public String editedProduct(@PathVariable("id") Long id,
                                 @Valid EditUserBindingDto editedUser,
                                 BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes,
-                                Principal principal,
-                                Model model) {
+                                RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
 
@@ -126,14 +122,7 @@ public class UserController {
 
         }
 
-        if (this.userService.editUser(id, editedUser, principal)) {
-
-//            redirectAttributes.addFlashAttribute("editedUser", editedUser);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editedUser"
-//                    , bindingResult);
-
-//            model.addAttribute("errorUser", true);
-
+        if (this.userService.editUser(id, editedUser)) {
             return "redirect:/users/edit/" + id;
         }
 
