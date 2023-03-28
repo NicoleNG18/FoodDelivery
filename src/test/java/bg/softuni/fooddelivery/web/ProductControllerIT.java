@@ -1,10 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
-import bg.softuni.fooddelivery.domain.entities.UserEntity;
-import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
-import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
-import bg.softuni.fooddelivery.repositories.ProductRepository;
 import bg.softuni.fooddelivery.util.TestDataUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.math.BigDecimal;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -165,5 +159,7 @@ public class ProductControllerIT {
                 .andExpect(redirectedUrl("/products/edit/" + pizza3.getId().toString()));
 
     }
+
+
 
 }

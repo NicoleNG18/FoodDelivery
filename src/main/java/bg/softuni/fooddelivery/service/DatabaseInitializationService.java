@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.utils;
+package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
@@ -6,9 +6,7 @@ import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
-import bg.softuni.fooddelivery.service.CartService;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,26 +15,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class InitService {
+public class DatabaseInitializationService {
 
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
     private final CartService cartService;
-    private final String defaultPass;
+    private final String defaultPass = "${USERS_DEF_PASS}";
 
     private final UserRepository userRepository;
 
-    public InitService(UserRoleRepository userRoleRepository,
-                       PasswordEncoder passwordEncoder,
-                       CartService cartService,
-                       UserRepository userRepository,
-    @Value("${USERS_DEF_PASS}") String defaultPass) {
+    public DatabaseInitializationService(UserRoleRepository userRoleRepository,
+                                         PasswordEncoder passwordEncoder,
+                                         CartService cartService,
+                                         UserRepository userRepository){
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.cartService = cartService;
         this.userRepository = userRepository;
-        this.defaultPass=defaultPass;
     }
 
     @PostConstruct

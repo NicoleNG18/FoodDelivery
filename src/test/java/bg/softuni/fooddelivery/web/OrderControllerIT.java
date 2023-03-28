@@ -1,18 +1,9 @@
 package bg.softuni.fooddelivery.web;
 
-import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
-import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
-import bg.softuni.fooddelivery.domain.enums.GenderEnum;
-import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
-import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
-import bg.softuni.fooddelivery.repositories.OrderRepository;
-import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
-import bg.softuni.fooddelivery.repositories.UserRepository;
-import bg.softuni.fooddelivery.repositories.UserRoleRepository;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
+import bg.softuni.fooddelivery.util.TestDataUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -38,80 +22,113 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OrderControllerIT {
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ShoppingCartRepository shoppingCartRepository;
+    private TestDataUtils testDataUtils;
 
-    @Autowired
-    private UserRoleRepository userRoleRepository;
+    private UserEntity testUser, testAdmin;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+    private OrderEntity testOrder;
 
     @BeforeEach
-    public void init() {
-        this.mockMvc = MockMvcBuilders
-                .webAppContextSetup(webApplicationContext).apply(springSecurity())
-                .build();
+    void setUp() {
+        testUser = testDataUtils.createTestUser("userOrder@user.com", "userOrderCtrl");
+        testAdmin = testDataUtils.createTestAdmin("adminOrder@admin.com", "adminOrder");
+        testOrder = testDataUtils.createOrder(testUser);
     }
 
-    public UserEntity setUpEntity() {
+    @AfterEach
+    void tearDown() {
+        testDataUtils.cleanUpDatabase();
+    }
 
-        CartEntity cart = new CartEntity();
-        shoppingCartRepository.saveAndFlush(cart);
+    @Test
+    @WithMockUser(username = "userOrderCtrl", roles = "USER")
+    void testGetFinalize_ShowsUp() throws Exception {
 
-        UserRoleEntity roleAdmin = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
-        UserRoleEntity roleUser = new UserRoleEntity().setRole(UserRoleEnum.USER);
-        UserRoleEntity roleWorker = new UserRoleEntity().setRole(UserRoleEnum.WORKER);
+        mockMvc.perform(MockMvcRequestBuilders.get("/orders/finalize"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("finalize-order"))
+                .andExpect(model().attributeExists("foodPrice", "countBoxes"));
 
-        userRoleRepository.saveAndFlush(roleAdmin);
-        userRoleRepository.saveAndFlush(roleUser);
-        userRoleRepository.saveAndFlush(roleWorker);
+    }
 
-        UserEntity user = new UserEntity().setPassword("topsecret")
-                .setGender(GenderEnum.FEMALE)
-                .setFirstName("tester")
-                .setLastName("testerov")
-                .setEmail("test@mail.com")
-                .setPhoneNumber("phoneeeeeee")
-                .setAge(25)
-                .setUsername("testUser")
-                .setOrders(new ArrayList<>())
-                .setRoles(List.of(roleAdmin, roleUser, roleWorker))
-                .setCart(cart);
+    @Test
+    @WithMockUser(username = "userOrderCtrl",roles = "USER")
+    void testFinalizeOrder_WorksCorrectly() throws Exception {
+        mockMvc.perform(post("/orders/finalize")
+                        .param("comment", "Test comment")
+                        .param("address", "Test address")
+                        .param("contactNumber", "0789654123")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"));
+    }
 
-        userRepository.save(user);
+    @Test
+    @WithMockUser(username = "userOrderCtrl", roles = "USER")
+    void testFinalizeOrder_WithInvalidData() throws Exception {
+        mockMvc.perform(post("/orders/finalize")
+                        .param("comment", "Test comment")
+                        .param("address", "Test address")
+                        .param("contactNumber", "")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/orders/finalize"));
+    }
 
-        return user;
+    @Test
+    @WithMockUser(username = "userOrderCtrl", roles = "USER")
+    void testGetOrdersHistory_ShowsUp() throws Exception {
+        mockMvc.perform(get("/orders/history"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("orders-history-user"))
+                .andExpect(model().attributeExists("orders"));
+    }
+
+    @Test
+    @WithMockUser(username = "userOrderCtrl", roles = "USER")
+    void testGetOrderDetails_ShowsUp() throws Exception {
+        mockMvc.perform(get("/orders/details/{id}", testOrder.getId()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("order-details-api"))
+                .andExpect(model().attributeExists("order", "idAtr"));
+    }
+
+    @Test
+    @WithMockUser(username = "userOrderCtrl", roles = "USER")
+    void testGetOrderDetails_ThrowsException() throws Exception {
+        mockMvc.perform(get("/orders/details/789"))
+                .andExpect(status().is4xxClientError())
+                .andExpect(view().name("object-not-found"))
+                .andExpect(model().attributeExists("objectId", "objectType"));
+    }
+
+    @Test
+    @WithMockUser(username = "adminOrder", roles = {"USER", "ADMIN", "WORKER"})
+    void testGetAllOrdersHistory_ShowsUp() throws Exception {
+        mockMvc.perform(get("/orders/all/history"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("orders-history"))
+                .andExpect(model().attributeExists("allOrders"));
     }
 
 //    @Test
-////    @WithMockUser(username = "admin", password = "topsecret", authorities = {"USER", "WORKER", "ADMIN"})
-//    void testGetOrderDetailsShowsUp() throws Exception {
+//    @WithMockUser(username = "adminOrder", roles = {"USER", "ADMIN", "WORKER"})
+//    void testFinishOrderCorrectly() throws Exception {
+//        mockMvc.perform(patch("/orders/finish/{id}", testOrder.getId()))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(redirectedUrl("/orders/all/history"));
+//    }
 //
-//        OrderEntity order = new OrderEntity()
-//                .setComment("commment")
-//                .setStatus(OrderStatusEnum.IN_PROGRESS)
-//                .setAddress("addresss")
-//                .setCreatedOn(LocalDateTime.now())
-//                .setContactNumber("numebrrrrr")
-//                .setDeliveredOn(LocalDateTime.now())
-//                .setPrice(BigDecimal.TEN);
-//        orderRepository.saveAndFlush(order);
-//
-//        String id = String.valueOf(1);
-//        mockMvc.perform(MockMvcRequestBuilders.get("/orders/details/{id}", id)
-//                        .param("id", id).with(user(setUpEntity().getUsername())))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("order-details-api"))
-//                .andExpect(model().attributeExists("idAtr", "order"));
+//    @Test
+//    @WithMockUser(username = "adminOrder",roles = {"USER","ADMIN","WORKER"})
+//    void testFinishOrder_ThrowsException() throws Exception {
+//        mockMvc.perform(patch("/orders/finish/78"))
+//                .andExpect(status().is4xxClientError())
+//                .andExpect(view().name("object-not-found"))
+//                .andExpect(model().attributeExists("objectId", "objectType"));
 //    }
 
 

@@ -1,11 +1,13 @@
 package bg.softuni.fooddelivery.util;
 
+import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
 import bg.softuni.fooddelivery.domain.entities.*;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
 import bg.softuni.fooddelivery.repositories.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,17 +24,21 @@ public class TestDataUtils {
     private ProductRepository productRepository;
     private OrderRepository orderRepository;
 
+    private ModelMapper modelMapper;
+
     @Autowired
     public TestDataUtils(UserRoleRepository userRoleRepository,
                          UserRepository userRepository,
                          ShoppingCartRepository cartRepository,
                          ProductRepository productRepository,
-                         OrderRepository orderRepository) {
+                         OrderRepository orderRepository,
+                         ModelMapper modelMapper) {
         this.userRoleRepository = userRoleRepository;
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
         this.orderRepository = orderRepository;
+        this.modelMapper = modelMapper;
     }
 
     private void initRoles() {
@@ -98,6 +104,43 @@ public class TestDataUtils {
         return userRepository.save(user);
     }
 
+    public UserEntity createTestWorker(String email,
+                                     String username) {
+
+        initRoles();
+
+        UserEntity user = new UserEntity()
+                .setEmail(email)
+                .setUsername(username)
+                .setFirstName("Worker")
+                .setLastName("Workerov")
+                .setPassword("topsecret")
+                .setGender(GenderEnum.FEMALE)
+                .setAge(25)
+                .setCart(createCart())
+                .setOrders(new ArrayList<>())
+                .setPhoneNumber("0789632145")
+                .setRoles(userRoleRepository.
+                        findAll().stream().
+                        filter(r -> r.getRole() != UserRoleEnum.ADMIN).
+                        toList());
+
+        return userRepository.save(user);
+    }
+
+    public OrderDetailViewDto createOrderDetailViewDto(String ownerEmail,String ownerName){
+
+        OrderEntity entity=new OrderEntity()
+                .setOwner(createTestUser(ownerEmail,ownerName))
+                .setPrice(BigDecimal.TEN)
+                .setAddress("orderAddress")
+                .setCreatedOn(LocalDateTime.now())
+                .setContactNumber("orderContactNumber")
+                .setStatus(OrderStatusEnum.IN_PROGRESS);
+
+        return this.modelMapper.map(entity, OrderDetailViewDto.class);
+    }
+
 
     public CartEntity createCart() {
 
@@ -129,13 +172,15 @@ public class TestDataUtils {
         return productRepository.saveAndFlush(product);
     }
 
-    public OrderEntity createOrder() {
+    public OrderEntity createOrder(UserEntity owner) {
 
         OrderEntity order = new OrderEntity()
                 .setPrice(BigDecimal.TEN)
                 .setCreatedOn(LocalDateTime.now())
                 .setAddress("orderAddress")
                 .setContactNumber("0789654466")
+                .setComment("orderComment")
+                .setOwner(owner)
                 .setStatus(OrderStatusEnum.IN_PROGRESS);
 
         return orderRepository.save(order);
@@ -143,11 +188,11 @@ public class TestDataUtils {
 
 
     public void cleanUpDatabase() {
-        userRepository.deleteAll();
-        userRoleRepository.deleteAll();
         orderRepository.deleteAll();
+        userRepository.deleteAll();
         cartRepository.deleteAll();
         productRepository.deleteAll();
+        userRoleRepository.deleteAll();
     }
 
 }

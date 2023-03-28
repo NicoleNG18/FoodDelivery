@@ -1,7 +1,6 @@
 package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
-import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
 import bg.softuni.fooddelivery.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

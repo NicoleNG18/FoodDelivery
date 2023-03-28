@@ -6,7 +6,7 @@ import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
-import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
+import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,7 +112,7 @@ public class OrderService {
     public OrderDetailViewDto getOrderById(Long id) {
 
         OrderEntity order = this.orderRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException(id, ORDER));
+                .orElseThrow(() -> new NotFoundObjectException(id, ORDER));
 
         if (order.getComment().equals("")) {
             order.setComment(NO_COMMENT_MESSAGE);
@@ -133,7 +133,7 @@ public class OrderService {
 
         OrderEntity orderEntity = this.orderRepository
                 .findById(orderId)
-                .orElseThrow(() -> new ObjectNotFoundException(orderId, ORDER));
+                .orElseThrow(() -> new NotFoundObjectException(orderId, ORDER));
 
         orderEntity.setStatus(OrderStatusEnum.DELIVERED);
         orderEntity.setDeliveredOn(LocalDateTime.now());

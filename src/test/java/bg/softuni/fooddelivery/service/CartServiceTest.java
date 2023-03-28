@@ -54,4 +54,5 @@ public class CartServiceTest {
         Assertions.assertEquals(0, newCart.getProducts().size());
         Assertions.assertEquals(BigDecimal.ZERO, newCart.getProductsSum());
     }
+
 }

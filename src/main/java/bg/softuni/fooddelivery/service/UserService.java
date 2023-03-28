@@ -1,26 +1,20 @@
 package bg.softuni.fooddelivery.service;
 
-import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.EditUserBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.UserRegistrationBindingDto;
 import bg.softuni.fooddelivery.domain.dto.view.UserViewDto;
 import bg.softuni.fooddelivery.domain.entities.CartEntity;
-import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.entities.UserRoleEntity;
 import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
-import bg.softuni.fooddelivery.exception.ObjectNotFoundException;
+import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -82,7 +76,7 @@ public class UserService {
     public UserViewDto getUserById(Long id) {
         final UserEntity userById = this.userRepository
                 .findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException(id, USER));
+                .orElseThrow(() -> new NotFoundObjectException(id, USER));
 
         return this.mapToUserView(userById);
     }
