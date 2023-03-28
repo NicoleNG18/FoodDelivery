@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head>
     <title>Profile</title>
@@ -24,7 +25,7 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                          alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
                     <h5 th:text="|*{firstName} *{lastName}|">name</h5>
-                        <a class="edit-button-a text-center text-secondary" type="submit" style="text-decoration: none; "
+                        <a sec:authorize="!hasAuthority('ROLE_ADMIN')" class="edit-button-a text-center text-secondary" type="submit" style="text-decoration: none; "
                            th:href="@{/users/edit/{id}(id=${user.id})}"
                         >Edit</a>
                 </div>

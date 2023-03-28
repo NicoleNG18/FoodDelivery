@@ -1,8 +1,12 @@
 package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
+import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
+import bg.softuni.fooddelivery.domain.enums.UserRoleEnum;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
+import bg.softuni.fooddelivery.util.TestDataUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,33 +31,21 @@ public class ProductControllerIT {
     private MockMvc mockMvc;
 
     @Autowired
-    private ProductRepository mockProductRepository;
+    private TestDataUtils testDataUtils;
+
+    private ProductEntity pizza1, pizza2, pizza3;
 
     @BeforeEach
     void setUp() {
-        ProductEntity testProduct1 = new ProductEntity()
-                .setPrice(BigDecimal.valueOf(11.00))
-                .setCategory(ProductCategoryEnum.pizza)
-                .setDescription("descriptionnnnnn1")
-                .setName("pizza test1");
-
-        ProductEntity testProduct2 = new ProductEntity()
-                .setPrice(BigDecimal.valueOf(12.00))
-                .setCategory(ProductCategoryEnum.pizza)
-                .setDescription("descriptionnnnnn2")
-                .setName("pizza test2");
-
-        ProductEntity testProduct3 = new ProductEntity()
-                .setPrice(BigDecimal.valueOf(13.00))
-                .setCategory(ProductCategoryEnum.pizza)
-                .setDescription("descriptionnnnnn3")
-                .setName("pizza test3");
-
-        mockProductRepository.saveAndFlush(testProduct1);
-        mockProductRepository.saveAndFlush(testProduct2);
-        mockProductRepository.saveAndFlush(testProduct3);
+        pizza1 = testDataUtils.createProductPizza("pizza1");
+        pizza2 = testDataUtils.createProductPizza("pizza2");
+        pizza3 = testDataUtils.createProductPizza("pizza3");
     }
 
+    @AfterEach
+    void tearDown(){
+        testDataUtils.cleanUpDatabase();
+    }
 
     @Test
     void testGetMenuShowsUp() throws Exception {
@@ -63,7 +55,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testGetAddProductWorksCorrectly() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/products/add"))
                 .andExpect(status().isOk())
@@ -86,7 +78,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testAddProductCorrectly() throws Exception {
 
         mockMvc.perform(post("/products/add")
@@ -101,7 +93,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testAddProductWithInvalidData() throws Exception {
 
         mockMvc.perform(post("/products/add")
@@ -116,17 +108,17 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testGetEditProductShowsUp() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/{id}", pizza1.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("edit-product"))
                 .andExpect(model().attributeExists("product"));
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "ADMIN", "WORKER"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testGetEditProductThrowsException() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/28"))
@@ -136,14 +128,12 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"ADMIN", "WORKER", "USER"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testDeleteProductWorksCorrectly() throws Exception {
 
-        String deletedProductId = String.valueOf(3);
-
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/products/delete/{id}", deletedProductId)
-                        .param("id", deletedProductId)
+                        .delete("/products/delete/{id}", pizza2.getId())
+                        .param("id", pizza2.getId().toString())
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/menu/pizza"));
@@ -151,11 +141,10 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "WORKER", "ADMIN"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testUpdateProductWorksCorrectly() throws Exception {
-        String deletedProductId = String.valueOf(1);
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedProductId)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", pizza3.getId())
                         .with(csrf())
                         .param("description", "new descriptionnn")
                         .param("price", "600"))
@@ -165,16 +154,15 @@ public class ProductControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"USER", "WORKER", "ADMIN"})
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void testUpdateProductWithInvalidData() throws Exception {
-        String deletedProductId = String.valueOf(1);
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", deletedProductId)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/products/edited/{id}", pizza3.getId())
                         .with(csrf())
                         .param("description", "dddddd")
                         .param("price", "-600"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/products/edit/" + deletedProductId));
+                .andExpect(redirectedUrl("/products/edit/" + pizza3.getId().toString()));
 
     }
 

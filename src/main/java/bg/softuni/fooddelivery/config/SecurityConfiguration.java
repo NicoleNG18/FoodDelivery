@@ -42,7 +42,9 @@ public class SecurityConfiguration {
                 .requestMatchers( "/cart/**","/orders/**").hasRole(UserRoleEnum.USER.name())
 //                TODO:PERMIT LOGIN FOR AUTHENTICATED USER
                 //for workers and admin
-                .requestMatchers("/orders/all/history").hasAnyRole(UserRoleEnum.WORKER.name(), UserRoleEnum.ADMIN.name())
+                .requestMatchers("/orders/all/history").hasAnyRole(UserRoleEnum.WORKER.name(),
+                        UserRoleEnum.ADMIN.name())
+                .requestMatchers("/products/**").hasAnyRole(UserRoleEnum.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()

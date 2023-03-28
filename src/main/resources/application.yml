@@ -16,7 +16,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: ${DB_DEF_PASS}
     url: jdbc:mysql://localhost:3306/food_delivery?createDatabaseIfNotExist=true
-    username: root
+    username: ${DB_DEF_USERNAME}
   jpa:
     hibernate:
       ddl-auto: update

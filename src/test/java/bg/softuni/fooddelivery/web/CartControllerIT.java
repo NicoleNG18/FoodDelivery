@@ -61,8 +61,8 @@ public class CartControllerIT {
     @WithMockUser(username = "user1", roles = "USER")
     void testAddingProductToCart_WorksCorrectly() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/cart/add/6").with(csrf())
-                        .param("id", "6"))
+        mockMvc.perform(MockMvcRequestBuilders.patch("/cart/add/{id}", pizzaOne.getId())
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/menu/pizza"));
 
@@ -72,13 +72,10 @@ public class CartControllerIT {
     @WithMockUser(username = "user1", roles = "USER")
     void testRemoveFromCart_WorksCorrectly() throws Exception {
 
-        String deletedProductId = String.valueOf(1);
-
-        mockMvc.perform(patch("/cart/remove/{id}", deletedProductId)
-                        .param("id", deletedProductId).with(csrf()))
+        mockMvc.perform(patch("/cart/remove/{id}", burgerOne.getId())
+                        .param("id", burgerOne.getId().toString()).with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/cart"));
-
 
     }
 
