@@ -108,10 +108,10 @@ public class UserController {
     }
 
     @PatchMapping("/edited/{id}")
-    public String editedProduct(@PathVariable("id") Long id,
-                                @Valid EditUserBindingDto editedUser,
-                                BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes) {
+    public String editedUser(@PathVariable("id") Long id,
+                             @Valid EditUserBindingDto editedUser,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
 
