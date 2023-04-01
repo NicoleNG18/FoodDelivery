@@ -21,7 +21,7 @@ public class DatabaseInitializationService {
     private final PasswordEncoder passwordEncoder;
 
     private final CartService cartService;
-    private final String defaultPass = "${USERS_DEF_PASS}";
+//    private final String defaultPass = "${USERS_DEF_PASS}";
 
     private final UserRepository userRepository;
 
@@ -51,7 +51,7 @@ public class DatabaseInitializationService {
                     .setLastName("Georgieva")
                     .setAge(25)
                     .setEmail("nikol@user.com")
-                    .setPassword(passwordEncoder.encode(defaultPass))
+                    .setPassword(passwordEncoder.encode("topsecret"))
                     .setGender(GenderEnum.MALE)
                     .setUsername("nikol")
                     .setPhoneNumber("0515051504")
@@ -66,7 +66,7 @@ public class DatabaseInitializationService {
                     .setLastName("Ivanov")
                     .setAge(25)
                     .setEmail("ivan@user.com")
-                    .setPassword(passwordEncoder.encode(defaultPass))
+                    .setPassword(passwordEncoder.encode("topsecret"))
                     .setGender(GenderEnum.MALE)
                     .setUsername("ivan")
                     .setPhoneNumber("0515051504")
@@ -102,7 +102,7 @@ public class DatabaseInitializationService {
                     .setLastName("Adminov")
                     .setAge(25)
                     .setEmail("admin@admin.com")
-                    .setPassword(passwordEncoder.encode(defaultPass))
+                    .setPassword(passwordEncoder.encode("topsecret"))
                     .setGender(GenderEnum.MALE)
                     .setUsername("admin")
                     .setPhoneNumber("0515051501")
@@ -121,7 +121,7 @@ public class DatabaseInitializationService {
                     .setLastName("One")
                     .setAge(25)
                     .setEmail("worker@one.com")
-                    .setPassword(passwordEncoder.encode(defaultPass))
+                    .setPassword(passwordEncoder.encode("topsecret"))
                     .setGender(GenderEnum.MALE)
                     .setUsername("workerOne")
                     .setPhoneNumber("0515051502")
@@ -136,7 +136,7 @@ public class DatabaseInitializationService {
                     .setLastName("Two")
                     .setAge(25)
                     .setEmail("worker@two.com")
-                    .setPassword(passwordEncoder.encode(defaultPass))
+                    .setPassword(passwordEncoder.encode("topsecret"))
                     .setGender(GenderEnum.MALE)
                     .setUsername("workerTwo")
                     .setPhoneNumber("0515051503")

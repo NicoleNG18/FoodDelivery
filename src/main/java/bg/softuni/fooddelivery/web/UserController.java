@@ -50,7 +50,6 @@ public class UserController {
     public String getProfile(Model model,
                              Principal principal) {
 
-
         model.addAttribute("user", this.userService.getUserViewByUsername(principal.getName()));
 
         return "user-profile";
@@ -77,6 +76,7 @@ public class UserController {
         model.addAttribute("user", this.userService.getUserById(id));
 
         return "roles-change";
+
     }
 
     @PatchMapping("/roles/remove/{id}")

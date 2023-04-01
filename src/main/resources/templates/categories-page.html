@@ -14,13 +14,13 @@
 </div>
 
 <div>
-  <h1 th:text="${#strings.capitalize(category)}" class="category-heading text-center text-white"></h1>
+  <h1 th:text="${#strings.capitalize(category)}" class="category-heading text-center" style="color:#2c504a"></h1>
 </div>
 
 
 <table id="dtBasicExample" class="products-table">
   <tbody>
-  <tr  class="row mb-2 mt-2" th:each="product : ${products}">
+  <tr  class="row mb-2 mt-2 text-white" th:each="product : ${products}">
     <td th:text="*{product.name}" style="font-weight: bold">Tiger Nixon</td>
     <td th:text="|*{product.price} &euro;|"></td>
     <td th:text="|*{product.description}|">Edinburgh</td>
@@ -28,7 +28,7 @@
       <form th:method="PATCH"
             th:action="@{/cart/add/{id}(id=${product.id})}"
             th:object="${product}">
-        <button class="order-button text-center text-decoration-none" type="submit" style="border-color: white"
+        <button class="order-button text-center text-decoration-none" type="submit"
         >Add to cart</button>
       </form>
     </td>

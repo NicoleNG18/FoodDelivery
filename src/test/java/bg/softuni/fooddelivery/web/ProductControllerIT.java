@@ -101,6 +101,8 @@ public class ProductControllerIT {
 
     }
 
+    //TODO: TEST WITH OTHER FIELD INVALID DATA
+
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
     void testGetEditProductShowsUp() throws Exception {

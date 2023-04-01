@@ -19,7 +19,7 @@ public class DailySalesScheduler {
     }
 
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 47 20 * * *")
     public void changePromotions() {
 
         final DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();

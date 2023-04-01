@@ -4,12 +4,10 @@
 }
 
 body {
-    /* background-image: url('download\ \(1\).jfif');  */
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size:cover;
-    background-color: rgb(234, 153, 153);
     margin-top: 70px;
 }
 
@@ -17,8 +15,8 @@ body {
     margin-left: 25px;
     margin-right: 25px;
 }
-.main-form{
-    background-color: #d54b43;
+.main-form-login{
+    background-color: #49857b;
     border-radius: 25px;
     width:74%;
     height: 77%;
@@ -48,13 +46,13 @@ body {
     size: 150px;
     color: aqua;
 }
-.btn{
+.btn-login{
     background-color: white;
-    color:#424242;
+    color:#2c504a;
 }
 
-.btn:hover{
-    background-color:darkred;
+.btn-login:hover{
+    background-color:#2c504a;
     color:white;
     transition: all 2000ms ease
 }

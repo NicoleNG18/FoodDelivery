@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductController {
 
     private final ProductService productService;
+
     @Autowired
     public ProductController(ProductService menuService) {
         this.productService = menuService;
@@ -96,10 +97,10 @@ public class ProductController {
 
 
     @PatchMapping("/products/edited/{id}")
-    public String editedProduct(@PathVariable("id") Long productId,
-                                @Valid EditProductBindingDto editedProductDto,
+    public String editedProduct(@Valid EditProductBindingDto editedProductDto,
                                 BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes) {
+                                RedirectAttributes redirectAttributes,
+                                @PathVariable("id") Long productId) {
 
         if (bindingResult.hasErrors()) {
 
