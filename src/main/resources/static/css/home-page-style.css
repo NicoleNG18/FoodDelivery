@@ -1,43 +1,4 @@
-body{
-    background-color: rgb(234, 153, 153);
-
-}
-
-.sale-image{
-    margin-top: 65px;
-    margin-left: 150px;
-    width: 50%;
-    margin-bottom: 70px;
-    filter: drop-shadow(0px 10px 3px rgb(175, 37, 37));
-    border-radius: 15px;
-}
-.order-now{
-    background-color: rgb(175, 37, 37);
-    border-radius: 25px;
-    border-color: rgb(175, 37, 37);
-    margin-left: 0;
-    margin-right: auto;
-    width: 50%;
-    height:25%;
-    margin-top: 150px;
-    font-size: 28px;
-    color: white;
-    filter: drop-shadow(0px 10px 3px rgb(205, 113, 113));
-}
-
-.order-now:hover{
-    background-color:rgb(217, 215, 215);
-    border-color: rgb(175, 37, 37);
-    color: black;
-    filter: drop-shadow(0px 10px 3px rgb(205, 113, 113));
-    transition: all 2000ms ease
-}
-
-
-.button{
-    margin-top: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+body {
+    background-color: #eaddc6;
 }
 

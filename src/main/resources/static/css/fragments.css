@@ -1,71 +1,80 @@
-nav .navbar-brand{
+nav .navbar-brand {
     margin-left: 30px;
     width: 10%;
 }
 
-nav .pizza-logo{
+nav .pizza-logo {
     width: 50%;
-    height:80%;
+    height: 80%;
 }
 
 
 nav .nav-link {
     margin-top: 0;
     height: 40px;
+    color: #2c504a;
+    font-weight: bolder;
     padding-bottom: 24px;
-    width:100%;
-    color:white;
+    width: 100%;
 }
-nav .nav-link:hover{
-    color:white;
-    background-color: rgb(234, 153, 153);
-    opacity: 0.8;
+
+nav .nav-link:hover {
+    color: #f1eee9;
+    background-color: #49857b;
     border-radius: 25px;
 }
 
-nav .nav-link:focus{
+nav .nav-link:focus {
+    color: #f1eee9;
+    background-color: #49857b;
+}
+
+nav .dropdown-menu {
+    background-color: #49857b;
+}
+
+nav .dropdown-item {
     color: white;
+    font-weight: bold;
+    border-radius: 25px;
 }
 
-nav .dropdown-menu{
-    background-color:#d54b43;
-}
-
-nav .dropdown-item:hover{
-    color:white;
-    background-color: rgb(234, 153, 153);
+nav .dropdown-item:hover {
+    color: #2c504a;
+    background-color: white;
     opacity: 0.8;
     border-radius: 25px;
 }
 
-nav .nav-item{
+nav .nav-item {
     font-weight: 450;
-    font-size:17px;
+    font-size: 17px;
     display: inline-block;
     flex: 1;
     text-align: center;
 }
 
-nav .collapse{
+nav .collapse {
     margin-right: 0;
 }
 
 nav .navbar-nav {
-    margin-left:0;
+    margin-left: 0;
     text-align: center;
     font-size: 70px;
     width: 100%;
     display: flex;
 }
 
-nav{
+nav {
     height: 60px;
-    background-color: #d54b43;
+    background-color: #e1d7cd;
 }
 
 footer {
     width: 80%;
-    position:fixed;
+    color: #3a6661;
+    position: fixed;
     text-align: center;
     font-weight: 500;
     font-size: 18px;

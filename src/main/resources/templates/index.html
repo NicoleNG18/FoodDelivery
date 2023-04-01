@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <title>Home</title>
-  <th:block th:insert="~{/fragments/head}"></th:block>
+    <title>Home</title>
+    <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
 <body>
 
 <div>
-  <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
-<div class="sale mt-3">
+<div class="col-5 float-start">
+    <img alt="pizza delivery image" src="/images/pizzaDelivery.png" class="delivery-image">
+</div>
 
-  <div class="row p-1">
-
-    <div class="col-md-8 float-start">
-      <img class="sale-image" alt="sale image" src="/images/bannerSale.jpg" />
-    </div>
-
-    <div class="button col-md-4 float-end justify-content-center">
-      <button type="button" class="order-now justify-content-center">Order now</button>
-    </div>
-
-  </div>
+<div class="col-5 float-end"
+     style="margin-top: 200px;
+text-align: center;
+padding: 10px;
+background-color: #49857b;
+margin-right: 110px;
+margin-left: 0;
+border-radius: 25px;
+color: white">
+    <h3 sec:authorize="isAuthenticated() && hasAuthority('ROLE_USER') && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
+        Hello, <span th:text="${name}"></span>! Welcome to our restaurant. If you want to eat delicious food, look at
+        the menu and make order. </h3>
+    <h3 sec:authorize="isAuthenticated() && hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">Hello, <span
+            th:text="${name}"></span>! Welcome to our restaurant. It's time for work. </h3>
+    <h3 sec:authorize="!isAuthenticated()">Hello, Anonymous! Welcome to our restaurant. If you want to eat delicious
+        food, make registration or login, look at the menu and make order. </h3>
 
 </div>
 

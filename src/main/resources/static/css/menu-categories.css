@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(246, 241, 241);
+    background-color: #eaddc6;
 }
 
 .container{
@@ -23,14 +23,15 @@ body {
 }
 
 .navigate-to:hover{
-    background-color:darkred;
+    background-color:#3a6661;
     color:white;
     transition: all 2000ms ease
 }
 
 
 .card{
-    background-color: #eea9a8;
+    /*background-color: #eea9a8;*/
+    background-color: #49857b;
     width:70%;
     margin-left: 50px;
     margin-right: 50px;
@@ -40,7 +41,8 @@ body {
 }
 
 .card-dessert{
-    background-color:#d54b43;
+    /*background-color:#d54b43;*/
+    background-color: #eaddc6;
 }
 
 .row{

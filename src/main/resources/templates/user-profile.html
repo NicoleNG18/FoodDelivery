@@ -21,11 +21,11 @@
                 <div class="col-md-4 text-center"
                      style="border-top-left-radius: .5rem;
                      border-bottom-left-radius: .5rem;
-                     background-color: rgba(253, 160, 133, 1);">
+                     background-color:#80aaa3">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                          alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
                     <h5 th:text="|*{firstName} *{lastName}|">name</h5>
-                        <a sec:authorize="!hasAuthority('ROLE_ADMIN')" class="edit-button-a text-center text-secondary" type="submit" style="text-decoration: none; "
+                        <a sec:authorize="!hasAuthority('ROLE_ADMIN')" class="edit-button-a text-center" type="submit" style="text-decoration: none; "
                            th:href="@{/users/edit/{id}(id=${user.id})}"
                         >Edit</a>
                 </div>
