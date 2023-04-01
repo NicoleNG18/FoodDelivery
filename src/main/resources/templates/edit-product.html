@@ -13,7 +13,7 @@
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
-<form style="background-color: #d54b43; margin-left: 250px; margin-right: 250px; margin-top: 220px; border-radius: 25px"
+<form style="background-color: #3a6661; color: white; margin-left: 250px; margin-right: 250px; margin-top: 220px; border-radius: 25px"
 th:method="patch" th:object="${product}" th:action="@{/products/edited/{id}(id=${product.id})}">
     <h3 class="text-white text-center">Edit product</h3>
     <div class="form-group row">

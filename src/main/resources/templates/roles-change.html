@@ -16,27 +16,27 @@
 <div class="container mt-2">
   <div class="row">
     <div class="col-12">
-      <table class="table table-bordered">
+      <table class="table table-bordered border-dark">
         <thead>
-        <tr>
+        <tr style="background-color: #3a6661; color: white">
           <th scope="col" class="text-center">Roles</th>
           <th scope="col" class="text-center">Manage</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="role: ${T(bg.softuni.fooddelivery.domain.enums.UserRoleEnum).values()}" th:object="${role}">
-          <th scope="row" th:text="${role.name()}" class="text-center">1</th>
-          <td style="text-align: center;" th:if="${#strings.equals(role.name(),'USER')}">
+          <th scope="row" th:text="${role.name()}" class="text-center" style="background-color: #f4f1ed">1</th>
+          <td style="background-color: #f4f1ed; font-weight:bold; text-align: center" th:if="${#strings.equals(role.name(),'USER')}">
             Not manageable
           </td>
-          <td style="text-align: center;" th:if="${#strings.equals(role.name(),'ADMIN')}">
+          <td style="background-color: #f4f1ed; font-weight: bold; text-align: center;" th:if="${#strings.equals(role.name(),'ADMIN')}">
             Cannot be admin
           </td>
-          <td style="text-align: center;" th:if="${#strings.equals(role.name(),'WORKER')}">
+          <td style="background-color: #f4f1ed; text-align: center;" th:if="${#strings.equals(role.name(),'WORKER')}">
             <form th:method="PATCH"
                   th:action="@{/users/roles/add/{id}(id=${user.id})}"
                   th:object="${user}">
-            <button class="button-detail" type="submit" style="border-color: white" th:unless="${user.hasRoleWorker()}"
+            <button class="button-detail" type="submit" style="border-color: white;  background-color: #49857b;" th:unless="${user.hasRoleWorker()}"
             >Add role</button>
             </form>
 

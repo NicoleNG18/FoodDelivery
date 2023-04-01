@@ -55,3 +55,9 @@ body {
     color: white;
     transition: all 2000ms ease;
 }
+
+.button-detail-all:hover{
+    background-color: #2c504a;
+    color: white;
+
+}
