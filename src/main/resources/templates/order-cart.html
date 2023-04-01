@@ -13,53 +13,54 @@
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 <div class="row">
-<div class="container-cart rounded">
-            <h3 class="cartHeader text-white text-center mb-3">Cart</h3>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-<!--            <div class="bg-dark rounded" style="height: 68.5vh; overflow: auto; width:70%; margin-left: auto; margin-right: auto;">-->
-                <table class="table table-cart table-striped table-dark" style="height: 68.5vh; overflow: auto; width:70%; margin-left: auto; margin-right: auto;">
-                    <tr th:each="food:${cartProducts}" th:object="${food}">
-                        <td class="bg-info product-name" th:text="*{name}">Name</td>
-                        <td class="bg-primary description" th:text="*{description}">{numberOfLikes) likes</td>
-                        <td th:text="*{price}" class="price text-center bg-info">{content}</td>
-                        <td class="text-center bg-primary">
+    <div class="container-cart rounded">
+        <h3 class="text-center mb-3" style="color: #2c504a">Cart</h3>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-cart text-center text-white" style="height: 68.5vh;
+                overflow: auto; width:70%; margin-left: auto; margin-right: auto; border-top-left-radius:25px; border-top-right-radius: 25px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background-color: #49857b">
+                <tr th:each="food:${cartProducts}" th:object="${food}">
+                    <td class="product-name" th:text="*{name}">Name</td>
+                    <td class="description" th:text="*{description}">{numberOfLikes) likes</td>
+                    <td th:text="*{price}" class="price text-center">{content}</td>
+                    <td class="text-center justify-content-center">
 
-                            <form th:method="PATCH"
-                                  th:action="@{/cart/remove/{id}(id = *{id})}"
-                                  th:object="${food}">
-                                <button class="remove-button justify-content-center" type="submit" style="border-color: white"
-                                >Remove</button>
-                            </form>
-
-<!--                            <a class="remove-button justify-content-center" th:href="@{/cart/remove/{id}(id = *{id})}">Remove</a>-->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="text-align: end;">
-                            Total:
-                        </td>
-                        <td style=" text-align: center" th:text="${productsPrice}">
-                        </td>
-                        <td></td>
-                    </tr>
-<!--                    <tr>-->
-<!--                        <td style="width: 100%"><a class="finalize-button text-end text-decoration-none"-->
-<!--                               th:href="@{/order}"-->
-<!--                        >Finalize order</a></td>-->
-<!--                    </tr>-->
-                </table>
-    </div>
-                <div class="mt-2" style="margin-right: 0; margin-left: 950px;">
-                    <a class="finalize-order justify-content-center" th:if="${cartProducts.size()!=0}" th:href="@{/orders/finalize}">Finalize order</a>
-                </div>
-
-<!--            </div>-->
+                        <form th:method="PATCH"
+                              th:action="@{/cart/remove/{id}(id = *{id})}"
+                              th:object="${food}">
+                            <button class="remove-button justify-content-center" type="submit"
+                                    style="border-color: white"
+                            >Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align: end; color: white">
+                        Total:
+                    </td>
+                    <td style=" text-align: center; color: white" th:text="${productsPrice}">
+                    </td>
+                    <td></td>
+                </tr>
+                <!--                    <tr>-->
+                <!--                        <td style="width: 100%"><a class="finalize-button text-end text-decoration-none"-->
+                <!--                               th:href="@{/order}"-->
+                <!--                        >Finalize order</a></td>-->
+                <!--                    </tr>-->
+            </table>
         </div>
+        <div class="mt-2" style="margin-right: 0; margin-left: 950px;">
+            <a class="finalize-order justify-content-center" th:if="${cartProducts.size()!=0}"
+               th:href="@{/orders/finalize}">Finalize order</a>
+        </div>
+
+        <!--            </div>-->
+    </div>
 </div>
 
 <div class="row">
-<th:block th:insert="~{fragments/footer}"></th:block>
+    <th:block th:insert="~{fragments/footer}"></th:block>
 </div>
 
 

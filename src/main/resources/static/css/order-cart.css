@@ -1,5 +1,4 @@
 body {
-    /*background-color: rgb(234, 153, 153);*/
     background-color: white;
 }
 
@@ -8,7 +7,7 @@ body {
     border-style: none;
     text-decoration: none;
     background-color: white;
-    color: #424242;
+    color: #2c504a;
     display: flex;
 }
 
@@ -21,7 +20,7 @@ body {
 }
 
 .remove-button:hover {
-    background-color: darkred;
+    background-color: #2c504a;
     color: white;
     transition: all 2000ms ease;
 }
@@ -44,15 +43,15 @@ body {
     margin-right: 200px;
     border-radius: 25px;
     border-style: none;
-    background-color: white;
-    color: #424242;
+    background-color: #49857b;
+    color: white;
     text-decoration: none;
     display: flex;
     width: 50%;
 }
 
 .finalize-order:hover {
-    background-color: darkred;
+    background-color: #2c504a;
     color: white;
     transition: all 2000ms ease;
 }
