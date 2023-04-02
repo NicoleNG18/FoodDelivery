@@ -100,6 +100,16 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<OrderDetailViewDto> getInProgressOrdersByUser(UserEntity userEntity) {
+
+        return this.orderRepository
+                .findAllByStatusAndOwner_Id(OrderStatusEnum.IN_PROGRESS,userEntity.getId())
+                .stream()
+                .map(this::mapToOrderViewDto)
+                .collect(Collectors.toList());
+    }
+
     private OrderDetailViewDto mapToOrderViewDto(OrderEntity orderEntity) {
 
         OrderDetailViewDto orderDetail = this.modelMapper.map(orderEntity, OrderDetailViewDto.class);

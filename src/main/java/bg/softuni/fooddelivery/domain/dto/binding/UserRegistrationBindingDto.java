@@ -4,6 +4,7 @@ import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import bg.softuni.fooddelivery.validation.FieldMatch;
 import bg.softuni.fooddelivery.validation.UniqueUserEmail;
 import bg.softuni.fooddelivery.validation.UniqueUsername;
+import bg.softuni.fooddelivery.validation.ValidPhoneNumber;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -38,7 +39,8 @@ public class UserRegistrationBindingDto {
     @NotNull(message = AGE_PROVIDED)
     private Integer age;
 
-    @NotEmpty(message = PHONE_NUMBER_PROVIDED)
+//    @NotEmpty(message = PHONE_NUMBER_PROVIDED)
+    @ValidPhoneNumber
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)

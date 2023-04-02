@@ -1,5 +1,7 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
+import bg.softuni.fooddelivery.validation.ValidPhoneNumber;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
 import static bg.softuni.fooddelivery.constants.ErrorMessages.ADDRESS_REQUIRED;
@@ -10,8 +12,10 @@ public class OrderBindingDto {
     private String comment;
     @NotEmpty(message = ADDRESS_REQUIRED)
     private String address;
-    @NotEmpty(message = CONTACT_NUMBER_REQUIRED)
+    //    @NotEmpty(message = CONTACT_NUMBER_REQUIRED)
+    @ValidPhoneNumber
     private String contactNumber;
+
 
     public OrderBindingDto() {
     }

@@ -62,7 +62,6 @@ public class OrderController {
         return "redirect:/";
     }
 
-
     @GetMapping("/history")
     public String getOrdersHistory(Model model,
                                    Principal principal) {

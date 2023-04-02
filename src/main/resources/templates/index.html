@@ -26,9 +26,34 @@ margin-right: 110px;
 margin-left: 0;
 border-radius: 25px;
 color: white">
-    <h3 sec:authorize="isAuthenticated() && hasAuthority('ROLE_USER') && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
-        Hello, <span th:text="${name}"></span>! Welcome to our restaurant. If you want to eat delicious food, look at
-        the menu and make order. </h3>
+    <div sec:authorize="isAuthenticated() && hasAuthority('ROLE_USER') && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
+        <h3>Hello, <span th:text="${name}"></span>!</h3>
+        <h3 th:if="${orders.size()==0}">You don't have active orders. Look at the menu and make one.</h3>
+        <table th:if="${orders.size()!=0}" class="table table-bordered" style="width: 60%; margin-left:auto; margin-right: auto;">
+            <thead>
+            <tr style="background-color: #3a6661; color: white">
+                <th scope="col" class="text-center">Id</th>
+                <th scope="col" class="text-center">Price</th>
+                <th scope="col" class="text-center">Created on</th>
+                <th scope="col" class="text-center">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order: ${orders}" th:object="${order}">
+                <th scope="row" th:text="*{id}" class="text-center" style="background-color: #93b5b1">1</th>
+                <td th:text="*{price}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+                <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+                <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+
+            </tr>
+
+
+            </tbody>
+        </table>
+
+        <!--            Hello, <span th:text="${name}"></span>! Welcome to our restaurant. If you want to eat delicious food, look at-->
+<!--            the menu and make order. </h3>-->
+    </div>
     <h3 sec:authorize="isAuthenticated() && hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">Hello, <span
             th:text="${name}"></span>! Welcome to our restaurant. It's time for work. </h3>
     <h3 sec:authorize="!isAuthenticated()">Hello, Anonymous! Welcome to our restaurant. If you want to eat delicious

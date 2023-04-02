@@ -9,7 +9,7 @@ public class ValidPhoneNumberValidator implements ConstraintValidator<ValidPhone
     public boolean isValid(String number,
                            ConstraintValidatorContext context) {
 
-        if(number.length()<10){
+        if(number.length()!=10){
             return false;
         }
 

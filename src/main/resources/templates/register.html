@@ -114,7 +114,7 @@
                th:errorclass="is-invalid"
                class="form-control"
                id="phoneNumber"
-               placeholder="Phone number">
+               placeholder="Ex: 0877777777">
         <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('phoneNumber')}"
              th:text="${err}"/>
       </div>

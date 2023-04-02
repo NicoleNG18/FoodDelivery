@@ -16,7 +16,7 @@
 <h3 class="text-center" style="margin-top: 35px; color: #2c504a">Finalize order</h3>
 
 
-<div class="row" style="margin-top: 40px; background-color: #3a6661; border-radius: 25px; margin-bottom: 80px;">
+<div class="row" style="margin-top: 40px; background-color: #49857b; border-radius: 25px; margin-bottom: 80px;">
     <div class="col-md-8">
     <form th:method="POST"
           th:action="@{/orders/finalize}"
@@ -36,7 +36,7 @@
             <input type="text" class="form-control"
                    th:field="*{contactNumber}"
                    th:errorclass="is-invalid"
-                   id="numberContact" placeholder="Phone number">
+                   id="numberContact" placeholder="Ex: 0877777777">
             <div class="invalid-feedback errors-register alert-danger"
                  th:each="err :${#fields.errors('contactNumber')}"
                  th:text="${err}"/>

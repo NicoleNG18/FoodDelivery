@@ -14,15 +14,16 @@
 </div>
 
 
-<h2 class="text-center text-white">All orders</h2>
+<h2 class="text-center" style="color: #2c504a">All orders</h2>
 
 <div class="container mt-2">
   <div class="row">
     <div class="col-12">
       <table class="table table-bordered">
         <thead>
-        <tr>
+        <tr  style="background-color: #3a6661; color: white">
           <th scope="col" class="text-center">Id</th>
+          <th scope="col" class="text-center">Owner</th>
           <th scope="col" class="text-center">Price</th>
           <th scope="col" class="text-center">Created on</th>
           <th scope="col" class="text-center">Delivered on</th>
@@ -33,23 +34,24 @@
         </thead>
         <tbody>
         <tr th:each="order: ${allOrders}" th:object="${order}">
-          <th scope="row" th:text="*{id}" class="text-center">1</th>
-          <td th:text="*{price}" class="text-center">0.00</td>
-          <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center">01-01-2010</td>
-          <td th:text="*{#temporals.format(deliveredOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center">01-01-2010</td>
-          <td th:text="*{status.name()}" class="text-center">Delivered</td>
-          <td style="text-align: center;" sec:authorize="hasAuthority('ROLE_WORKER')">
+          <th scope="row" th:text="*{id}" class="text-center" style="background-color: #93b5b1">1</th>
+          <td th:text="*{client}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+          <td th:text="*{price}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+          <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
+          <td th:text="*{#temporals.format(deliveredOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
+          <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">Delivered</td>
+          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAuthority('ROLE_WORKER')" >
             <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
                     th:method="PATCH"
                   th:action="@{/orders/finish/{id}(id=${order.id})}"
                   th:object="${order}">
-              <button class="button-detail" type="submit" style="border-color: white"
+              <button class="button-detail" type="submit" style="width:100%; border-color: white; background-color: #49857b;"
               >Finish order</button>
             </form>
           </td>
 
-          <td style="text-align: center;">
-            <a type="button" class="button-detail" th:href="@{/orders/details/{id}(id=${order.id})}">Details</a>
+          <td style="text-align: center; background-color: #f4f1ed">
+            <a type="button" class="button-detail" th:href="@{/orders/details/{id}(id=${order.id})}" style="background-color: #49857b">Details</a>
           </td>
         </tr>
         </tbody>

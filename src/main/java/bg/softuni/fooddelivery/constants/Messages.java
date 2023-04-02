@@ -11,6 +11,7 @@ public enum Messages {
     public static final String NO_COMMENT = "no comment";
     public static final String FIELDS_MATCH = "Fields should match";
     public static final String INVALID_USERNAME = "Invalid username";
+    public static final String INVALID_CONTACT_NUMBER = "Invalid contact number";
 
     public static final String NO_COMMENT_MESSAGE="There is no comment on this order";
     public static final String ORDER="Order";
