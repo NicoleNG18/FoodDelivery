@@ -13,7 +13,7 @@ import static bg.softuni.fooddelivery.constants.ErrorMessages.USERNAME_MINIMUM;
 public class EditUserBindingDto {
 
     @Size(min=1)
-    @UniqueUsername(message = UNIQUE_USERNAME)
+//    @UniqueUsername(message = UNIQUE_USERNAME)
     private String username;
     public EditUserBindingDto() {
     }

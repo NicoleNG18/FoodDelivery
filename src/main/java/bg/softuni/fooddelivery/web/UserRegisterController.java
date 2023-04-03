@@ -22,7 +22,7 @@ public class UserRegisterController {
     }
 
     @ModelAttribute("registerDto")
-    public UserRegistrationBindingDto initBindingDto() {
+    public UserRegistrationBindingDto initRegisterDto() {
         return new UserRegistrationBindingDto();
     }
 

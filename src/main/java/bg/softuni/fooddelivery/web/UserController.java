@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @ModelAttribute("editedUser")
-    public EditUserBindingDto initBindingDto() {
+    public EditUserBindingDto initEditUserDto() {
         return new EditUserBindingDto();
     }
 
