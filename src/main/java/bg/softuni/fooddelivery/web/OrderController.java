@@ -37,6 +37,7 @@ public class OrderController {
 
         model.addAttribute("foodPrice", this.orderService.getProductsPrice(principal));
         model.addAttribute("countBoxes", this.orderService.getProducts(principal).size());
+        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
 
         return "finalize-order";
     }
@@ -67,16 +68,18 @@ public class OrderController {
                                    Principal principal) {
 
         model.addAttribute("orders", this.orderService.getOrdersByUser(principal));
+        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
 
         return "orders-history-user";
     }
 
     @GetMapping("/details/{id}")
     public String orderDetails(@PathVariable("id") Long id,
-                               Model model) {
+                               Model model,Principal principal) {
 
         model.addAttribute("order", this.orderService.getOrderById(id));
         model.addAttribute("idAtr", id);
+        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
 
         return "order-details-api";
     }
@@ -93,6 +96,14 @@ public class OrderController {
     public String finishOrder(@PathVariable("id") Long orderId) {
 
         this.orderService.finishOrder(orderId);
+
+        return "redirect:/orders/all/history";
+    }
+
+    @PatchMapping("/cancel/{id}")
+    public String cancelOrder(@PathVariable("id") Long orderId) {
+
+        this.orderService.cancelOrder(orderId);
 
         return "redirect:/orders/all/history";
     }

@@ -13,11 +13,14 @@ public class CartEntity extends BaseEntity {
     @ManyToMany
     private List<ProductEntity> products;
 
+    private Long countProducts;
+
     private BigDecimal productsSum;
 
     public CartEntity() {
         this.productsSum = BigDecimal.ZERO;
         this.products = new ArrayList<>();
+        this.countProducts = 0L;
     }
 
     public List<ProductEntity> getProducts() {
@@ -38,6 +41,15 @@ public class CartEntity extends BaseEntity {
         return this;
     }
 
+    public Long getCountProducts() {
+        return countProducts;
+    }
+
+    public CartEntity setCountProducts(Long countProducts) {
+        this.countProducts = countProducts;
+        return this;
+    }
+
     public void addProduct(ProductEntity product) {
         this.products.add(product);
     }
@@ -47,6 +59,7 @@ public class CartEntity extends BaseEntity {
         BigDecimal sum = this.getProductsSum();
 
         this.setProductsSum(sum.add(productPrice));
+        this.countProducts++;
 
     }
 
@@ -55,7 +68,7 @@ public class CartEntity extends BaseEntity {
         BigDecimal sum = this.getProductsSum();
 
         this.setProductsSum(sum.subtract(productPrice));
-
+        this.countProducts--;
     }
 
 }

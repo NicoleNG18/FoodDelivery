@@ -34,6 +34,7 @@ public class CartController {
 
         model.addAttribute("cartProducts", this.orderService.getProducts(principal));
         model.addAttribute("productsPrice", this.orderService.getProductsPrice(principal));
+        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
 
         return "order-cart";
     }

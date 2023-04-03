@@ -14,7 +14,7 @@
           <a class="nav-link" th:href="@{/contact}">Contact us</a>
         </li>
         <li class="nav-item" sec:authorize="isAuthenticated() && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
-          <a class="nav-link" th:href="@{/cart}">Order cart</a>
+          <a class="nav-link" th:href="@{/cart}">Order cart (<span th:text="${countProducts}"></span>)</a>
         </li>
         <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')">
           <a class="nav-link" th:href="@{/orders/all/history}">All orders history</a>

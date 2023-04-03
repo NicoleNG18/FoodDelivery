@@ -5,6 +5,7 @@ import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.service.ProductService;
+import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,15 +16,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+
 
 @Controller
 public class ProductController {
 
     private final ProductService productService;
+    private final UserService userService;
 
     @Autowired
-    public ProductController(ProductService menuService) {
+    public ProductController(ProductService menuService,
+                             UserService userService) {
         this.productService = menuService;
+        this.userService = userService;
     }
 
     @ModelAttribute("productDto")
@@ -47,17 +53,23 @@ public class ProductController {
     }
 
     @GetMapping("/menu")
-    public String getMenu() {
+    public String getMenu(Principal principal,Model model) {
+
+
+        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
+
         return "menu-categories";
     }
 
     @GetMapping("/menu/{category}")
     public String getCategoryPage(@PathVariable("category")
                                   String category,
-                                  Model model) {
+                                  Model model,Principal principal) {
 
         model.addAttribute("category", this.productService.findCategory(category));
         model.addAttribute("products", this.productService.allProducts(ProductCategoryEnum.valueOf(category)));
+        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
+
         return "categories-page";
     }
 

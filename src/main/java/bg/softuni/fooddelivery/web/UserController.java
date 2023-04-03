@@ -51,15 +51,17 @@ public class UserController {
                              Principal principal) {
 
         model.addAttribute("user", this.userService.getUserViewByUsername(principal.getName()));
+        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
 
         return "user-profile";
     }
 
     @GetMapping("/profile/{id}")
     public String getProfileById(@PathVariable("id") Long id,
-                                 Model model) {
+                                 Model model,Principal principal) {
 
         model.addAttribute("user", this.userService.getUserById(id));
+        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
 
         return "user-profile";
     }
@@ -97,9 +99,10 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String getEditUser(@PathVariable("id") Long id,
-                              Model model) {
+                              Model model,Principal principal) {
 
         model.addAttribute("user", this.userService.getUserById(id));
+        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
 //        if(!model.containsAttribute("errorUser")) {
 //            model.addAttribute("errorUser", false);
 //        }

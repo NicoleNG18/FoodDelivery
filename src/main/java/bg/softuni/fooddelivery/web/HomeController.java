@@ -31,6 +31,7 @@ public class HomeController {
 
             model.addAttribute("name", loggedUser.getUsername());
             model.addAttribute("orders",orderService.getInProgressOrdersByUser(loggedUser));
+            model.addAttribute("countProducts",loggedUser.getCart().getCountProducts());
 
         }
 

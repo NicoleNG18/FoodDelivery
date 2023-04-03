@@ -29,6 +29,7 @@
           <th scope="col" class="text-center">Delivered on</th>
           <th scope="col" class="text-center">Status</th>
           <th scope="col" class="text-center" sec:authorize="hasAuthority('ROLE_WORKER')">Finish</th>
+          <th scope="col" class="text-center" sec:authorize="hasAuthority('ROLE_WORKER')">Cancel</th>
           <th scope="col" class="text-center">More details</th>
         </tr>
         </thead>
@@ -49,7 +50,15 @@
               >Finish order</button>
             </form>
           </td>
-
+          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAuthority('ROLE_WORKER')" >
+            <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
+                  th:method="PATCH"
+                  th:action="@{/orders/cancel/{id}(id=${order.id})}"
+                  th:object="${order}">
+              <button class="button-detail" type="submit" style="width:100%; border-color: white; background-color: #49857b;"
+              >Cancel order</button>
+            </form>
+          </td>
           <td style="text-align: center; background-color: #f4f1ed">
             <a type="button" class="button-detail" th:href="@{/orders/details/{id}(id=${order.id})}" style="background-color: #49857b">Details</a>
           </td>

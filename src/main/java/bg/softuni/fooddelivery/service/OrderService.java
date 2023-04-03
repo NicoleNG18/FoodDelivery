@@ -73,6 +73,7 @@ public class OrderService {
         this.orderRepository.saveAndFlush(order);
 
         user.getCart().setProducts(new ArrayList<>()).setProductsSum(BigDecimal.ZERO);
+        user.getCart().setCountProducts(0L);
     }
 
     private static void buildOrder(OrderBindingDto orderDto,
@@ -147,6 +148,17 @@ public class OrderService {
 
         orderEntity.setStatus(OrderStatusEnum.DELIVERED);
         orderEntity.setDeliveredOn(LocalDateTime.now());
+
+        this.orderRepository.saveAndFlush(orderEntity);
+    }
+
+    public void cancelOrder(Long orderId) {
+
+        OrderEntity orderEntity = this.orderRepository
+                .findById(orderId)
+                .orElseThrow(() -> new NotFoundObjectException(orderId, ORDER));
+
+        orderEntity.setStatus(OrderStatusEnum.CANCELLED);
 
         this.orderRepository.saveAndFlush(orderEntity);
     }
