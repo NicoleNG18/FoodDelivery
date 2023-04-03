@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
 
+import static bg.softuni.fooddelivery.constants.ControllerAttributesConstants.*;
+
 @Controller
 public class HomeController {
-
     private final UserService userService;
     private final OrderService orderService;
 
@@ -21,20 +22,21 @@ public class HomeController {
         this.orderService = orderService;
     }
 
-
     @GetMapping("/")
     public String getHome(Principal principal,
                           Model model) {
 
         if (principal != null) {
-            UserEntity loggedUser = this.userService.getUserByUsername(principal.getName());
 
-            model.addAttribute("name", loggedUser.getUsername());
-            model.addAttribute("orders",orderService.getInProgressOrdersByUser(loggedUser));
-            model.addAttribute("countProducts",loggedUser.getCart().getCountProducts());
+            final UserEntity loggedUser = this.userService.getUserByUsername(principal.getName());
+
+            model.addAttribute(NAME, loggedUser.getUsername());
+            model.addAttribute(ORDERS, orderService.getInProgressOrdersByUser(loggedUser));
+            model.addAttribute(COUNT_PRODUCTS, loggedUser.getCart().getCountProducts());
 
         }
 
         return "index";
     }
+
 }
