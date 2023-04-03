@@ -12,12 +12,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import static bg.softuni.fooddelivery.constants.Messages.*;
 
 @Service
@@ -79,9 +81,19 @@ public class OrderService {
     private static void buildOrder(OrderBindingDto orderDto,
                                    OrderEntity order,
                                    UserEntity user) {
+
+        BigDecimal price = user.getCart().getProductsSum()
+                .add(BigDecimal.valueOf(user.getCart().getCountProducts()*0.5))
+                .add(BigDecimal.valueOf(3.50));
+
+        price = orderDto.getDiscount().equals("")
+                ? price
+                : price.multiply(BigDecimal.valueOf(0.9));
+
         order
                 .setOwner(user)
-                .setPrice(user.getCart().getProductsSum())
+                .setPrice(price)
+                .setDiscount(orderDto.getDiscount())
                 .setCreatedOn(LocalDateTime.now())
                 .setComment(orderDto.getComment() != null ? orderDto.getComment() : NO_COMMENT)
                 .setAddress(orderDto.getAddress())
@@ -105,7 +117,7 @@ public class OrderService {
     public List<OrderDetailViewDto> getInProgressOrdersByUser(UserEntity userEntity) {
 
         return this.orderRepository
-                .findAllByStatusAndOwner_Id(OrderStatusEnum.IN_PROGRESS,userEntity.getId())
+                .findAllByStatusAndOwner_Id(OrderStatusEnum.IN_PROGRESS, userEntity.getId())
                 .stream()
                 .map(this::mapToOrderViewDto)
                 .collect(Collectors.toList());

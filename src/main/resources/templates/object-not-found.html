@@ -4,12 +4,14 @@
     <th:block th:insert="~{/fragments/head}"></th:block>
     <title>Object not found</title>
 </head>
-<body style="background-color: #eea9a8">
+<body style="background-color: white">
 
-<div class="container text-center" style="background-color: #d54b43; border-radius: 50px; margin-top: 300px;">
+<div class="container text-center"
+     style="background-color: #49857b; border-radius: 50px; margin-top: 300px; color:white">
 
-    <h1><small th:text="${objectType}"></small> with id <small th:text="${objectId}"></small> was not found!</h1>
-
+    <h1><small th:text="${objectType}"></small> with id <small th:text="${objectId}"></small> was not found! Click <a
+            th:href="@{/}" style="color: #2c504a">here</a> to return to the home page.
+    </h1>
 
 
 </div>

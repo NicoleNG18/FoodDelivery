@@ -1,6 +1,10 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
+import bg.softuni.fooddelivery.domain.enums.Discount;
+import bg.softuni.fooddelivery.validation.DiscountMatch;
 import bg.softuni.fooddelivery.validation.ValidPhoneNumber;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -12,12 +16,24 @@ public class OrderBindingDto {
     private String comment;
     @NotEmpty(message = ADDRESS_REQUIRED)
     private String address;
-    //    @NotEmpty(message = CONTACT_NUMBER_REQUIRED)
+
+    @DiscountMatch
+    private String discount;
     @ValidPhoneNumber
     private String contactNumber;
 
 
     public OrderBindingDto() {
+    }
+
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public OrderBindingDto setDiscount(String discount) {
+        this.discount = discount;
+        return this;
     }
 
     public String getComment() {

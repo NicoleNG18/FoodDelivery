@@ -1,5 +1,6 @@
 package bg.softuni.fooddelivery.domain.entities;
 
+import bg.softuni.fooddelivery.domain.enums.Discount;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 
@@ -26,6 +27,9 @@ public class OrderEntity extends BaseEntity {
     @Column(nullable = false)
     private String address;
 
+    @Column
+    private String discount;
+
     @Column(nullable = false)
     private String contactNumber;
 
@@ -34,6 +38,15 @@ public class OrderEntity extends BaseEntity {
     private OrderStatusEnum status;
 
     public OrderEntity() {
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public OrderEntity setDiscount(String discount) {
+        this.discount = discount;
+        return this;
     }
 
     public UserEntity getOwner() {

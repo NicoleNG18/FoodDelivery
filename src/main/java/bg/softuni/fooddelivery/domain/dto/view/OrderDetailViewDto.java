@@ -26,6 +26,8 @@ public class OrderDetailViewDto {
 
     private String client;
 
+    private String discount;
+
     private String comment;
 
 
@@ -38,6 +40,16 @@ public class OrderDetailViewDto {
 
     public OrderDetailViewDto setComment(String comment) {
         this.comment = comment;
+        return this;
+    }
+
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public OrderDetailViewDto setDiscount(String discount) {
+        this.discount = discount;
         return this;
     }
 

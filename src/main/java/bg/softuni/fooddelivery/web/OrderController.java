@@ -2,6 +2,7 @@ package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
 import bg.softuni.fooddelivery.service.OrderService;
+import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,13 @@ import java.security.Principal;
 public class OrderController {
 
     private final OrderService orderService;
+    private final UserService userService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService,
+                           UserService userService) {
         this.orderService = orderService;
+        this.userService = userService;
     }
 
     @ModelAttribute("orderDto")
@@ -36,8 +40,7 @@ public class OrderController {
 
 
         model.addAttribute("foodPrice", this.orderService.getProductsPrice(principal));
-        model.addAttribute("countBoxes", this.orderService.getProducts(principal).size());
-        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
+        model.addAttribute("countProducts", this.orderService.getProducts(principal).size());
 
         return "finalize-order";
     }
@@ -68,18 +71,19 @@ public class OrderController {
                                    Principal principal) {
 
         model.addAttribute("orders", this.orderService.getOrdersByUser(principal));
-        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
+        model.addAttribute("countProducts", this.orderService.getProducts(principal).size());
 
         return "orders-history-user";
     }
 
     @GetMapping("/details/{id}")
     public String orderDetails(@PathVariable("id") Long id,
-                               Model model,Principal principal) {
+                               Model model,
+                               Principal principal) {
 
         model.addAttribute("order", this.orderService.getOrderById(id));
         model.addAttribute("idAtr", id);
-        model.addAttribute("countProducts",this.orderService.getProducts(principal).size());
+        model.addAttribute("countProducts", this.orderService.getProducts(principal).size());
 
         return "order-details-api";
     }
