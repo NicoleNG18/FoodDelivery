@@ -6,7 +6,7 @@ import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class OrderDetailViewDto {
+public class OrderViewDto {
 
     private Long id;
 
@@ -31,14 +31,14 @@ public class OrderDetailViewDto {
     private String comment;
 
 
-    public OrderDetailViewDto() {
+    public OrderViewDto() {
     }
 
     public String getComment() {
         return comment;
     }
 
-    public OrderDetailViewDto setComment(String comment) {
+    public OrderViewDto setComment(String comment) {
         this.comment = comment;
         return this;
     }
@@ -48,7 +48,7 @@ public class OrderDetailViewDto {
         return discount;
     }
 
-    public OrderDetailViewDto setDiscount(String discount) {
+    public OrderViewDto setDiscount(String discount) {
         this.discount = discount;
         return this;
     }
@@ -57,7 +57,7 @@ public class OrderDetailViewDto {
         return id;
     }
 
-    public OrderDetailViewDto setId(Long id) {
+    public OrderViewDto setId(Long id) {
         this.id = id;
         return this;
     }
@@ -66,7 +66,7 @@ public class OrderDetailViewDto {
         return price;
     }
 
-    public OrderDetailViewDto setPrice(BigDecimal price) {
+    public OrderViewDto setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -75,7 +75,7 @@ public class OrderDetailViewDto {
         return client;
     }
 
-    public OrderDetailViewDto setClient(String client) {
+    public OrderViewDto setClient(String client) {
         this.client = client;
         return this;
     }
@@ -84,7 +84,7 @@ public class OrderDetailViewDto {
         return createdOn;
     }
 
-    public OrderDetailViewDto setCreatedOn(LocalDateTime createdOn) {
+    public OrderViewDto setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
         return this;
     }
@@ -93,7 +93,7 @@ public class OrderDetailViewDto {
         return deliveredOn;
     }
 
-    public OrderDetailViewDto setDeliveredOn(LocalDateTime deliveredOn) {
+    public OrderViewDto setDeliveredOn(LocalDateTime deliveredOn) {
         this.deliveredOn = deliveredOn;
         return this;
     }
@@ -102,7 +102,7 @@ public class OrderDetailViewDto {
         return address;
     }
 
-    public OrderDetailViewDto setAddress(String address) {
+    public OrderViewDto setAddress(String address) {
         this.address = address;
         return this;
     }
@@ -111,7 +111,7 @@ public class OrderDetailViewDto {
         return contactNumber;
     }
 
-    public OrderDetailViewDto setContactNumber(String contactNumber) {
+    public OrderViewDto setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
         return this;
     }
@@ -120,12 +120,12 @@ public class OrderDetailViewDto {
         return cart;
     }
 
-    public OrderDetailViewDto setCart(CartEntity cart) {
+    public OrderViewDto setCart(CartEntity cart) {
         this.cart = cart;
         return this;
     }
 
-    public OrderDetailViewDto setStatus(OrderStatusEnum status) {
+    public OrderViewDto setStatus(OrderStatusEnum status) {
         this.status = status;
         return this;
     }

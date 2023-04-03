@@ -1,10 +1,6 @@
 package bg.softuni.fooddelivery.service;
 
-import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
-import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
-import bg.softuni.fooddelivery.domain.entities.CartEntity;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
-import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.repositories.OrderRepository;
@@ -18,15 +14,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 import java.time.LocalDateTime;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
@@ -36,9 +27,6 @@ public class OrderServiceTest {
     private OrderRepository mockOrderRepository;
     @Mock
     private ModelMapper modelMapper;
-
-    @Captor
-    private ArgumentCaptor<OrderEntity> orderEntityArgumentCaptor;
 
     private OrderService serviceToTest;
     private OrderEntity orderOne, orderTwo;

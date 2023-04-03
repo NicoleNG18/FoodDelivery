@@ -33,8 +33,8 @@ public class OrderController {
     public String getFinalizeOrder(Model model,
                                    Principal principal) {
 
-        model.addAttribute(FOOD_PRICE, this.orderService.getProductsPrice(principal));
-        model.addAttribute(COUNT_PRODUCTS, this.orderService.getProducts(principal).size());
+        model.addAttribute(FOOD_PRICE, this.orderService.getProductsPrice(principal.getName()));
+        model.addAttribute(COUNT_PRODUCTS, this.orderService.getProductsInTheCart(principal.getName()).size());
 
         return "finalize-order";
     }
@@ -55,7 +55,7 @@ public class OrderController {
 
         }
 
-        this.orderService.makeOrder(orderDto, principal);
+        this.orderService.makeOrder(orderDto, principal.getName());
 
         return "redirect:/";
     }
@@ -64,7 +64,7 @@ public class OrderController {
     public String getOwnOrdersHistory(Model model,
                                       Principal principal) {
 
-        model.addAttribute(ORDERS, this.orderService.getOrdersByUser(principal));
+        model.addAttribute(ORDERS, this.orderService.getOrdersByUser(principal.getName()));
 
         return "orders-history-user";
     }

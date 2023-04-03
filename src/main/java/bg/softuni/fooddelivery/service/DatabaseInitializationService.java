@@ -19,16 +19,13 @@ public class DatabaseInitializationService {
 
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
-
     private final CartService cartService;
-//    private final String defaultPass = "${USERS_DEF_PASS}";
-
     private final UserRepository userRepository;
 
     public DatabaseInitializationService(UserRoleRepository userRoleRepository,
                                          PasswordEncoder passwordEncoder,
                                          CartService cartService,
-                                         UserRepository userRepository){
+                                         UserRepository userRepository) {
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.cartService = cartService;
@@ -43,44 +40,6 @@ public class DatabaseInitializationService {
         initUsers();
     }
 
-    private void initUsers() {
-        if(this.userRepository.count()==3) {
-
-            UserEntity userOne = new UserEntity()
-                    .setFirstName("Nikol")
-                    .setLastName("Georgieva")
-                    .setAge(25)
-                    .setEmail("nikol@user.com")
-                    .setPassword(passwordEncoder.encode("topsecret"))
-                    .setGender(GenderEnum.MALE)
-                    .setUsername("nikol")
-                    .setPhoneNumber("0515051504")
-                    .setRoles(userRoleRepository.findAll()
-                            .stream()
-                            .filter(r->r.getRole()==UserRoleEnum.USER)
-                            .collect(Collectors.toList()))
-                    .setCart(this.cartService.getNewCart());
-
-            UserEntity userTwo = new UserEntity()
-                    .setFirstName("Ivan")
-                    .setLastName("Ivanov")
-                    .setAge(25)
-                    .setEmail("ivan@user.com")
-                    .setPassword(passwordEncoder.encode("topsecret"))
-                    .setGender(GenderEnum.MALE)
-                    .setUsername("ivan")
-                    .setPhoneNumber("0515051504")
-                    .setRoles(userRoleRepository.findAll()
-                            .stream()
-                            .filter(r->r.getRole()==UserRoleEnum.USER)
-                            .collect(Collectors.toList()))
-                    .setCart(this.cartService.getNewCart());
-
-            this.userRepository.saveAndFlush(userOne);
-            this.userRepository.saveAndFlush(userTwo);
-        }
-    }
-
     public void initRoles() {
         if (this.userRoleRepository.count() == 0) {
             this.userRoleRepository.saveAllAndFlush(getUserRoles());
@@ -89,9 +48,11 @@ public class DatabaseInitializationService {
 
     private static List<UserRoleEntity> getUserRoles() {
         List<UserRoleEntity> roles = new ArrayList<>();
+
         roles.add(new UserRoleEntity().setRole(UserRoleEnum.ADMIN));
         roles.add(new UserRoleEntity().setRole(UserRoleEnum.USER));
         roles.add(new UserRoleEntity().setRole(UserRoleEnum.WORKER));
+
         return roles;
     }
 
@@ -127,7 +88,7 @@ public class DatabaseInitializationService {
                     .setPhoneNumber("0515051502")
                     .setRoles(userRoleRepository.findAll()
                             .stream()
-                            .filter(r->r.getRole()!=UserRoleEnum.ADMIN)
+                            .filter(r -> r.getRole() != UserRoleEnum.ADMIN)
                             .collect(Collectors.toList()))
                     .setCart(this.cartService.getNewCart());
 
@@ -137,20 +98,73 @@ public class DatabaseInitializationService {
                     .setAge(25)
                     .setEmail("worker@two.com")
                     .setPassword(passwordEncoder.encode("topsecret"))
-                    .setGender(GenderEnum.MALE)
+                    .setGender(GenderEnum.FEMALE)
                     .setUsername("workerTwo")
                     .setPhoneNumber("0515051503")
                     .setRoles(userRoleRepository.findAll()
                             .stream()
-                            .filter(r->r.getRole()!=UserRoleEnum.ADMIN)
+                            .filter(r -> r.getRole() != UserRoleEnum.ADMIN)
                             .collect(Collectors.toList()))
                     .setCart(this.cartService.getNewCart());
 
             this.userRepository.saveAndFlush(workerOne);
             this.userRepository.saveAndFlush(workerTwo);
         }
+
     }
 
+    private void initUsers() {
+        if (this.userRepository.count() == 3) {
 
+            UserEntity userOne = new UserEntity()
+                    .setFirstName("Nikol")
+                    .setLastName("Georgieva")
+                    .setAge(25)
+                    .setEmail("nikol@user.com")
+                    .setPassword(passwordEncoder.encode("topsecret"))
+                    .setGender(GenderEnum.MALE)
+                    .setUsername("nikol")
+                    .setPhoneNumber("0515051504")
+                    .setRoles(userRoleRepository.findAll()
+                            .stream()
+                            .filter(r -> r.getRole() == UserRoleEnum.USER)
+                            .collect(Collectors.toList()))
+                    .setCart(this.cartService.getNewCart());
+
+            UserEntity userTwo = new UserEntity()
+                    .setFirstName("Ivan")
+                    .setLastName("Ivanov")
+                    .setAge(25)
+                    .setEmail("ivan@user.com")
+                    .setPassword(passwordEncoder.encode("topsecret"))
+                    .setGender(GenderEnum.MALE)
+                    .setUsername("ivan")
+                    .setPhoneNumber("0515051504")
+                    .setRoles(userRoleRepository.findAll()
+                            .stream()
+                            .filter(r -> r.getRole() == UserRoleEnum.USER)
+                            .collect(Collectors.toList()))
+                    .setCart(this.cartService.getNewCart());
+
+            UserEntity testUser = new UserEntity()
+                    .setFirstName("Testerche")
+                    .setLastName("Testerov")
+                    .setAge(25)
+                    .setEmail("testAppUser@user.com")
+                    .setPassword(passwordEncoder.encode("topsecret"))
+                    .setGender(GenderEnum.MALE)
+                    .setUsername("testAppUser")
+                    .setPhoneNumber("0515051504")
+                    .setRoles(userRoleRepository.findAll()
+                            .stream()
+                            .filter(r -> r.getRole() == UserRoleEnum.USER)
+                            .collect(Collectors.toList()))
+                    .setCart(this.cartService.getNewCart());
+
+            this.userRepository.saveAndFlush(userOne);
+            this.userRepository.saveAndFlush(userTwo);
+            this.userRepository.saveAndFlush(testUser);
+        }
+    }
 
 }

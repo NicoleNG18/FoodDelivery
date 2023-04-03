@@ -47,7 +47,7 @@ public class MenuController {
                                         Principal principal) {
 
         model.addAttribute(CATEGORY, this.productService.findCategory(category));
-        model.addAttribute(PRODUCTS, this.productService.allProducts(ProductCategoryEnum.valueOf(category)));
+        model.addAttribute(PRODUCTS, this.productService.getAllProductsByCategory(ProductCategoryEnum.valueOf(category)));
 
         if (principal != null) {
             model.addAttribute(COUNT_PRODUCTS,

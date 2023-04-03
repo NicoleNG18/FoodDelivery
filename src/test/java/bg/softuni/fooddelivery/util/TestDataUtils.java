@@ -1,6 +1,6 @@
 package bg.softuni.fooddelivery.util;
 
-import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
+import bg.softuni.fooddelivery.domain.dto.view.OrderViewDto;
 import bg.softuni.fooddelivery.domain.entities.*;
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
@@ -128,7 +128,7 @@ public class TestDataUtils {
         return userRepository.save(user);
     }
 
-    public OrderDetailViewDto createOrderDetailViewDto(String ownerEmail,String ownerName){
+    public OrderViewDto createOrderDetailViewDto(String ownerEmail, String ownerName){
 
         OrderEntity entity=new OrderEntity()
                 .setOwner(createTestUser(ownerEmail,ownerName))
@@ -138,7 +138,7 @@ public class TestDataUtils {
                 .setContactNumber("orderContactNumber")
                 .setStatus(OrderStatusEnum.IN_PROGRESS);
 
-        return this.modelMapper.map(entity, OrderDetailViewDto.class);
+        return this.modelMapper.map(entity, OrderViewDto.class);
     }
 
 

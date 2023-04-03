@@ -1,20 +1,19 @@
 package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.dto.binding.OrderBindingDto;
-import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
+import bg.softuni.fooddelivery.domain.dto.view.OrderViewDto;
 import bg.softuni.fooddelivery.domain.dto.view.ProductViewDto;
 import bg.softuni.fooddelivery.domain.entities.OrderEntity;
+import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.repositories.OrderRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,6 @@ public class OrderService {
 
     private final ModelMapper modelMapper;
 
-    @Autowired
     public OrderService(UserService userService,
                         OrderRepository orderRepository,
                         ModelMapper modelMapper) {
@@ -41,22 +39,25 @@ public class OrderService {
     }
 
     @Transactional
-    public List<ProductViewDto> getProducts(Principal principal) {
+    public List<ProductViewDto> getProductsInTheCart(String username) {
 
-        final UserEntity user = this.userService.getUserByUsername(principal.getName());
+        final UserEntity user = this.userService.getUserByUsername(username);
 
         return user
                 .getCart()
                 .getProducts()
                 .stream()
-                .map(p -> this.modelMapper.map(p, ProductViewDto.class))
+                .map(this::mapToProductViewDto)
                 .collect(Collectors.toList());
     }
 
+    private ProductViewDto mapToProductViewDto(ProductEntity productEntity) {
+        return this.modelMapper.map(productEntity, ProductViewDto.class);
+    }
 
-    public BigDecimal getProductsPrice(Principal principal) {
+    public BigDecimal getProductsPrice(String username) {
 
-        final UserEntity user = this.userService.getUserByUsername(principal.getName());
+        final UserEntity user = this.userService.getUserByUsername(username);
 
         return user.getCart().getProductsSum();
 
@@ -64,11 +65,11 @@ public class OrderService {
 
     @Transactional
     public void makeOrder(OrderBindingDto orderDto,
-                          Principal principal) {
+                          String username) {
 
         OrderEntity order = new OrderEntity();
 
-        final UserEntity user = this.userService.getUserByUsername(principal.getName());
+        final UserEntity user = this.userService.getUserByUsername(username);
 
         buildOrder(orderDto, order, user);
 
@@ -83,7 +84,7 @@ public class OrderService {
                                    UserEntity user) {
 
         BigDecimal price = user.getCart().getProductsSum()
-                .add(BigDecimal.valueOf(user.getCart().getCountProducts()*0.5))
+                .add(BigDecimal.valueOf(user.getCart().getCountProducts() * 0.5))
                 .add(BigDecimal.valueOf(3.50));
 
         price = orderDto.getDiscount().equals("")
@@ -102,9 +103,9 @@ public class OrderService {
     }
 
     @Transactional
-    public List<OrderDetailViewDto> getOrdersByUser(Principal principal) {
+    public List<OrderViewDto> getOrdersByUser(String username) {
 
-        final UserEntity user = this.userService.getUserByUsername(principal.getName());
+        final UserEntity user = this.userService.getUserByUsername(username);
 
         return this.orderRepository
                 .findAllByOwner_Id(user.getId())
@@ -114,7 +115,7 @@ public class OrderService {
     }
 
     @Transactional
-    public List<OrderDetailViewDto> getInProgressOrdersByUser(UserEntity userEntity) {
+    public List<OrderViewDto> getInProgressOrdersByUser(UserEntity userEntity) {
 
         return this.orderRepository
                 .findAllByStatusAndOwner_Id(OrderStatusEnum.IN_PROGRESS, userEntity.getId())
@@ -123,16 +124,16 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    private OrderDetailViewDto mapToOrderViewDto(OrderEntity orderEntity) {
+    private OrderViewDto mapToOrderViewDto(OrderEntity orderEntity) {
 
-        OrderDetailViewDto orderDetail = this.modelMapper.map(orderEntity, OrderDetailViewDto.class);
+        OrderViewDto orderDetail = this.modelMapper.map(orderEntity, OrderViewDto.class);
 
         orderDetail.setClient(orderEntity.getOwner().getUsername());
 
         return orderDetail;
     }
 
-    public OrderDetailViewDto getOrderById(Long id) {
+    public OrderViewDto getOrderById(Long id) {
 
         OrderEntity order = this.orderRepository.findById(id)
                 .orElseThrow(() -> new NotFoundObjectException(id, ORDER));
@@ -144,7 +145,7 @@ public class OrderService {
         return mapToOrderViewDto(order);
     }
 
-    public List<OrderDetailViewDto> getAllOrders() {
+    public List<OrderViewDto> getAllOrders() {
         return this.orderRepository
                 .findAll()
                 .stream()
@@ -174,4 +175,5 @@ public class OrderService {
 
         this.orderRepository.saveAndFlush(orderEntity);
     }
+
 }

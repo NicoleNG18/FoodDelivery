@@ -11,7 +11,6 @@ import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +24,13 @@ import static bg.softuni.fooddelivery.constants.Messages.WORKER;
 
 @Service
 public class UserService {
-
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleService userRoleService;
-
     private final UserRoleRepository userRoleRepository;
-
     private final CartService cartService;
 
-    @Autowired
     public UserService(ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder,
                        UserRepository userRepository,
@@ -52,9 +47,9 @@ public class UserService {
 
     public void registerUser(UserRegistrationBindingDto userToRegister) {
 
-        UserEntity userToSave = this.mapToUser(userToRegister);
+        UserEntity userToSave = this.mapToUserEntity(userToRegister);
 
-        final UserRoleEntity userRole = this.userRoleService.getRoleByType(UserRoleEnum.USER);
+        final UserRoleEntity userRole = this.userRoleService.getRole(UserRoleEnum.USER);
         final CartEntity shoppingCart = this.cartService.getNewCart();
 
         userToSave
@@ -66,7 +61,7 @@ public class UserService {
     }
 
     public UserEntity getUserByUsername(String username) {
-        return this.userRepository.findUserEntityByUsername(username).orElse(null);
+        return this.userRepository.findByUsername(username);
     }
 
     public UserViewDto getUserViewByUsername(String username) {
@@ -81,7 +76,7 @@ public class UserService {
         return this.mapToUserView(userById);
     }
 
-    public UserEntity mapToUser(UserRegistrationBindingDto modelDto) {
+    public UserEntity mapToUserEntity(UserRegistrationBindingDto modelDto) {
         return this.modelMapper.map(modelDto, UserEntity.class);
     }
 
@@ -99,7 +94,7 @@ public class UserService {
 
         userById.getRoles().removeIf(userRoleEntity -> userRoleEntity.getRole().name().equals(WORKER));
 
-        this.userRepository.save(userById);
+        this.userRepository.saveAndFlush(userById);
 
     }
 
@@ -109,7 +104,7 @@ public class UserService {
 
         userById.getRoles().add(userRoleRepository.findByRole(UserRoleEnum.WORKER));
 
-        this.userRepository.save(userById);
+        this.userRepository.saveAndFlush(userById);
 
     }
 

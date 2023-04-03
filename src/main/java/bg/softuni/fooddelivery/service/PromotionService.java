@@ -2,7 +2,6 @@ package bg.softuni.fooddelivery.service;
 
 import bg.softuni.fooddelivery.domain.entities.ProductEntity;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,11 +13,10 @@ import static bg.softuni.fooddelivery.constants.Messages.*;
 public class PromotionService {
 
     private final ProductRepository productRepository;
-    @Autowired
+
     public PromotionService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
 
     public void makePromotions(DayOfWeek dayOfWeek) {
 
@@ -34,27 +32,13 @@ public class PromotionService {
         ProductEntity doughnuts = this.productRepository.findByName(DOUGHNUTS);
 
         switch (dayOfWeek) {
-            case MONDAY -> {
-                monday(margherita, mousse, doughnuts);
-            }
-            case TUESDAY -> {
-                tuesday(margherita, chickenBurger);
-            }
-            case WEDNESDAY -> {
-                wednesday(chickenBurger, mrCheesy);
-            }
-            case THURSDAY -> {
-                thursday(mrCheesy, satoshi);
-            }
-            case FRIDAY -> {
-                friday(satoshi, blackAngus, ranchFries);
-            }
-            case SATURDAY -> {
-                saturday(blackAngus, ranchFries, carbonara, brownie);
-            }
-            case SUNDAY -> {
-                sunday(carbonara, brownie, mousse, doughnuts);
-            }
+            case MONDAY -> monday(margherita, mousse, doughnuts);
+            case TUESDAY -> tuesday(margherita, chickenBurger);
+            case WEDNESDAY -> wednesday(chickenBurger, mrCheesy);
+            case THURSDAY -> thursday(mrCheesy, satoshi);
+            case FRIDAY -> friday(satoshi, blackAngus, ranchFries);
+            case SATURDAY -> saturday(blackAngus, ranchFries, carbonara, brownie);
+            case SUNDAY -> sunday(carbonara, brownie, mousse, doughnuts);
         }
 
     }
@@ -152,6 +136,5 @@ public class PromotionService {
         margherita.setPrice(BigDecimal.valueOf(6.99));
         this.productRepository.save(margherita);
     }
-
 
 }

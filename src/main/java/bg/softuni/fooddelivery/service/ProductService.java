@@ -9,7 +9,6 @@ import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,14 +23,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
     public ProductService(ProductRepository productRepository,
                           ModelMapper modelMapper) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<ProductViewDto> allProducts(ProductCategoryEnum category) {
+    public List<ProductViewDto> getAllProductsByCategory(ProductCategoryEnum category) {
         return this.productRepository
                 .findAllByCategory(category)
                 .stream()
@@ -50,7 +48,14 @@ public class ProductService {
                 .name();
     }
 
-    public void addProduct(AddProductBindingDto productDto) {
+    public void saveProduct(AddProductBindingDto productDto) {
+
+        ProductEntity productToSave = createProduct(productDto);
+
+        this.productRepository.saveAndFlush(productToSave);
+    }
+
+    private static ProductEntity createProduct(AddProductBindingDto productDto) {
 
         ProductEntity productToSave = new ProductEntity();
 
@@ -60,10 +65,11 @@ public class ProductService {
                 .setDescription(productDto.getDescription())
                 .setPrice(productDto.getPrice());
 
-        this.productRepository.saveAndFlush(productToSave);
+        return productToSave;
     }
 
     public ProductViewDto getProductById(Long productId) {
+
         ProductEntity productEntity = this.productRepository
                 .findById(productId)
                 .orElseThrow(() -> new NotFoundObjectException(productId, PRODUCT));
@@ -81,7 +87,7 @@ public class ProductService {
                 .setDescription(editedProductDto.getDescription())
                 .setPrice(editedProductDto.getPrice());
 
-        this.productRepository.save(productEntityById);
+        this.productRepository.saveAndFlush(productEntityById);
 
     }
 
@@ -99,4 +105,5 @@ public class ProductService {
 
         throw new WrongCategoryException(category);
     }
+
 }

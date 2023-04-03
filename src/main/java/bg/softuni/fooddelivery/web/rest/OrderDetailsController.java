@@ -1,12 +1,11 @@
 package bg.softuni.fooddelivery.web.rest;
 
-import bg.softuni.fooddelivery.domain.dto.view.OrderDetailViewDto;
+import bg.softuni.fooddelivery.domain.dto.view.OrderViewDto;
 import bg.softuni.fooddelivery.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/order/details")
 public class OrderDetailsController {
 
     private final OrderService orderService;
@@ -15,11 +14,12 @@ public class OrderDetailsController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderDetailViewDto> getOrderById(@PathVariable("id") Long id) {
-        OrderDetailViewDto orderDetail = orderService.getOrderById(id);
+    @GetMapping("/api/order/details/{id}")
+    public ResponseEntity<OrderViewDto> getOrderById(@PathVariable("id") Long id) {
+
+        OrderViewDto orderDetail = orderService.getOrderById(id);
+
         return ResponseEntity.ok(orderDetail);
     }
-
 
 }

@@ -6,39 +6,22 @@ import bg.softuni.fooddelivery.domain.entities.UserEntity;
 import bg.softuni.fooddelivery.repositories.ProductRepository;
 import bg.softuni.fooddelivery.repositories.ShoppingCartRepository;
 import bg.softuni.fooddelivery.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.security.Principal;
-
-
 
 @Service
 public class CartService {
 
     private final UserRepository userRepository;
-
     private final ProductRepository productRepository;
-
     private final ShoppingCartRepository shoppingCartRepository;
-    @Autowired
+
     public CartService(UserRepository userRepository,
                        ProductRepository productRepository,
                        ShoppingCartRepository shoppingCartRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.shoppingCartRepository = shoppingCartRepository;
-    }
-
-    @Transactional
-    public void addToCart(Long id,
-                          Principal principal) {
-
-        UserEntity user = this.userRepository.findByUsername(principal.getName());
-        final ProductEntity product = this.productRepository.findProductEntityById(id);
-
-        user.getCart().addProduct(product);
-        user.getCart().increaseProductsSum(product.getPrice());
     }
 
     public CartEntity getNewCart() {
@@ -51,14 +34,26 @@ public class CartService {
     }
 
     @Transactional
-    public void removeFromCart(Long id,
-                               Principal principal) {
+    public void addProductToTheCart(Long id,
+                                    String username) {
 
-        UserEntity user = this.userRepository.findByUsername(principal.getName());
+        UserEntity user = this.userRepository.findByUsername(username);
+        final ProductEntity product = this.productRepository.findProductEntityById(id);
+
+        user.getCart().addProduct(product);
+        user.getCart().increaseProductsSum(product.getPrice());
+    }
+
+    @Transactional
+    public void removeProductFromTheCart(Long id,
+                                         String username) {
+
+        UserEntity user = this.userRepository.findByUsername(username);
         final ProductEntity product = this.productRepository.findProductEntityById(id);
 
         user.getCart().getProducts().remove(product);
         user.getCart().decreaseProductsSum(product.getPrice());
 
     }
+
 }

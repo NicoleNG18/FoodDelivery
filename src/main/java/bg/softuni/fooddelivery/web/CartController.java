@@ -31,9 +31,9 @@ public class CartController {
     public String getCart(Model model,
                           Principal principal) {
 
-        model.addAttribute(CART_PRODUCTS, this.orderService.getProducts(principal));
-        model.addAttribute(PRODUCTS_PRICE, this.orderService.getProductsPrice(principal));
-        model.addAttribute(COUNT_PRODUCTS, this.orderService.getProducts(principal).size());
+        model.addAttribute(CART_PRODUCTS, this.orderService.getProductsInTheCart(principal.getName()));
+        model.addAttribute(PRODUCTS_PRICE, this.orderService.getProductsPrice(principal.getName()));
+        model.addAttribute(COUNT_PRODUCTS, this.orderService.getProductsInTheCart(principal.getName()).size());
 
         return "order-cart";
     }
@@ -42,7 +42,7 @@ public class CartController {
     public String addProductToTheCart(@PathVariable("id") Long id,
                                       Principal principal) {
 
-        this.cartService.addToCart(id, principal);
+        this.cartService.addProductToTheCart(id, principal.getName());
 
         return "redirect:/menu/" + this.productService.getCategoryName(id);
     }
@@ -51,7 +51,7 @@ public class CartController {
     public String removeProductFromTheCart(@PathVariable("id") Long id,
                                            Principal principal) {
 
-        this.cartService.removeFromCart(id, principal);
+        this.cartService.removeProductFromTheCart(id, principal.getName());
 
         return "redirect:/cart";
     }

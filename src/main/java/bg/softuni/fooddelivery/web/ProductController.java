@@ -68,7 +68,7 @@ public class ProductController {
 
         }
 
-        this.productService.addProduct(productDto);
+        this.productService.saveProduct(productDto);
 
         return "redirect:/";
     }

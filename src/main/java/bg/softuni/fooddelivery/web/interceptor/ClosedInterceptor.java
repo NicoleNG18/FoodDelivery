@@ -21,7 +21,7 @@ public class ClosedInterceptor implements HandlerInterceptor {
 
             LocalTime now = LocalTime.now();
 
-            if (now.getHour() > 21 || now.getHour() < 12) {
+            if (now.getHour() > 21 || now.getHour() < 11) {
 
                 var secondRequestURI= request.getRequestURI();
 
@@ -36,4 +36,5 @@ public class ClosedInterceptor implements HandlerInterceptor {
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
+
 }
