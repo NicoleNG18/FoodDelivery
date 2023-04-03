@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import static bg.softuni.fooddelivery.constants.ControllerAttributesConstants.OBJECT_ID;
+import static bg.softuni.fooddelivery.constants.ControllerAttributesConstants.OBJECT_TYPE;
+
 @ControllerAdvice
 public class ErrorController {
 
@@ -16,9 +19,10 @@ public class ErrorController {
 
         ModelAndView modelAndView=new ModelAndView("object-not-found");
 
-        modelAndView.addObject("objectId",objectNotFoundException.getObjectId());
-        modelAndView.addObject("objectType",objectNotFoundException.getObjectType());
+        modelAndView.addObject(OBJECT_ID,objectNotFoundException.getObjectId());
+        modelAndView.addObject(OBJECT_TYPE,objectNotFoundException.getObjectType());
 
         return modelAndView;
     }
+
 }
