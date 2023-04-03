@@ -39,7 +39,6 @@ public class UserRegistrationBindingDto {
     @NotNull(message = AGE_PROVIDED)
     private Integer age;
 
-//    @NotEmpty(message = PHONE_NUMBER_PROVIDED)
     @ValidPhoneNumber
     private String phoneNumber;
 

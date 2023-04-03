@@ -39,7 +39,8 @@ public class ContactController {
     public String getContact(Principal principal,
                              Model model) {
 
-        model.addAttribute("countProducts", this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
+//        model.addAttribute("countProducts",
+//                this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
 
         return "contact-us";
     }

@@ -3,8 +3,6 @@ package bg.softuni.fooddelivery.web;
 import bg.softuni.fooddelivery.domain.dto.binding.EditUserBindingDto;
 import bg.softuni.fooddelivery.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,12 +11,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
+import static bg.softuni.fooddelivery.constants.ControllerAttributesConstants.*;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-    @Autowired
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -28,54 +28,37 @@ public class UserController {
         return new EditUserBindingDto();
     }
 
-    @GetMapping("/login")
-    public String getLogin() {
-
-        return "auth-login";
-    }
-
-    @PostMapping("/login-error")
-    public String failedLogin(
-            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-            String username,
-            RedirectAttributes redirectAttributes) {
-
-        redirectAttributes.addFlashAttribute("username", username);
-        redirectAttributes.addFlashAttribute("bad_credentials", true);
-
-        return "redirect:/users/login";
-    }
-
     @GetMapping("/profile")
-    public String getProfile(Model model,
-                             Principal principal) {
+    public String getOwnProfile(Model model,
+                                Principal principal) {
 
-        model.addAttribute("user", this.userService.getUserViewByUsername(principal.getName()));
-        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
+        model.addAttribute(USER, this.userService.getUserViewByUsername(principal.getName()));
 
         return "user-profile";
     }
 
     @GetMapping("/profile/{id}")
-    public String getProfileById(@PathVariable("id") Long id,
-                                 Model model,Principal principal) {
+    public String getOtherUserProfileById(@PathVariable("id") Long id,
+                                          Model model) {
 
-        model.addAttribute("user", this.userService.getUserById(id));
-        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
+        model.addAttribute(USER, this.userService.getUserById(id));
 
         return "user-profile";
     }
 
     @GetMapping("/all")
     public String getAllUsers(Model model) {
-        model.addAttribute("users", this.userService.getAllUsers());
+
+        model.addAttribute(USERS, this.userService.getAllUsers());
+
         return "all-users";
     }
 
     @GetMapping("/change/{id}")
-    public String changeRoles(@PathVariable("id") Long id,
-                              Model model) {
-        model.addAttribute("user", this.userService.getUserById(id));
+    public String getChangeRoles(@PathVariable("id") Long id,
+                                 Model model) {
+
+        model.addAttribute(USER, this.userService.getUserById(id));
 
         return "roles-change";
 
@@ -99,13 +82,9 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String getEditUser(@PathVariable("id") Long id,
-                              Model model,Principal principal) {
+                              Model model) {
 
-        model.addAttribute("user", this.userService.getUserById(id));
-        model.addAttribute("countProducts",this.userService.getUserByUsername(principal.getName()).getCart().getCountProducts());
-//        if(!model.containsAttribute("errorUser")) {
-//            model.addAttribute("errorUser", false);
-//        }
+        model.addAttribute(USER, this.userService.getUserById(id));
 
         return "edit-user";
     }
@@ -132,4 +111,5 @@ public class UserController {
 
         return "redirect:/users/profile/{id}";
     }
+
 }

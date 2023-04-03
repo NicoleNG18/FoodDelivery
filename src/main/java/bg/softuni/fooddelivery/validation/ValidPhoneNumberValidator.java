@@ -22,6 +22,7 @@ public class ValidPhoneNumberValidator implements ConstraintValidator<ValidPhone
                 return false;
             }
         }
+
         return true;
     }
 

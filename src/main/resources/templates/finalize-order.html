@@ -71,6 +71,7 @@
                 <label class="col col-form-label">Delivery: 3.50 <span th:text="|&euro;|"></span></label>
             </div>
             <div class="form-group row" style="margin-left: 10px">
+<!--                //TODO:refactor cena-->
                 <label class="col col-form-label">Boxes: <span th:text="|${#numbers.formatDecimal(countProducts*0.50,0,2)} &euro;|"></span></label>
             </div>
             <div class="form-group row" style="margin-left: 10px; margin-bottom: 5px;">
