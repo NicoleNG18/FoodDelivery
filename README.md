@@ -6,10 +6,10 @@
 Overview:
 -----------------
 
-Food Delivery is web application for making food orders from restaurants.
-Before registration, you only can view the menu and maybe choose dish.
-After registration and login you can add some products to your cart, add contact number and address for delivery and
-make order.
+Food Delivery is a web application for making food orders from restaurants.
+Before registration, you can only view the menu and maybe choose a dish or dishes.
+After registration and login you can add some products to your cart, contact number and address for delivery and
+make an order.
 
 [//]: # ()
 
@@ -118,13 +118,13 @@ Before registration people can view the menu and submit something in the contact
 
 There are three types of users: ADMIN, WORKER, USER.
 After registration, everyone automatically gets the "USER" role.
-After that, only the admin can change roles.
+After that, only the admin is able to change roles.
 
 ADMIN functionalities
 
 - The admin of the application is one person, who is manually set up
-- View all users along with their details and change their roles (can add or remove user role "WORKER")
-- View all orders history and finish orders which are in progress they are already delivered
+- View all users along with their details and change their roles (add or remove user role "WORKER")
+- View all orders' history and finish or cancel orders 
 - Add, edit or delete product from the menu
 - View its personal information, but cannot edit anything
 
@@ -132,7 +132,7 @@ WORKER functionalities:
 
 - Manually set up workers are two - with usernames "workerOne" and "workerTwo"
 - Only view the menu
-- View all orders history and finish orders which are in progress they are already delivered
+- View all orders' history and finish or cancel orders
 - View its personal information and edit username
 
 USER functionalities:
@@ -141,7 +141,7 @@ USER functionalities:
 - Add products to the cart
 - Remove products from the cart
 - Make orders
-- View its own orders history and orders' details
+- View its own orders' history and orders' details
 - View its own cart
 - View its own personal information and edit username
 - View contact form and submit some message
@@ -167,8 +167,8 @@ Role user:
 
 SoftUni additional requirements:
 
-- Interceptor: the working time of the restaurant is 11AM-10PM. Outside the working hours when logged user tries to make
-  order, it will be redirected to information that the action is impossible at that moment.
+- Interceptor: the working time of the restaurant is 11AM-10PM. Outside the working hours when a logged user tries to make
+  order, it will be redirected to page which will inform user with the working time.
 - Fetch: displaying order's details
 - Error handling: global controller advice for not found object, specific controller exception for wrong menu category.
 Whitelabel error page replaced with custom error.html page.
