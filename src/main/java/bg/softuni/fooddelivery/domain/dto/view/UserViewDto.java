@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserViewDto {
-
     private Long id;
     private String firstName;
     private String lastName;
@@ -16,7 +15,6 @@ public class UserViewDto {
     private String phoneNumber;
     private Integer age;
     private GenderEnum gender;
-
     private List<UserRoleEntity> roles;
 
     public UserViewDto() {
@@ -112,4 +110,5 @@ public class UserViewDto {
     public boolean hasRoleWorker(){
         return getRolesNames().contains("WORKER");
     }
+
 }

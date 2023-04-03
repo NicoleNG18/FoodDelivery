@@ -15,4 +15,5 @@ public class WrongCategoryException extends RuntimeException{
     public WrongCategoryException(String category) {
         this.category = category;
     }
+
 }

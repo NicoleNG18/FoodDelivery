@@ -1,6 +1,7 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
 import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
+import bg.softuni.fooddelivery.validation.product.ValidProductName;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,7 +13,8 @@ import java.math.BigDecimal;
 import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
 
 public class AddProductBindingDto {
-    @NotEmpty(message = PRODUCT_NAME_REQUIRED)
+    //    @NotEmpty(message = PRODUCT_NAME_REQUIRED)
+    @ValidProductName
     private String name;
     @Positive(message = POSITIVE_PRICE)
     @NotNull(message = PRICE_REQUIRED)
@@ -61,4 +63,5 @@ public class AddProductBindingDto {
         this.description = description;
         return this;
     }
+
 }

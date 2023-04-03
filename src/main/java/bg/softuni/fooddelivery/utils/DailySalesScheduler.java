@@ -18,8 +18,7 @@ public class DailySalesScheduler {
         this.promotionService = promotionService;
     }
 
-
-    @Scheduled(cron = "0 47 20 * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void changePromotions() {
 
         final DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();

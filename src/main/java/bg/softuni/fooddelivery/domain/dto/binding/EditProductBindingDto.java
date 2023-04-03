@@ -35,4 +35,5 @@ public class EditProductBindingDto {
         this.price = price;
         return this;
     }
+
 }

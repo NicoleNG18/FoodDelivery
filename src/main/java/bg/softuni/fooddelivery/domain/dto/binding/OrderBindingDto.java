@@ -3,6 +3,7 @@ package bg.softuni.fooddelivery.domain.dto.binding;
 import bg.softuni.fooddelivery.domain.enums.Discount;
 import bg.softuni.fooddelivery.validation.DiscountMatch;
 import bg.softuni.fooddelivery.validation.ValidPhoneNumber;
+import bg.softuni.fooddelivery.validation.order.ValidAddress;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;
@@ -14,9 +15,8 @@ import static bg.softuni.fooddelivery.constants.ErrorMessages.CONTACT_NUMBER_REQ
 public class OrderBindingDto {
 
     private String comment;
-    @NotEmpty(message = ADDRESS_REQUIRED)
+    @ValidAddress
     private String address;
-
     @DiscountMatch
     private String discount;
     @ValidPhoneNumber

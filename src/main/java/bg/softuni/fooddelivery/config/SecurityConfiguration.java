@@ -58,7 +58,11 @@ public class SecurityConfiguration {
                 .and().logout()
                 .logoutUrl("/users/logout")
                 .logoutSuccessUrl("/")
-                .invalidateHttpSession(true);
+                .invalidateHttpSession(true)
+                .and()
+                .rememberMe()
+                .key("placeForUniqueKeyAtNikolFoodDeliveryProject")
+                .tokenValiditySeconds(5 * 24 * 60 * 60);
 
         return httpSecurity.build();
     }

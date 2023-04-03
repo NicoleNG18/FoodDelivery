@@ -7,29 +7,17 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class OrderViewDto {
-
     private Long id;
-
     private BigDecimal price;
-
     private LocalDateTime createdOn;
-
     private LocalDateTime deliveredOn;
-
     private String address;
-
     private String contactNumber;
-
     private CartEntity cart;
-
     private OrderStatusEnum status;
-
     private String client;
-
     private String discount;
-
     private String comment;
-
 
     public OrderViewDto() {
     }
@@ -75,9 +63,8 @@ public class OrderViewDto {
         return client;
     }
 
-    public OrderViewDto setClient(String client) {
+    public void setClient(String client) {
         this.client = client;
-        return this;
     }
 
     public LocalDateTime getCreatedOn() {
@@ -133,6 +120,7 @@ public class OrderViewDto {
     public OrderStatusEnum getStatus() {
         return status;
     }
+
 }
 
 

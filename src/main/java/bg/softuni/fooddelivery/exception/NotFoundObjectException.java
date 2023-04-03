@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class NotFoundObjectException extends RuntimeException {
-
     private final Long objectId;
 
     private final String objectType;
@@ -23,4 +22,5 @@ public class NotFoundObjectException extends RuntimeException {
         this.objectId = productId;
         this.objectType = objectType;
     }
+
 }

@@ -1,6 +1,5 @@
 package bg.softuni.fooddelivery.domain.entities;
 
-import bg.softuni.fooddelivery.domain.enums.Discount;
 import bg.softuni.fooddelivery.domain.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 
@@ -89,9 +88,8 @@ public class OrderEntity extends BaseEntity {
         return deliveredOn;
     }
 
-    public OrderEntity setDeliveredOn(LocalDateTime deliveredOn) {
+    public void setDeliveredOn(LocalDateTime deliveredOn) {
         this.deliveredOn = deliveredOn;
-        return this;
     }
 
     public String getComment() {

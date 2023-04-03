@@ -1,10 +1,9 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
-import bg.softuni.fooddelivery.validation.FieldMatch;
-import bg.softuni.fooddelivery.validation.UniqueUserEmail;
-import bg.softuni.fooddelivery.validation.UniqueUsername;
-import bg.softuni.fooddelivery.validation.ValidPhoneNumber;
+import bg.softuni.fooddelivery.validation.*;
+import bg.softuni.fooddelivery.validation.contact.ValidPersonName;
+import bg.softuni.fooddelivery.validation.user.ValidPassword;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -16,21 +15,21 @@ import static bg.softuni.fooddelivery.constants.Messages.*;
         message = MATCHING_PASSWORDS)
 public class UserRegistrationBindingDto {
 
-    @Size(min =2,max = 15,message = FIRST_NAME_BETWEEN)
+    @ValidPersonName
     private String firstName;
 
-    @Size(min =2,max = 15,message = LAST_NAME_BETWEEN)
+    @ValidPersonName
     private String lastName;
 
     @UniqueUsername(message = UNIQUE_USERNAME)
-    @Size(min =2,message = USERNAME_MINIMUM)
+    @ValidUsername
     private String username;
 
-    @NotEmpty(message = EMAIL_REQUIRED)
+    @ValidEmail
     @UniqueUserEmail(message = EMAIL_UNIQUE)
     private String email;
 
-    @Size(min =8,message = PASSWORD_MINIMUM)
+    @ValidPassword
     private String password;
 
     private String confirmPassword;

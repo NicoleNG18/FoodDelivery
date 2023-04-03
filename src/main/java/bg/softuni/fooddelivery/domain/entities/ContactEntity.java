@@ -68,8 +68,8 @@ public class ContactEntity extends BaseEntity {
         return createdOn;
     }
 
-    public ContactEntity setCreatedOn(LocalDateTime createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
-        return this;
     }
+
 }

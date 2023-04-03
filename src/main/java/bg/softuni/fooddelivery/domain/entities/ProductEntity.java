@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity{
-
     @Column(nullable = false)
     private String name;
 
@@ -21,6 +20,9 @@ public class ProductEntity extends BaseEntity{
 
     @Column(nullable = false,columnDefinition = "TEXT")
     private String description;
+
+    public ProductEntity() {
+    }
 
     public String getName() {
         return name;

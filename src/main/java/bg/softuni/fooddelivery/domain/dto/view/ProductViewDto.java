@@ -5,12 +5,9 @@ import bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum;
 import java.math.BigDecimal;
 
 public class ProductViewDto {
-
     private Long id;
     private String name;
-
     private ProductCategoryEnum category;
-
     private BigDecimal price;
     private String description;
 
@@ -61,4 +58,5 @@ public class ProductViewDto {
         this.description = description;
         return this;
     }
+
 }

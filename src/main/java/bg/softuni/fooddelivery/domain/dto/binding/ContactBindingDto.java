@@ -1,16 +1,15 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import bg.softuni.fooddelivery.validation.ValidEmail;
+import bg.softuni.fooddelivery.validation.contact.ValidPersonName;
 import jakarta.validation.constraints.Size;
 
 import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
 
 public class ContactBindingDto {
-    @Size(min = 2, max = 15, message = NAME_BETWEEN)
+    @ValidPersonName
     private String name;
-    @NotEmpty(message = EMAIL_REQUIRED)
-    @Email(message = EMAIL_VALID)
+    @ValidEmail
     private String email;
     @Size(min = 3, message = SUBJECT_MINIMUM)
     private String subject;
@@ -55,4 +54,5 @@ public class ContactBindingDto {
         this.description = description;
         return this;
     }
+
 }

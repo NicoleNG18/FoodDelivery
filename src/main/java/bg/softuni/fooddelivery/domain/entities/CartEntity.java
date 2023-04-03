@@ -36,18 +36,16 @@ public class CartEntity extends BaseEntity {
         return productsSum;
     }
 
-    public CartEntity setProductsSum(BigDecimal productsSum) {
+    public void setProductsSum(BigDecimal productsSum) {
         this.productsSum = productsSum;
-        return this;
     }
 
     public Long getCountProducts() {
         return countProducts;
     }
 
-    public CartEntity setCountProducts(Long countProducts) {
+    public void setCountProducts(Long countProducts) {
         this.countProducts = countProducts;
-        return this;
     }
 
     public void addProduct(ProductEntity product) {
@@ -60,7 +58,6 @@ public class CartEntity extends BaseEntity {
 
         this.setProductsSum(sum.add(productPrice));
         this.countProducts++;
-
     }
 
     public void decreaseProductsSum(BigDecimal productPrice) {

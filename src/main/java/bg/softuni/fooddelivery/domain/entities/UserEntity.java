@@ -148,4 +148,5 @@ public class UserEntity extends BaseEntity {
         this.orders = orders;
         return this;
     }
+
 }
