@@ -28,8 +28,8 @@
           <th scope="col" class="text-center">Created on</th>
           <th scope="col" class="text-center">Delivered on</th>
           <th scope="col" class="text-center">Status</th>
-          <th scope="col" class="text-center" sec:authorize="hasAuthority('ROLE_WORKER')">Finish</th>
-          <th scope="col" class="text-center" sec:authorize="hasAuthority('ROLE_WORKER')">Cancel</th>
+          <th scope="col" class="text-center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">Finish</th>
+          <th scope="col" class="text-center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">Cancel</th>
           <th scope="col" class="text-center">More details</th>
         </tr>
         </thead>
@@ -41,7 +41,7 @@
           <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
           <td th:text="*{#temporals.format(deliveredOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
           <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">Delivered</td>
-          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAuthority('ROLE_WORKER')" >
+          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')" >
             <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
                     th:method="PATCH"
                   th:action="@{/orders/finish/{id}(id=${order.id})}"
@@ -50,7 +50,7 @@
               >Finish order</button>
             </form>
           </td>
-          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAuthority('ROLE_WORKER')" >
+          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')" >
             <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
                   th:method="PATCH"
                   th:action="@{/orders/cancel/{id}(id=${order.id})}"

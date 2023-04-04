@@ -29,15 +29,17 @@ public class SecurityConfiguration {
                 //for the static resources
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 //visible for everyone
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/",
+                        "/menu",
+                        "/menu/**",
+                        "/contact",
+                        "/users/profile").permitAll()
                 //for anonymous users
                 .requestMatchers("/users/login"
                         , "/users/register",
                         "/users/login-error",
                         "/",
-                        "/contact",
-                        "/menu",
-                        "/menu/**").anonymous()
+                        "/contact").anonymous()
                 //for users
                 .requestMatchers("/menu/**",
                         "/menu",
@@ -49,7 +51,8 @@ public class SecurityConfiguration {
                         "/cart",
                         "/orders/details/**",
                         "/orders/history",
-                        "/users/profile").hasRole(UserRoleEnum.USER.name())
+                        "/users/profile",
+                        "/users/profile/**").hasRole(UserRoleEnum.USER.name())
                 //for workers
                 .requestMatchers("/",
                         "/menu",
@@ -59,7 +62,8 @@ public class SecurityConfiguration {
                         "/orders/all/history",
                         "/users/profile").hasRole(UserRoleEnum.WORKER.name())
                 //for admins
-                .requestMatchers("/",
+                .requestMatchers(
+                        "/",
                         "/products/add",
                         "/users/all",
                         "/menu",
@@ -68,7 +72,8 @@ public class SecurityConfiguration {
                         "/orders/all/history",
                         "/users/change/**",
                         "/users/profile",
-                        "/users/profile/**").hasAnyRole(UserRoleEnum.ADMIN.name())
+                        "/users/profile/**")
+                .hasRole(UserRoleEnum.ADMIN.name())
 
                 .anyRequest()
                 .authenticated()
