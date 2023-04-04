@@ -8,8 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static bg.softuni.fooddelivery.constants.Messages.INVALID_USERNAME;
-import static bg.softuni.fooddelivery.constants.Messages.UNIQUE_USERNAME;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.UNIQUE_USERNAME;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

@@ -29,25 +29,50 @@ public class SecurityConfiguration {
                 //for the static resources
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 //visible for everyone
-                .requestMatchers("/",
-                        "/users/login",
-                        "/users/register",
+                .requestMatchers("/").permitAll()
+                //for anonymous users
+                .requestMatchers("/users/login"
+                        , "/users/register",
                         "/users/login-error",
+                        "/",
                         "/contact",
                         "/menu",
-                        "/menu/**",
-                        "/api/order/details/all",
-                        "/closed").permitAll()
+                        "/menu/**").anonymous()
                 //for users
-                .requestMatchers( "/cart/**","/orders/history","/orders/finalize"
-                        ,"/orders/details/**").hasRole(UserRoleEnum.USER.name())
-//                TODO:PERMIT LOGIN FOR AUTHENTICATED USER
-                //for workers and admin
-                .requestMatchers("orders/**","/orders/finish/**").hasAnyRole(UserRoleEnum.WORKER.name(),
-                        UserRoleEnum.ADMIN.name())
-                .requestMatchers("/products/**").hasAnyRole(UserRoleEnum.ADMIN.name())
+                .requestMatchers("/menu/**",
+                        "/menu",
+                        "/closed",
+                        "/contact",
+                        "/users/edit/**",
+                        "/orders/finalize",
+                        "/",
+                        "/cart",
+                        "/orders/details/**",
+                        "/orders/history",
+                        "/users/profile").hasRole(UserRoleEnum.USER.name())
+                //for workers
+                .requestMatchers("/",
+                        "/menu",
+                        "/menu/**",
+                        "/users/edit/**",
+                        "/orders/details/**",
+                        "/orders/all/history",
+                        "/users/profile").hasRole(UserRoleEnum.WORKER.name())
+                //for admins
+                .requestMatchers("/",
+                        "/products/add",
+                        "/users/all",
+                        "/menu",
+                        "/menu/**",
+                        "/products/edit/**",
+                        "/orders/all/history",
+                        "/users/change/**",
+                        "/users/profile",
+                        "/users/profile/**").hasAnyRole(UserRoleEnum.ADMIN.name())
+
                 .anyRequest()
                 .authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/users/login")
@@ -55,10 +80,13 @@ public class SecurityConfiguration {
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/")
                 .failureForwardUrl("/users/login-error")
-                .and().logout()
+
+                .and()
+                .logout()
                 .logoutUrl("/users/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
+
                 .and()
                 .rememberMe()
                 .key("placeForUniqueKeyAtNikolFoodDeliveryProject")
@@ -71,4 +99,5 @@ public class SecurityConfiguration {
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new FoodDeliveryUserDetailsService(userRepository);
     }
+
 }

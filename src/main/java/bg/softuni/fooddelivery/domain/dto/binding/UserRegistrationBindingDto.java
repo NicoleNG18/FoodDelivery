@@ -8,7 +8,7 @@ import bg.softuni.fooddelivery.validation.user.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.*;
 import static bg.softuni.fooddelivery.constants.Messages.*;
 
 @FieldMatch(firstField = PASSWORD,

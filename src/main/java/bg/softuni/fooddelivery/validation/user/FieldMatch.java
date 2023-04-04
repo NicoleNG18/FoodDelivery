@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static bg.softuni.fooddelivery.constants.Messages.FIELDS_MATCH;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.FIELDS_MATCH;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

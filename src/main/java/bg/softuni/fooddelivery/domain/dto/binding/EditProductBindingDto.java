@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.*;
 
 public class EditProductBindingDto {
     @NotEmpty(message = DESCRIPTION_NOT_EMPTY)

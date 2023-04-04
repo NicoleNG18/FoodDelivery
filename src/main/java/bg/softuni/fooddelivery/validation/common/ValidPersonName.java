@@ -8,7 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static bg.softuni.fooddelivery.constants.Messages.INVALID_CONTACT_NAME;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.INVALID_CONTACT_NAME;
+
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

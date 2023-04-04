@@ -4,7 +4,7 @@ import bg.softuni.fooddelivery.validation.common.ValidEmail;
 import bg.softuni.fooddelivery.validation.common.ValidPersonName;
 import jakarta.validation.constraints.Size;
 
-import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.*;
 
 public class ContactBindingDto {
     @ValidPersonName

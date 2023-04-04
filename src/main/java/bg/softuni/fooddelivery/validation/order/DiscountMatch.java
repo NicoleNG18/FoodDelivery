@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static bg.softuni.fooddelivery.constants.Messages.INVALID_DISCOUNT;
+import static bg.softuni.fooddelivery.constants.ValidationErrorMessages.INVALID_DISCOUNT;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
