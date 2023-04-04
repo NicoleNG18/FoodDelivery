@@ -65,6 +65,7 @@ public class OrderController {
                                       Principal principal) {
 
         model.addAttribute(ORDERS, this.orderService.getOrdersByUser(principal.getName()));
+        model.addAttribute(COUNT_PRODUCTS,this.orderService.getProductsInTheCart(principal.getName()).size());
 
         return "orders-history-user";
     }

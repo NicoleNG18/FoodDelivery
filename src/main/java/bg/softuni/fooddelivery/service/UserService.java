@@ -11,9 +11,12 @@ import bg.softuni.fooddelivery.exception.NotFoundObjectException;
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import bg.softuni.fooddelivery.repositories.UserRoleRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +34,9 @@ public class UserService {
     private final UserRoleRepository userRoleRepository;
     private final CartService cartService;
 
+//    private UserDetailsService userDetailsService;
+
+
     public UserService(ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder,
                        UserRepository userRepository,
@@ -43,6 +49,7 @@ public class UserService {
         this.userRoleService = userRoleService;
         this.userRoleRepository = userRoleRepository;
         this.cartService = cartService;
+//        this.userDetailsService = userDetailsService;
     }
 
     public void registerUser(UserRegistrationBindingDto userToRegister) {
@@ -108,26 +115,13 @@ public class UserService {
 
     }
 
-    public boolean editUser(Long id,
+    public void editUser(Long id,
                             EditUserBindingDto editedUser) {
 
         UserEntity user = this.userRepository.findUserEntityById(id);
 
-        Optional<UserEntity> byUsername = this.userRepository.findUserEntityByUsername(editedUser.getUsername());
-
-        if (byUsername.isPresent()) {
-            if (byUsername.get().getId().equals(id)) {
-                return false;
-            }
-        }
-
-        if (byUsername.isEmpty()) {
-            user.setUsername(editedUser.getUsername());
-            this.userRepository.save(user);
-            return false;
-        }
-
-        return true;
+        user.setFirstName(editedUser.getFirstName()).setLastName(editedUser.getLastName());
+        this.userRepository.saveAndFlush(user);
     }
 
 }

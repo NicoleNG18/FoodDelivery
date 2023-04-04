@@ -17,30 +17,29 @@
       th:method="patch" th:object="${user}" th:action="@{/users/edited/{id}(id=${user.id})}">
     <h3 class="text-white text-center mb-4">Edit user</h3>
 
-<!--    <small th:if="${errorUser}">Username already in use</small>-->
-
     <div class="form-group row mb-3">
         <label for="firstName" class="col-sm-2 col-form-label text-white">First name</label>
         <div class="col-sm-10">
             <input type="text"
-                   th:value="*{firstName}"
-                   readonly class="form-control-plaintext text-white" id="firstName" name="price">
+                   th:field="*{firstName}"
+                   th:errorclass="is-invalid"
+                   class="form-control" id="firstName" name="price">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="lastName" class="col-sm-2 col-form-label text-white">Last name</label>
         <div class="col-sm-10">
             <input type="text"
-                   th:value="*{lastName}"
-                   readonly class="form-control-plaintext text-white" id="lastName" name="price">
+                   th:field="*{lastName}"
+                   th:errorclass="is-invalid"
+                   class="form-control" id="lastName" name="price">
         </div>
     </div>
     <div class="form-group row mt-2">
         <label for="username" class="col-sm-2 col-form-label text-white">Username</label>
         <div class="col-sm-10 mb-2">
-            <input class="form-control"
-                   th:field="*{username}"
-                   th:errorclass="is-invalid"
+            <input readonly class="form-control-plaintext text-white"
+                   th:value="*{username}"
                    id="username">
         </div>
     </div>

@@ -33,6 +33,10 @@ public class UserController {
                                 Principal principal) {
 
         model.addAttribute(USER, this.userService.getUserViewByUsername(principal.getName()));
+        model.addAttribute(COUNT_PRODUCTS,
+                this.userService
+                        .getUserByUsername(principal.getName()).getCart()
+                        .getCountProducts());
 
         return "user-profile";
     }
@@ -82,9 +86,14 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String getEditUser(@PathVariable("id") Long id,
-                              Model model) {
+                              Model model,
+                              Principal principal) {
 
         model.addAttribute(USER, this.userService.getUserById(id));
+        model.addAttribute(COUNT_PRODUCTS,
+                this.userService
+                        .getUserByUsername(principal.getName()).getCart()
+                        .getCountProducts());
 
         return "edit-user";
     }
@@ -105,9 +114,7 @@ public class UserController {
 
         }
 
-        if (this.userService.editUser(id, editedUser)) {
-            return "redirect:/users/edit/" + id;
-        }
+        this.userService.editUser(id, editedUser);
 
         return "redirect:/users/profile/{id}";
     }
