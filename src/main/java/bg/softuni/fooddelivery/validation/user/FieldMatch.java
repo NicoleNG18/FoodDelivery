@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.user;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -11,9 +11,7 @@ import java.lang.annotation.Target;
 import static bg.softuni.fooddelivery.constants.Messages.FIELDS_MATCH;
 
 @Retention(RetentionPolicy.RUNTIME)
-//how long annotation can be retained
 @Target(ElementType.TYPE)
-//Indicates the contexts in which  we can use this annotation
 @Constraint(validatedBy = FieldMatchValidator.class)
 public @interface FieldMatch {
 

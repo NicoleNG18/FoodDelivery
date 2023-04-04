@@ -1,9 +1,10 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
 import bg.softuni.fooddelivery.domain.enums.GenderEnum;
-import bg.softuni.fooddelivery.validation.*;
-import bg.softuni.fooddelivery.validation.contact.ValidPersonName;
-import bg.softuni.fooddelivery.validation.user.ValidPassword;
+import bg.softuni.fooddelivery.validation.common.ValidEmail;
+import bg.softuni.fooddelivery.validation.common.ValidPersonName;
+import bg.softuni.fooddelivery.validation.common.ValidPhoneNumber;
+import bg.softuni.fooddelivery.validation.user.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 

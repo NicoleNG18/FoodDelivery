@@ -1,16 +1,6 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
-import bg.softuni.fooddelivery.validation.UniqueUserEmail;
-import bg.softuni.fooddelivery.validation.UniqueUsername;
-import bg.softuni.fooddelivery.validation.ValidUsername;
-import bg.softuni.fooddelivery.validation.contact.ValidPersonName;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-
-import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
-import static bg.softuni.fooddelivery.constants.ErrorMessages.USERNAME_MINIMUM;
+import bg.softuni.fooddelivery.validation.common.ValidPersonName;
 
 public class EditUserBindingDto {
     @ValidPersonName

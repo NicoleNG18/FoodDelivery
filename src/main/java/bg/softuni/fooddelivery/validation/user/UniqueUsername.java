@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.user;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,15 +9,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import static bg.softuni.fooddelivery.constants.Messages.INVALID_USERNAME;
+import static bg.softuni.fooddelivery.constants.Messages.UNIQUE_USERNAME;
 
 @Retention(RetentionPolicy.RUNTIME)
-//how long annotation can be retained
 @Target(ElementType.FIELD)
-//Indicates the contexts in which  we can use this annotation
 @Constraint(validatedBy = UniqueUserUsernameValidator.class)
 public @interface UniqueUsername {
 
-    String message() default INVALID_USERNAME;
+    String message() default UNIQUE_USERNAME;
 
     Class<?>[] groups() default {};
 

@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.user;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

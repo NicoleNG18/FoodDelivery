@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import static bg.softuni.fooddelivery.constants.ErrorMessages.*;
 
 public class AddProductBindingDto {
-    //    @NotEmpty(message = PRODUCT_NAME_REQUIRED)
     @ValidProductName
     private String name;
     @Positive(message = POSITIVE_PRICE)

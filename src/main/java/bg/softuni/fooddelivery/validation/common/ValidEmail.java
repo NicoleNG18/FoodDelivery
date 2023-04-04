@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.common;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -8,16 +8,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static bg.softuni.fooddelivery.constants.Messages.INVALID_DISCOUNT;
+import static bg.softuni.fooddelivery.constants.Messages.INVALID_EMAIL;
 
 @Retention(RetentionPolicy.RUNTIME)
-//how long annotation can be retained
 @Target(ElementType.FIELD)
-//Indicates the contexts in which  we can use this annotation
-@Constraint(validatedBy = DiscountMatchValidator.class)
-public @interface DiscountMatch{
-
-    String message() default INVALID_DISCOUNT;
+@Constraint(validatedBy = ValidEmailValidator.class)
+public @interface ValidEmail {
+    String message() default INVALID_EMAIL;
 
     Class<?>[] groups() default {};
 

@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.user;
 
 import bg.softuni.fooddelivery.repositories.UserRepository;
 import jakarta.validation.ConstraintValidator;

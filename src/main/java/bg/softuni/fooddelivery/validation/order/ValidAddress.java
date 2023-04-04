@@ -1,6 +1,5 @@
 package bg.softuni.fooddelivery.validation.order;
 
-import bg.softuni.fooddelivery.validation.ValidUsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

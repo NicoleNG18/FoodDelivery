@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation.contact;
+package bg.softuni.fooddelivery.validation.common;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -12,7 +12,7 @@ import static bg.softuni.fooddelivery.constants.Messages.INVALID_CONTACT_NAME;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = ValidContactNameValidator.class)
+@Constraint(validatedBy = ValidPersonNameValidator.class)
 public @interface ValidPersonName {
     String message() default INVALID_CONTACT_NAME;
 

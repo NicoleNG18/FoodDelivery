@@ -1,4 +1,4 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.common;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -8,15 +8,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static bg.softuni.fooddelivery.constants.Messages.INVALID_EMAIL;
+import static bg.softuni.fooddelivery.constants.Messages.INVALID_PHONE_NUMBER;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = ValidEmailValidator.class)
-public @interface ValidEmail {
-    String message() default INVALID_EMAIL;
+@Constraint(validatedBy = ValidPhoneNumberValidator.class)
+public @interface ValidPhoneNumber {
+
+    String message() default INVALID_PHONE_NUMBER;
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
+

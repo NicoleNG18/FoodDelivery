@@ -1,6 +1,7 @@
-package bg.softuni.fooddelivery.validation;
+package bg.softuni.fooddelivery.validation.order;
 
 import bg.softuni.fooddelivery.domain.enums.Discount;
+import bg.softuni.fooddelivery.validation.order.DiscountMatch;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

@@ -1,7 +1,7 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
-import bg.softuni.fooddelivery.validation.ValidEmail;
-import bg.softuni.fooddelivery.validation.contact.ValidPersonName;
+import bg.softuni.fooddelivery.validation.common.ValidEmail;
+import bg.softuni.fooddelivery.validation.common.ValidPersonName;
 import jakarta.validation.constraints.Size;
 
 import static bg.softuni.fooddelivery.constants.ErrorMessages.*;

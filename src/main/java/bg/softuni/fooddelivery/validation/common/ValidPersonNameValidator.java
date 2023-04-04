@@ -1,9 +1,9 @@
-package bg.softuni.fooddelivery.validation.contact;
+package bg.softuni.fooddelivery.validation.common;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ValidContactNameValidator implements ConstraintValidator<ValidPersonName, String> {
+public class ValidPersonNameValidator implements ConstraintValidator<ValidPersonName, String> {
     @Override
     public boolean isValid(String value,
                            ConstraintValidatorContext context) {

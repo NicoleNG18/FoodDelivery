@@ -1,16 +1,8 @@
 package bg.softuni.fooddelivery.domain.dto.binding;
 
-import bg.softuni.fooddelivery.domain.enums.Discount;
-import bg.softuni.fooddelivery.validation.DiscountMatch;
-import bg.softuni.fooddelivery.validation.ValidPhoneNumber;
+import bg.softuni.fooddelivery.validation.order.DiscountMatch;
+import bg.softuni.fooddelivery.validation.common.ValidPhoneNumber;
 import bg.softuni.fooddelivery.validation.order.ValidAddress;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-
-import static bg.softuni.fooddelivery.constants.ErrorMessages.ADDRESS_REQUIRED;
-import static bg.softuni.fooddelivery.constants.ErrorMessages.CONTACT_NUMBER_REQUIRED;
 
 public class OrderBindingDto {
 
