@@ -1,8 +1,6 @@
 # FoodDelivery
 
-[//]: # (This is my final project for SoftUni Java Web module. It's made during Spring Advanced course in SoftUni and has only educational purpose at this moment.)
-
-[//]: # (The project is still in progress. Until 9th April it will be ready for the online project defense. After that with all new knowledge, I'll continue developing it.)
+This is my final project for SoftUni Java Web module.
 
 Overview:
 -----------------
@@ -10,7 +8,7 @@ Overview:
 Food Delivery is a web application for making food orders from restaurants.
 Before registration, you can only view the menu and maybe choose a dish or dishes.
 After registration and login you can add some products to your cart, contact number and address for delivery and
-make an order.
+make an order. If you have discount code, you can use it for 10% discount.(valid codes at the moment: "FOOD23", "PIZZA4", "EASTER")
 
 Functionalities:
 -----------------------------------------------------
@@ -146,7 +144,7 @@ Pages:
 Test accounts:
 ---------------------------------------------
 
-Password for all: "topsecret"
+Password for all: "secret1@"
 
 Role admin:
 
@@ -163,10 +161,10 @@ Role user:
 - username: ivan
 
 SoftUni additional requirements:
+--------------------------------------
 
 - Interceptor: the working time of the restaurant is 11AM-10PM. Outside the working hours when a logged user tries to
-  make
-  order, it will be redirected to page which will inform user with the working time.
+  make order, it will be redirected to page which will inform user with the working time.
 - Fetch: displaying order's details
 - Error handling: global controller advice for not found object, specific controller exception for wrong menu category.
   Whitelabel error page replaced with custom error.html page.
