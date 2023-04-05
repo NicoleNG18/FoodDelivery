@@ -1,64 +1,93 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Profile</title>
     <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
-<body>
+<body style="font-family: Georgia, serif;">
 
 <div>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
 <div class="row profile-form d-flex justify-content-center align-items-center" th:object="${user}">
+
     <div class="col mb-4 mb-lg-0">
+
         <div class="main-card mb-3" style="border-radius: .5rem;">
+
             <div class="row first-row g-0">
+
                 <div class="col-md-4 text-center"
                      style="border-top-left-radius: .5rem;
                      border-bottom-left-radius: .5rem;
-                     background-color:#80aaa3">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                     background-color:#49857b">
+
+                    <img th:if="*{gender.equals(T(bg.softuni.fooddelivery.domain.enums.GenderEnum).FEMALE)}"
+                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                          alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
-                    <h5 th:text="|*{firstName} *{lastName}|">name</h5>
-                        <a sec:authorize="!hasAuthority('ROLE_ADMIN')" class="edit-button-a text-center" type="submit" style="text-decoration: none; "
-                           th:href="@{/users/edit/{id}(id=${user.id})}"
-                        >Edit</a>
+
+                    <img th:if="*{gender.equals(T(bg.softuni.fooddelivery.domain.enums.GenderEnum).MALE)}"
+                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                         alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
+
+                    <h5 style="color: white" th:text="|*{firstName} *{lastName}|">name</h5>
+
+                    <a sec:authorize="!hasAuthority('ROLE_ADMIN')" class="edit-button-a text-center" type="submit"
+                       style="text-decoration: none; "
+                       th:href="@{/users/edit/{id}(id=${user.id})}"
+                    >Edit</a>
+
                 </div>
+
                 <div class="col-md-8">
+
                     <div class="card-body p-4">
+
                         <h4>Information</h4>
+
                         <hr class="mt-0 mb-4">
+
                         <div class="row pt-1">
                             <div class="col-6 mb-3">
                                 <h5>Email</h5>
                                 <p th:text="*{email}" class="text-muted" style="font-weight: 500">info@example.com</p>
                             </div>
+
                             <div class="col-6 mb-3">
                                 <h5>Phone</h5>
-                                <p  th:text="*{phoneNumber}" class="text-muted" style="font-weight: 500">123 456 789</p>
+                                <p th:text="*{phoneNumber}" class="text-muted" style="font-weight: 500">123 456 789</p>
                             </div>
+
                         </div>
+
                         <hr class="mt-0 mb-4">
+
                         <div class="row pt-1">
+
                             <div class="col-6 mb-3">
                                 <h5>Age</h5>
-                                <p class="text-muted" style="font-weight: 500"  th:text="*{age}">17</p>
+                                <p class="text-muted" style="font-weight: 500" th:text="*{age}">17</p>
                             </div>
+
                             <div class="col-6 mb-3">
                                 <h5>Gender</h5>
-                                <p class="text-muted" style="font-weight: 500" th:text="*{#strings.toLowerCase(gender)}">Female</p>
+                                <p class="text-muted" style="font-weight: 500"
+                                   th:text="*{#strings.toLowerCase(gender)}">Female</p>
                             </div>
+
                         </div>
+
                         <div class="d-flex eee justify-content-start">
                             <a href="#"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
                             <a href="#"><i class="fab fa-twitter fa-lg me-3"></i></a>
                             <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
                         </div>
+
                     </div>
                 </div>
             </div>

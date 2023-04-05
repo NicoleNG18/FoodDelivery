@@ -3,48 +3,64 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Orders history</title>
-  <th:block th:insert="~{/fragments/head}"></th:block>
+    <title>Orders history</title>
+    <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
 <body>
 
 <div>
-  <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
+<div class="container" style="background-color: #49857b; border-radius: 25px; font-family: Georgia, serif;">
+    <h3 class="text-center" style="color: white; margin-top: 10px;">My orders</h3>
 
-<h5 class="text-center" style="color: #2c504a; margin-top: 100px;">My orders</h5>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered mt-4">
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered mt-0">
-        <thead>
-        <tr style="background-color: #3a6661; color: white">
-          <th scope="col" class="text-center">Id</th>
-          <th scope="col" class="text-center">Price</th>
-          <th scope="col" class="text-center">Created on</th>
-          <th scope="col" class="text-center">Status</th>
-          <th scope="col" class="text-center">More details</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="order: ${orders}" th:object="${order}">
-          <th scope="row" th:text="*{id}" class="text-center" style="background-color: #93b5b1">1</th>
-          <td th:text="*{price}" class="text-center" style="background-color: #f4f1ed">0.00</td>
-          <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
-          <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">Delivered</td>
-          <td style="text-align: center;">
-            <a type="button" class="button-detail" style=" background-color: #93b5b1" th:href="@{/orders/details/{id}(id=${order.id})}">Details</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+                <thead>
+
+                <tr style="background-color: #3a6661; color: white">
+                    <th scope="col" class="text-center">Id</th>
+                    <th scope="col" class="text-center">Price</th>
+                    <th scope="col" class="text-center">Created on</th>
+                    <th scope="col" class="text-center">Status</th>
+                    <th scope="col" class="text-center">More details</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="order: ${orders}" th:object="${order}">
+
+                    <th scope="row" th:text="*{id}" class="text-center" style="background-color: #93b5b1; color: white">
+                        1
+                    </th>
+
+                    <td th:text="*{price}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+
+                    <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy')}" class="text-center"
+                        style="background-color: #f4f1ed">01-01-2010
+                    </td>
+
+                    <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">Delivered</td>
+
+                    <td style="text-align: center; background-color: #f4f1ed">
+                        <a type="button" class="button-detail" style=" background-color: #93b5b1"
+                           th:href="@{/orders/details/{id}(id=${order.id})}">Details</a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
     </div>
-  </div>
 </div>
-
 
 
 <th:block th:insert="~{fragments/footer}"></th:block>
