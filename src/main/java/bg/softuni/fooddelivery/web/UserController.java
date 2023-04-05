@@ -116,7 +116,7 @@ public class UserController {
 
         this.userService.editUser(id, editedUser);
 
-        return "redirect:/users/profile/{id}";
+        return "redirect:/users/profile";
     }
 
 }

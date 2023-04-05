@@ -1,25 +1,32 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <th:block th:insert="~{/fragments/head}"></th:block>
     <title>Error</title>
 </head>
-<body style="background-color: white">
 
-<div class="container text-center" style="background-color: #49857b; border-radius: 50px; margin-top: 250px; color:white">
+<body style="font-family: Georgia, serif; background-color: white">
 
-    <h1>Error! Probably you have tried to do something that you don't have permission for.
-        We will figure this and message you. Click <a th:href="@{/}" style="color: #2c504a">here</a> to return to the home page.</h1>
+<div class="container text-center"
+     style="background-color: #49857b;
+border-radius: 50px;
+margin-top: 225px;
+color:white;
+width: 70%">
 
-
+    <h1 style="padding: 15px;">Error! You have tried to do something that you don't have permission for.
+        We will figure this and message you. Click <a th:href="@{/}" style="color: #2c504a">here</a> to return to the
+        home page.</h1>
 
 </div>
 
+<th:block th:insert="~{fragments/footer}"></th:block>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<th:block th:insert="~{fragments/footer}"></th:block>
+
 </body>
 
 </html>

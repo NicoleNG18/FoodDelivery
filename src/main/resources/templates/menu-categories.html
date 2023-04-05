@@ -3,71 +3,76 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Order food</title>
-  <th:block th:insert="~{/fragments/head}"></th:block>
+    <title>Menu</title>
+    <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
 <body>
 
 <div>
-  <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
-<div class="container">
+<div class="container" style="font-family: Georgia, serif;">
 
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <img src="/images/pizza.png" class="card-img" alt="pizza image">
-        <h5 class="card-title mb-1 mt-2">Pizza</h5>
-        <a th:href="@{/menu/{category}(category = 'pizza')}"
-        class="navigate-to mb-1">Explore pizzas</a>
-      </div>
+    <div class="row">
+
+        <div class="col">
+            <div class="card">
+                <img src="/images/pizza.png" class="card-img" alt="pizza image">
+                <h5 class="card-title mb-1 mt-2">Pizza</h5>
+                <a th:href="@{/menu/{category}(category = 'pizza')}"
+                   class="navigate-to mb-1">Explore pizzas</a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+
+                <img src="/images/tortilla.png" class="card-img" alt="pizza image">
+
+                <h5 class="card-title mb-1 mt-4">Tortilla</h5>
+                <a th:href="@{/menu/{category}(category = 'tortilla')}" class="navigate-to mb-1">Explore tortillas</a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <img src="/images/burger.png" class="card-img" alt="pizza image">
+                <h5 class="card-title mb-1 mt-2">Burgers</h5>
+                <a th:href="@{/menu/{category}(category = 'burger')}" class="navigate-to mb-1">Explore burgers</a>
+            </div>
+        </div>
     </div>
-    <div class="col">
-      <div class="card">
 
-        <img src="/images/tortilla.png" class="card-img" alt="pizza image">
+    <div class="row">
 
-        <h5 class="card-title mb-1 mt-4">Tortilla</h5>
-        <a th:href="@{/menu/{category}(category = 'tortilla')}" class="navigate-to mb-1">Explore tortillas</a>
-      </div>
+        <div class="col">
+            <div class="card">
+                <img src="/images/fries.png" class="card-img" alt="pizza image">
+                <h5 class="card-title mb-1 mt-2">French fries</h5>
+                <a th:href="@{/menu/{category}(category = 'fries')}" class="navigate-to mb-1">Explore french fries</a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <img src="/images/dessert.png" class="card-img mt-2 pb-0" alt="pizza image">
+                <h5 class="card-title mb-1 mt-4">Deserts</h5>
+                <a th:href="@{/menu/{category}(category = 'dessert')}" class="navigate-to mb-1">Explore deserts</a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <img src="/images/Kola-zero.png" class="card-img" alt="pizza image">
+                <h5 class="card-title mb-1 mt-4">Drinks</h5>
+                <a th:href="@{/menu/{category}(category = 'drink')}" class="navigate-to mb-1">Explore drinks</a>
+            </div>
+
+        </div>
+
     </div>
-    <div class="col">
-      <div class="card">
-        <img src="/images/burger.png" class="card-img" alt="pizza image">
-        <h5 class="card-title mb-1 mt-2">Burgers</h5>
-        <a th:href="@{/menu/{category}(category = 'burger')}" class="navigate-to mb-1">Explore burgers</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col">
-      <div class="card">
-        <img src="/images/fries.png" class="card-img" alt="pizza image">
-        <h5 class="card-title mb-1 mt-2">French fries</h5>
-        <a th:href="@{/menu/{category}(category = 'fries')}" class="navigate-to mb-1">Explore french fries</a>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="/images/dessert.png" class="card-img mt-2 pb-0" alt="pizza image">
-        <h5 class="card-title mb-1 mt-4">Deserts</h5>
-        <a th:href="@{/menu/{category}(category = 'dessert')}" class="navigate-to mb-1">Explore deserts</a>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="/images/Kola-zero.png" class="card-img" alt="pizza image">
-        <h5 class="card-title mb-1 mt-4">Drinks</h5>
-        <a th:href="@{/menu/{category}(category = 'drink')}" class="navigate-to mb-1">Explore drinks</a>
-      </div>
-    </div>
-  </div>
-
-
 
 </div>
 

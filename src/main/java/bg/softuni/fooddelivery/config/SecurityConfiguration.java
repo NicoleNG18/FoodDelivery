@@ -51,8 +51,7 @@ public class SecurityConfiguration {
                         "/cart",
                         "/orders/details/**",
                         "/orders/history",
-                        "/users/profile",
-                        "/users/profile/**").hasRole(UserRoleEnum.USER.name())
+                        "/users/profile").hasRole(UserRoleEnum.USER.name())
                 //for workers
                 .requestMatchers("/",
                         "/menu",
