@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <title>Order food</title>
-  <th:block th:insert="~{/fragments/head}"></th:block>
+    <title th:text="|Menu - ${category}|"></title>
+    <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
 <body>
 
 <div>
-  <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
-<div>
-  <h1 th:text="${#strings.capitalize(category)}" class="category-heading text-center" style="color:#2c504a"></h1>
+<div class="container"
+     style="background-color: #49857b;
+     border-radius: 25px;
+     font-family: Georgia, serif;
+     width: 80%;
+     margin-bottom: 60px;">
+
+    <h1 th:text="${#strings.capitalize(category)}" class="category-heading text-center text-white"></h1>
+
+    <table id="dtBasicExample" class="products-table"
+           style="width: 90%; margin-right: auto; margin-left: auto; margin-bottom: 0">
+
+        <tbody>
+
+        <tr class="row mb-2 mt-2 text-white" th:each="product : ${products}">
+
+            <td th:text="*{product.name}" style="font-weight: bold">Cheeseburger</td>
+
+            <td th:text="|*{product.price} &euro;|">Price</td>
+            <td th:text="|*{product.description}|">Description</td>
+
+            <td sec:authorize="isAuthenticated() && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')"
+                style="margin-bottom:10px">
+
+                <form th:method="PATCH"
+                      th:action="@{/cart/add/{id}(id=${product.id})}"
+                      th:object="${product}">
+                    <button class="order-button text-center text-decoration-none" type="submit"
+                    >Add to cart
+                    </button>
+                </form>
+
+            </td>
+
+            <td sec:authorize="hasAuthority('ROLE_ADMIN')" style="margin-bottom:10px">
+                <a class="order-button text-center text-decoration-none"
+                   th:href="@{/products/edit/{id}(id=${product.id})}"
+                >Edit product</a>
+            </td>
+
+            <td sec:authorize="hasAuthority('ROLE_ADMIN')" style="margin-bottom:10px">
+
+                <form th:method="delete"
+                      th:action="@{/products/delete/{id}(id=${product.id})}"
+                      th:object="${product}">
+                    <button class="order-button text-center text-decoration-none"
+                            type="submit" style="border-color: white"
+                    >Remove product
+                    </button>
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
 </div>
-
-
-<table id="dtBasicExample" class="products-table">
-  <tbody>
-  <tr  class="row mb-2 mt-2 text-white" th:each="product : ${products}">
-    <td th:text="*{product.name}" style="font-weight: bold">Tiger Nixon</td>
-    <td th:text="|*{product.price} &euro;|"></td>
-    <td th:text="|*{product.description}|">Edinburgh</td>
-    <td sec:authorize="isAuthenticated() && !hasAnyAuthority('ROLE_ADMIN','ROLE_WORKER')" style="margin-bottom:10px">
-      <form th:method="PATCH"
-            th:action="@{/cart/add/{id}(id=${product.id})}"
-            th:object="${product}">
-        <button class="order-button text-center text-decoration-none" type="submit"
-        >Add to cart</button>
-      </form>
-    </td>
-    <td sec:authorize="hasAuthority('ROLE_ADMIN')" style="margin-bottom:10px">
-      <a class="order-button text-center text-decoration-none"
-         th:href="@{/products/edit/{id}(id=${product.id})}"
-      >Edit product</a>
-     </td>
-    <td sec:authorize="hasAuthority('ROLE_ADMIN')" style="margin-bottom:10px">
-      <form th:method="delete"
-            th:action="@{/products/delete/{id}(id=${product.id})}"
-            th:object="${product}">
-        <button class="order-button text-center text-decoration-none"
-                type="submit" style="border-color: white"
-        >Remove product</button>
-
-      </form>
-    </td>
-  </tr>
-  </tbody>
-</table>
 
 <th:block th:insert="~{fragments/footer}"></th:block>
 

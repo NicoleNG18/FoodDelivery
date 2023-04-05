@@ -1,19 +1,15 @@
-.category-heading {
-    margin-top: 110px;
-}
-
 .products-table {
     background-color: #49857b;
     border-radius: 25px;
     margin-bottom: 100px;
-    width:70%;
-    margin-left:15%;
-    margin-right:15%;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
     margin-top: 20px;
 }
 
-tr{
-    border-bottom:#424242;
+tr {
+    border-bottom: #424242;
     border-style: solid;
 }
 
@@ -28,19 +24,19 @@ tr{
     margin-bottom: 10px;
 }
 
-.order-button{
+.order-button {
     background-color: white;
-    color:#2c504a;
+    color: #2c504a;
     border-radius: 10px;
-    border:none;
+    border: none;
     float: right;
     width: 30%;
     height: 100%;
 }
 
-.order-button:hover{
-    background-color:#2c504a;
-    color:white;
+.order-button:hover {
+    background-color: #2c504a;
+    color: white;
     transition: all 2000ms ease
 }
 

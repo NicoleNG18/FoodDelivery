@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Login</title>
@@ -13,11 +13,11 @@
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
-<div class="col-5 float-start">
+<div class="col-5 float-start mx-lg-5">
     <img alt="pizza delivery image" src="/images/pizzaDelivery.png" class="delivery-image">
 </div>
 
-<div class="col-5 float-end">
+<div class="col-5 float-end" style="font-family: Georgia, serif;">
 
     <form th:method="post"
           th:action="@{/users/login}"
@@ -51,6 +51,7 @@
                    placeholder="Enter password"
                    name="password"/>
         </div>
+
         <div class="mt-2" style="margin-left: 25px;">
             <input
                     type="checkbox"
@@ -67,7 +68,7 @@
             </div>
         </div>
 
-        <div class="login-12 text-center mt-2 mb-3" >
+        <div class="login-12 text-center mt-2 mb-3">
             <button type="submit" class="btn">Login</button>
         </div>
 

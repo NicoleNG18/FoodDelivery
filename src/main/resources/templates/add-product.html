@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>All users</title>
+    <title>Add users</title>
     <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 <body>
@@ -11,55 +11,72 @@
 <div>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
-<div class="container" style=" margin-right: auto; margin-left: auto; background-color: #49857b; border-radius: 25px; width: 70%">
-<form style="margin-top: 15px; margin-left: auto; margin-right: auto; width: 70%; justify-content: center"
-      th:method="post" th:action="@{/products/add}" th:object="${productDto}">
-    <h3 class="text-white text-center">Add product</h3>
-    <div class="form-group">
-        <label for="name" class="text-white">Product name</label>
-        <input type="text"
-               th:field="*{name}"
-               th:errorclass="is-invalid"
-               class="form-control" id="name" placeholder="Cheeseburger">
-        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('name')}"
-             th:text="${err}"/>
-    </div>
-    <div class="form-group">
-        <label for="category" class="form-label float-start text-white">Category</label>
-        <select id="category"
-                th:field="*{category}"
-                th:errorclass="is-invalid"
-                class="form-select text-secondary">
-            <option value="">Select category</option>
-            <option th:each="g:${T(bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum).values()}"
-                    th:text="${#strings.toUpperCase(g.name())}"
-                    th:value="${g}">burger</option>
+<div class="container"
+     style=" margin-right: auto;
+     margin-left: auto;
+     background-color: #49857b;
+     border-radius: 25px;
+     width: 70%;
+     font-family: Georgia, serif;">
 
-        </select>
-        <small class="invalid-feedback errors-register alert-danger">Category is required.</small>
-    </div>
-    <div class="form-group">
-        <label for="price" class="form-label float-start text-white">Price</label>
-        <input type="number"
-               th:field="*{price}"
-               th:errorclass="is-invalid"
-               th:start="0" step="0.01" class="form-control" id="price" name="price"/>
-        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('price')}"
-             th:text="${err}"/>
-    </div>
-    <div class="form-group mb-3">
-        <label for="description" class="form-label float-start text-white">Description</label>
-        <textarea class="form-control"
-                  th:field="*{description}"
-                  th:errorclass="is-invalid"
-                  id="description" rows="5"></textarea>
-        <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('description')}"
-             th:text="${err}"/>
-    </div>
-    <div class="register-12 text-center mt-3 mb-3">
-        <button type="submit" class="btn">Add product</button>
-    </div>
-</form>
+    <form style="margin-top: 15px; margin-left: auto; margin-right: auto; width: 80%; justify-content: center"
+          th:method="post"
+          th:action="@{/products/add}"
+          th:object="${productDto}">
+
+        <h1 class="text-white text-center">Add product</h1>
+
+        <div class="form-group">
+            <label for="name" class="text-white">Product name</label>
+            <input type="text"
+                   th:field="*{name}"
+                   th:errorclass="is-invalid"
+                   class="form-control" id="name" placeholder="Ex: Cheeseburger">
+            <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('name')}"
+                 th:text="${err}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="category" class="form-label float-start text-white">Category</label>
+            <select id="category"
+                    th:field="*{category}"
+                    th:errorclass="is-invalid"
+                    class="form-select text-secondary">
+                <option value="">Select category</option>
+                <option th:each="g:${T(bg.softuni.fooddelivery.domain.enums.ProductCategoryEnum).values()}"
+                        th:text="${#strings.toUpperCase(g.name())}"
+                        th:value="${g}">burger
+                </option>
+            </select>
+            <small class="invalid-feedback errors-register alert-danger">Category is required.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="price" class="form-label float-start text-white">Price</label>
+            <input type="number"
+                   th:field="*{price}"
+                   th:errorclass="is-invalid"
+                   th:start="0" step="0.01" class="form-control" id="price" name="price"/>
+            <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('price')}"
+                 th:text="${err}"/>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="description" class="form-label float-start text-white">Description</label>
+            <textarea class="form-control"
+                      th:field="*{description}"
+                      th:errorclass="is-invalid"
+                      id="description" rows="5"></textarea>
+            <div class="invalid-feedback errors-register alert-danger" th:each="err :${#fields.errors('description')}"
+                 th:text="${err}"/>
+        </div>
+
+        <div class="register-12 text-center mt-4 mb-2">
+            <button type="submit" class="btn">Add product</button>
+        </div>
+
+    </form>
+
 </div>
 
 <th:block th:insert="~{fragments/footer}"></th:block>
