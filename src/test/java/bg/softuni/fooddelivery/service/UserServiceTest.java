@@ -11,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,9 +36,9 @@ public class UserServiceTest {
 
 
     @BeforeEach
-    void setUp(){
-        serviceToTest=new
-                UserService(mockModelMapper,mockPasswordEncoder,mockUserRepository,mockUserRoleService,mockUserRoleRepository,cartService);
+    void setUp() {
+        serviceToTest = new
+                UserService(mockModelMapper, mockPasswordEncoder, mockUserRepository, mockUserRoleService, mockUserRoleRepository, cartService);
     }
 
     @Test

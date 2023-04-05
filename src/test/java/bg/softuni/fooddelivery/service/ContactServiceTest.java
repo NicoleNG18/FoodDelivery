@@ -46,10 +46,10 @@ public class ContactServiceTest {
 
         ContactEntity actualSaved = contactEntityArgumentCaptor.getValue();
 
-        Assertions.assertEquals(contactBindingDto.getName(),actualSaved.getName());
-        Assertions.assertEquals(contactBindingDto.getDescription(),actualSaved.getDescription());
-        Assertions.assertEquals(contactBindingDto.getSubject(),actualSaved.getSubject());
-        Assertions.assertEquals(contactBindingDto.getEmail(),actualSaved.getEmail());
+        Assertions.assertEquals(contactBindingDto.getName(), actualSaved.getName());
+        Assertions.assertEquals(contactBindingDto.getDescription(), actualSaved.getDescription());
+        Assertions.assertEquals(contactBindingDto.getSubject(), actualSaved.getSubject());
+        Assertions.assertEquals(contactBindingDto.getEmail(), actualSaved.getEmail());
 
     }
 

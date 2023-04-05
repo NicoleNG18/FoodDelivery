@@ -18,13 +18,13 @@ import java.util.ArrayList;
 @Component
 public class TestDataUtils {
 
-    private UserRoleRepository userRoleRepository;
-    private UserRepository userRepository;
-    private ShoppingCartRepository cartRepository;
-    private ProductRepository productRepository;
-    private OrderRepository orderRepository;
+    private final UserRoleRepository userRoleRepository;
+    private final UserRepository userRepository;
+    private final ShoppingCartRepository cartRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public TestDataUtils(UserRoleRepository userRoleRepository,
@@ -105,7 +105,7 @@ public class TestDataUtils {
     }
 
     public UserEntity createTestWorker(String email,
-                                     String username) {
+                                       String username) {
 
         initRoles();
 
@@ -128,10 +128,11 @@ public class TestDataUtils {
         return userRepository.save(user);
     }
 
-    public OrderViewDto createOrderDetailViewDto(String ownerEmail, String ownerName){
+    public OrderViewDto createOrderDetailViewDto(String ownerEmail,
+                                                 String ownerName) {
 
-        OrderEntity entity=new OrderEntity()
-                .setOwner(createTestUser(ownerEmail,ownerName))
+        OrderEntity entity = new OrderEntity()
+                .setOwner(createTestUser(ownerEmail, ownerName))
                 .setPrice(BigDecimal.TEN)
                 .setAddress("orderAddress")
                 .setCreatedOn(LocalDateTime.now())

@@ -25,7 +25,7 @@ public class ProductServiceTest {
 
     @BeforeEach
     void setUp() {
-        serviceToTest = new ProductService(mockProductRepository,mockModelMapper);
+        serviceToTest = new ProductService(mockProductRepository, mockModelMapper);
     }
 
 
@@ -40,4 +40,5 @@ public class ProductServiceTest {
         Assertions.assertThrows(NotFoundObjectException.class,
                 () -> this.serviceToTest.getProductById(-1L));
     }
+
 }

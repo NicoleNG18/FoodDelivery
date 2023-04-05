@@ -37,7 +37,7 @@ public class FoodDeliveryUserDetailsServiceTest {
 
     @Test
     void testLoadUserByUsername_UserExists() {
-        //arrange
+
         UserEntity testUser = new UserEntity()
                 .setUsername("admin")
                 .setPassword("topsecret")
@@ -56,16 +56,14 @@ public class FoodDeliveryUserDetailsServiceTest {
         when(mockUserRepository.findUserEntityByUsername(testUser.getUsername()))
                 .thenReturn(Optional.of(testUser));
 
-        //act
         UserDetails userDetails = serviceToTest.loadUserByUsername(testUser.getUsername());
 
-        //assert
         Assertions.assertNotNull(userDetails);
 
         Assertions.assertEquals(testUser.getUsername(), userDetails.getUsername());
         Assertions.assertEquals(testUser.getPassword(), userDetails.getPassword());
 
-        Assertions.assertEquals(3,userDetails.getAuthorities().size());
+        Assertions.assertEquals(3, userDetails.getAuthorities().size());
         assertRole(userDetails.getAuthorities(), "ROLE_ADMIN");
         assertRole(userDetails.getAuthorities(), "ROLE_WORKER");
         assertRole(userDetails.getAuthorities(), "ROLE_USER");
@@ -87,4 +85,5 @@ public class FoodDeliveryUserDetailsServiceTest {
                 () -> serviceToTest.loadUserByUsername("non-existant@example.com")
         );
     }
+
 }

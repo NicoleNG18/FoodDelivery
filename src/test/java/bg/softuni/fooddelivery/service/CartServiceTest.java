@@ -47,10 +47,8 @@ public class CartServiceTest {
     @Test
     void testReturnedCart() {
 
-        //act
         CartEntity newCart = serviceToTest.getNewCart();
 
-        //assert
         Assertions.assertEquals(0, newCart.getProducts().size());
         Assertions.assertEquals(BigDecimal.ZERO, newCart.getProductsSum());
     }
