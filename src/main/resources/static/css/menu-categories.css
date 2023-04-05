@@ -30,7 +30,6 @@ body {
 
 
 .card{
-    /*background-color: #eea9a8;*/
     background-color: #49857b;
     width:70%;
     margin-left: 50px;
@@ -41,7 +40,6 @@ body {
 }
 
 .card-dessert{
-    /*background-color:#d54b43;*/
     background-color: #eaddc6;
 }
 
@@ -49,7 +47,6 @@ body {
     margin-left: 75px;
     margin-right: 75px;
 }
-
 
 .card-title{
     color: white;
