@@ -1,25 +1,46 @@
 <!doctype html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <th:block th:insert="~{/fragments/head}"></th:block>
     <title>Order details</title>
 </head>
+
 <body>
 
 <div>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
-<div class="container"
-     style="background-color: #49857b; margin-left: auto; margin-right: auto; width: 50%; margin-top: 200px; border-radius: 25px;">
 
+<div class="container"
+     style="background-color: #49857b;
+     margin-left: auto;
+     margin-right: auto;
+     width: 50%;
+      margin-top: 200px;
+       border-radius: 25px;
+font-family: Georgia, serif;">
 
     <button type="submit" id="orderButton"
-            style="border-radius: 25px; border-color: white; margin-left: 325px; margin-right: 150px">Load order details
+            style="border-radius: 25px;
+            border-color: white;
+            margin-left: 325px;
+            margin-right: 150px">
+        Load order details
     </button>
+
     <input type="hidden" name="orderId" id="orderId" th:value="${idAtr}">
 
-    <table class="table table-bordered mt-4" style="width: 60%; margin-left:auto; margin-right: auto; border: white; color:white;">
+    <table class="table table-bordered mt-4"
+           style="width: 90%;
+           margin-left:auto;
+            margin-right: auto;
+            border: white;
+            color:white;">
+
         <thead>
+
         <tr>
             <th class="text-center">Id</th>
             <th class="text-center">Client</th>
@@ -29,16 +50,23 @@
             <th class="text-center">Phone number</th>
             <th class="text-center">Comment</th>
         </tr>
+
         </thead>
-        <tbody id="orderTableBody"></tbody>
+
+        <tbody id="orderTableBody" style="text-align: center"></tbody>
+
     </table>
+
 </div>
+
+<th:block th:insert="~{fragments/footer}"></th:block>
+
 <script src="/js/orderDetails.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<th:block th:insert="~{fragments/footer}"></th:block>
+
 </body>
 
 </html>

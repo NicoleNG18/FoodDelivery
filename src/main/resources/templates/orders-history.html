@@ -3,72 +3,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <title>Orders history</title>
-  <th:block th:insert="~{/fragments/head}"></th:block>
+    <title>Orders history</title>
+    <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
 <body>
 
 <div>
-  <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </div>
 
+<div class="container" style="background-color: #49857b; font-family: Georgia, serif; border-radius: 25px;">
+    <h1 class="text-center text-white mb-3">All orders</h1>
 
-<h2 class="text-center" style="color: #2c504a">All orders</h2>
+    <div class="row">
 
-<div class="container mt-2">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered">
-        <thead>
-        <tr  style="background-color: #3a6661; color: white">
-          <th scope="col" class="text-center">Id</th>
-          <th scope="col" class="text-center">Owner</th>
-          <th scope="col" class="text-center">Price</th>
-          <th scope="col" class="text-center">Created on</th>
-          <th scope="col" class="text-center">Delivered on</th>
-          <th scope="col" class="text-center">Status</th>
-          <th scope="col" class="text-center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">Finish</th>
-          <th scope="col" class="text-center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">Cancel</th>
-          <th scope="col" class="text-center">More details</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="order: ${allOrders}" th:object="${order}">
-          <th scope="row" th:text="*{id}" class="text-center" style="background-color: #93b5b1">1</th>
-          <td th:text="*{client}" class="text-center" style="background-color: #f4f1ed">0.00</td>
-          <td th:text="*{price}" class="text-center" style="background-color: #f4f1ed">0.00</td>
-          <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
-          <td th:text="*{#temporals.format(deliveredOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center" style="background-color: #f4f1ed">01-01-2010</td>
-          <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">Delivered</td>
-          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')" >
-            <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
-                    th:method="PATCH"
-                  th:action="@{/orders/finish/{id}(id=${order.id})}"
-                  th:object="${order}">
-              <button class="button-detail" type="submit" style="width:100%; border-color: white; background-color: #49857b;"
-              >Finish order</button>
-            </form>
-          </td>
-          <td style="background-color: #f4f1ed; text-align: center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')" >
-            <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
-                  th:method="PATCH"
-                  th:action="@{/orders/cancel/{id}(id=${order.id})}"
-                  th:object="${order}">
-              <button class="button-detail" type="submit" style="width:100%; border-color: white; background-color: #49857b;"
-              >Cancel order</button>
-            </form>
-          </td>
-          <td style="text-align: center; background-color: #f4f1ed">
-            <a type="button" class="button-detail" th:href="@{/orders/details/{id}(id=${order.id})}" style="background-color: #49857b">Details</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+        <div class="col-12">
+
+            <table class="table table-bordered">
+
+                <thead>
+
+                <tr style="background-color: #3a6661; color: white">
+                    <th scope="col" class="text-center">Id</th>
+                    <th scope="col" class="text-center">Owner</th>
+                    <th scope="col" class="text-center">Price</th>
+                    <th scope="col" class="text-center">Created on</th>
+                    <th scope="col" class="text-center">Delivered on</th>
+                    <th scope="col" class="text-center">Status</th>
+                    <th scope="col" class="text-center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">
+                        Finish
+                    </th>
+                    <th scope="col" class="text-center" sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">
+                        Cancel
+                    </th>
+                    <th scope="col" class="text-center">More details</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="order: ${allOrders}" th:object="${order}">
+
+                    <th scope="row" th:text="*{id}" class="text-center" style="background-color: #93b5b1; color: white">1</th>
+
+                    <td th:text="*{client}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+
+                    <td th:text="*{price}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+
+                    <td th:text="*{#temporals.format(createdOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center"
+                        style="background-color: #f4f1ed">01-01-2010
+                    </td>
+
+                    <td th:text="*{#temporals.format(deliveredOn,'dd-MM-yyyy HH:mm:ss')}" class="text-center"
+                        style="background-color: #f4f1ed">01-01-2010
+                    </td>
+
+                    <td th:text="*{status.name()}" class="text-center" style="background-color: #f4f1ed">Delivered</td>
+
+                    <td style="background-color: #f4f1ed; text-align: center"
+                        sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">
+
+                        <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
+                              th:method="PATCH"
+                              th:action="@{/orders/finish/{id}(id=${order.id})}"
+                              th:object="${order}">
+                            <button class="button-detail" type="submit"
+                                    style="width:100%; border-color: white; background-color: #49857b;"
+                            >Finish order
+                            </button>
+                        </form>
+
+                    </td>
+
+                    <td style="background-color: #f4f1ed; text-align: center"
+                        sec:authorize="hasAnyAuthority('ROLE_WORKER','ROLE_ADMIN')">
+                        <form th:if="*{#strings.equals(getStatus().name(),'IN_PROGRESS')}"
+                              th:method="PATCH"
+                              th:action="@{/orders/cancel/{id}(id=${order.id})}"
+                              th:object="${order}">
+                            <button class="button-detail" type="submit"
+                                    style="width:100%; border-color: white; background-color: #49857b;"
+                            >Cancel order
+                            </button>
+                        </form>
+                    </td>
+
+                    <td style="text-align: center; background-color: #f4f1ed">
+                        <a type="button" class="button-detail" th:href="@{/orders/details/{id}(id=${order.id})}"
+                           style="background-color: #49857b">Details</a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
     </div>
-  </div>
-</div>
 
+</div>
 
 <th:block th:insert="~{fragments/footer}"></th:block>
 
