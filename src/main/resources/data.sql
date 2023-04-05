@@ -1,6 +1,5 @@
 USE `food_delivery`;
 
-# pizzas
 INSERT INTO `products` (name, price, description,category) VALUES ('Margherita',7.99,
                                                                 'Tomato sauce, mozzarella, spices','pizza');
 INSERT INTO `products` (name, price, description,category) VALUES ('Caprese',8.99,
@@ -28,13 +27,11 @@ INSERT INTO `products` (name, price, description,category) VALUES ('Capricciosa'
 INSERT INTO `products` (name, price, description,category) VALUES ('Pizza with mushrooms',8.99,
                                                                 'Tomato sauce, mushrooms, mozzarella, thyme, olive oil','pizza');
 
-# tortillas
 INSERT INTO `products` (name, price, description,category) VALUES ('Porkesa',11.99,
  'Pulled pork, caramel onion, barbecue sauce, cheese, mixed salads, tomatoes, mushroom mayonnaise, french fries','tortilla');
 INSERT INTO `products` (name, price, description,category) VALUES ('Chicken',9.99,
                                                                 'Crispy chicken with sesame, cheese, mixed salads, tomatoes, garlic sauce, ketchup, french fries','tortilla');
 
-# burgers
 INSERT INTO `products` (name, price, description,category) VALUES ('With pulled pork',10.99,
                                                                 'Pulled pork, caramelized onions, mushroom mayonnaise, barbecue sauce,mixed salads, tomatoes, cheddar slice, fries','burger');
 INSERT INTO `products` (name, price, description,category) VALUES ('Chicken Burger',10.99,
@@ -72,24 +69,12 @@ INSERT INTO `products` (name, price, description,category) VALUES ('Vegan Burger
                                                                  red onion and vegan bun without butter and eggs,
                                                                  fries and ketchup','burger');
 
-# fries
 INSERT INTO `products` (name, price, description,category) VALUES ('Plain french fries',3.99,'French fries, sea salt','fries');
 INSERT INTO `products` (name, price, description,category) VALUES ('Garlic fries',4.99,'French fries, garlic sauce','fries');
 INSERT INTO `products` (name, price, description,category) VALUES ('Ranch fries',5.99,'French fries, ranch sauce','fries');
 INSERT INTO `products` (name, price, description,category) VALUES ('Chili con carne fries',8.99,'French fries, chili con carne','fries');
 INSERT INTO `products` (name, price, description,category) VALUES ('Sweet fries',6.99,'French fries, garlic sauce','fries');
 
-# # sauces
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Ketchup',1.20,'Heinz','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Mayonnaise',1.20,'Heinz','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('BBQ',1.20,'Heinz','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Ranch',1.20,'Heinz','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Mustard',1.20,'Heinz','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Burger sauce',1.20,'Homemade burger sauce with secret ingredients','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Caesar',1.20,'Heinz','SAUCE');
-# INSERT INTO `foods` (name, price, description,category) VALUES ('Sweet chili',1.20,'Heinz','SAUCE');
-
-# desserts
 INSERT INTO `products` (name, price, description,category) VALUES ('Brownie',4.59,'With ice cream and fruit','dessert');
 INSERT INTO `products` (name, price, description,category) VALUES ('Cookies',0.99,'With chocolate chips','dessert');
 INSERT INTO `products` (name, price, description,category) VALUES ('Muffins',2.59,'Filled with blueberry cream','dessert');
@@ -97,7 +82,6 @@ INSERT INTO `products` (name, price, description,category) VALUES ('Doughnuts',1
 INSERT INTO `products` (name, price, description,category) VALUES ('White chocolate mousse',3.99,'With Lindt chocolate','dessert');
 INSERT INTO `products` (name, price, description,category) VALUES ('Ice cream',2.50,'Salted caramel','dessert');
 
-# drinks
 INSERT INTO `products` (name, price, description,category) VALUES ('Coca cola',1.99,'0.5L','drink');
 INSERT INTO `products` (name, price, description,category) VALUES ('Fanta',1.99,'0.5L','drink');
 INSERT INTO `products` (name, price, description,category) VALUES ('Sprite',1.99,'0.5L','drink');
