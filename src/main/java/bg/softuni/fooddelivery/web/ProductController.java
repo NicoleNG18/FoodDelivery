@@ -2,18 +2,14 @@ package bg.softuni.fooddelivery.web;
 
 import bg.softuni.fooddelivery.domain.dto.binding.EditProductBindingDto;
 import bg.softuni.fooddelivery.domain.dto.binding.AddProductBindingDto;
-import bg.softuni.fooddelivery.exception.WrongCategoryException;
 import bg.softuni.fooddelivery.service.ProductService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static bg.softuni.fooddelivery.constants.ControllerAttributesConstants.CATEGORY;
 import static bg.softuni.fooddelivery.constants.ControllerAttributesConstants.PRODUCT;
 
 
@@ -35,17 +31,6 @@ public class ProductController {
     @ModelAttribute("editedProductDto")
     public EditProductBindingDto initEditProductDto() {
         return new EditProductBindingDto();
-    }
-
-    @ExceptionHandler(WrongCategoryException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ModelAndView categoryDoesNotExist(WrongCategoryException productNotFoundException) {
-
-        ModelAndView modelAndView = new ModelAndView("category-does-not-exist");
-
-        modelAndView.addObject(CATEGORY, productNotFoundException.getCategory());
-
-        return modelAndView;
     }
 
     @GetMapping("/add")

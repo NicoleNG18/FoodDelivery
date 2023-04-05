@@ -7,7 +7,7 @@
   <th:block th:insert="~{/fragments/head}"></th:block>
 </head>
 
-<body>
+<body style="font-family: Georgia, serif;">
 
 <div>
   <th:block th:insert="~{/fragments/navigation}"></th:block>
@@ -16,16 +16,17 @@
 <form class="contact-form mb-4"
       th:action="@{/contact}"
       th:method="POST"
-      th:object="${contactDto}">
+      th:object="${contactDto}"
+style="width: 70%">
 
 
-  <h2 class="wrapper h1-responsive text-center text-white">Contact us</h2>
+  <h1 class="wrapper h1-responsive text-center text-white">Contact us</h1>
 
-  <p class="message text-center w-responsive text-white mt-1">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+  <p class="message text-center w-responsive text-white mt-1">
+    Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
     a matter of hours to help you.</p>
 
   <div class="row">
-
 
     <div class="col-md-9 mb-md-0 mb-5">
         <div class="form-info">
@@ -57,7 +58,6 @@
                    th:text="${err}"/>
             </div>
           </div>
-
         </div>
 
         <div class="form-info">
@@ -78,7 +78,6 @@
         <div class="form-info">
 
           <div class="col-md-12">
-
             <div class="md-form">
               <label for="message">Your message</label>
               <textarea type="text"
@@ -89,18 +88,20 @@
                    th:each="err :${#fields.errors('description')}"
                    th:text="${err}"/>
             </div>
-
           </div>
+
         </div>
 
       <div class="text-center text-md-left">
         <button class="send-button justify-content-center">Send</button>
       </div>
-      <div class="status"></div>
+
     </div>
 
     <div class="col-md-3 text-center mt-1 mb-2">
+
       <ul class="list-unstyled text-white">
+
         <li><i class="fas fa-map-marker-alt fa-2x"></i>
           <p>Kyustendil, 2500, Bulgaria</p>
         </li>
@@ -112,9 +113,10 @@
         <li><i class="fas fa-envelope mt-4 fa-2x"></i>
           <p>bestFastFood@abv.bg</p>
         </li>
-      </ul>
-    </div>
 
+      </ul>
+
+    </div>
 
   </div>
 
