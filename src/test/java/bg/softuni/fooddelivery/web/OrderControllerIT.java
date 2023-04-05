@@ -50,16 +50,17 @@ public class OrderControllerIT {
         mockMvc.perform(MockMvcRequestBuilders.get("/orders/finalize"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("finalize-order"))
-                .andExpect(model().attributeExists("foodPrice", "countBoxes"));
+                .andExpect(model().attributeExists("foodPrice", "countProducts"));
 
     }
 
     @Test
-    @WithMockUser(username = "userOrderCtrl",roles = "USER")
+    @WithMockUser(username = "userOrderCtrl", roles = "USER")
     void testFinalizeOrder_WorksCorrectly() throws Exception {
         mockMvc.perform(post("/orders/finalize")
                         .param("comment", "Test comment")
-                        .param("address", "Test address")
+                        .param("address", "Test address1")
+                        .param("discount", "PIZZA4")
                         .param("contactNumber", "0789654123")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
@@ -71,7 +72,8 @@ public class OrderControllerIT {
     void testFinalizeOrder_WithInvalidData() throws Exception {
         mockMvc.perform(post("/orders/finalize")
                         .param("comment", "Test comment")
-                        .param("address", "Test address")
+                        .param("address", "Test address1")
+                        .param("discount", "")
                         .param("contactNumber", "")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
@@ -113,23 +115,5 @@ public class OrderControllerIT {
                 .andExpect(view().name("orders-history"))
                 .andExpect(model().attributeExists("allOrders"));
     }
-
-//    @Test
-//    @WithMockUser(username = "adminOrder", roles = {"USER", "ADMIN", "WORKER"})
-//    void testFinishOrderCorrectly() throws Exception {
-//        mockMvc.perform(patch("/orders/finish/{id}", testOrder.getId()))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/orders/all/history"));
-//    }
-//
-//    @Test
-//    @WithMockUser(username = "adminOrder",roles = {"USER","ADMIN","WORKER"})
-//    void testFinishOrder_ThrowsException() throws Exception {
-//        mockMvc.perform(patch("/orders/finish/78"))
-//                .andExpect(status().is4xxClientError())
-//                .andExpect(view().name("object-not-found"))
-//                .andExpect(model().attributeExists("objectId", "objectType"));
-//    }
-
 
 }

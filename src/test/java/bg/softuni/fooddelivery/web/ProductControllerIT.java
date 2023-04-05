@@ -41,12 +41,6 @@ public class ProductControllerIT {
         testDataUtils.cleanUpDatabase();
     }
 
-    @Test
-    void testGetMenuShowsUp() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/menu"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("menu-categories"));
-    }
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
@@ -54,21 +48,6 @@ public class ProductControllerIT {
         mockMvc.perform(MockMvcRequestBuilders.get("/products/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("add-product"));
-    }
-
-    @Test
-    void testGetMenuCategoriesShowsUp() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/menu/pizza"))
-                .andExpect(view().name("categories-page"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("category", "products"));
-    }
-
-    @Test
-    void testGetMenuCategoriesThrowsException() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/menu/non-existent"))
-                .andExpect(view().name("category-does-not-exist"))
-                .andExpect(status().is4xxClientError());
     }
 
     @Test

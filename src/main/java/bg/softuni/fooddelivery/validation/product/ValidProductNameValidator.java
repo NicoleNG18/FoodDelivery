@@ -13,7 +13,7 @@ public class ValidProductNameValidator implements ConstraintValidator<ValidProdu
         }
 
         for (int i = 0; i < productName.length(); i++) {
-            if (!Character.isLetter(productName.charAt(i))) {
+            if (!Character.isLetter(productName.charAt(i)) && !Character.isWhitespace(productName.charAt(i))) {
                 return false;
             }
         }

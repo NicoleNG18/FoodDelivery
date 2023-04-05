@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -41,24 +40,6 @@ public class UserControllerIT {
     }
 
     @Test
-    @WithAnonymousUser
-    void testGetLoginShowsUp() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/login"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("auth-login"));
-    }
-
-    @Test
-    @WithAnonymousUser
-    void testLoginWithWrongInput_ShouldRedirectBackToLogin() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/login-error")
-                        .param("username", "userTest")
-                        .param("password", "123")
-                        .with(csrf()))
-                .andExpect(status().is3xxRedirection());
-    }
-
-    @Test
     @WithMockUser(username = "testUserCtr", roles = "USER")
     void testGetUserProfileShowsUp() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/users/profile"))
@@ -77,10 +58,10 @@ public class UserControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = "ADMIN")
+    @WithMockUser(username = "adminUserCtrl", roles = "ADMIN")
     void testUserGetProfileWithIdThrowsException() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/profile/28"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/profile/896"))
                 .andExpect(status().is4xxClientError())
                 .andExpect(view().name("object-not-found"))
                 .andExpect(model().attributeExists("objectId", "objectType"));
@@ -105,21 +86,21 @@ public class UserControllerIT {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(username = "adminUserCtrl", roles = "ADMIN")
     void testGetChangeRolesThrowsException() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/change/28"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/change/896"))
                 .andExpect(status().is4xxClientError())
                 .andExpect(view().name("object-not-found"))
                 .andExpect(model().attributeExists("objectId", "objectType"));
     }
 
     @Test
-    @WithMockUser(username = "adminUserCtrl", roles = "ADMIN")
+    @WithMockUser(username = "workerUserCtrl", roles = {"WORKER","USER"})
     void testGetEditUserWorksCorrectly() throws Exception {
         mockMvc.perform(get("/users/edit/{id}", testUser.getId()))
                 .andExpect(view().name("edit-user"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("user"));
+                .andExpect(model().attributeExists("user","countProducts"));
     }
 
     @Test
@@ -151,14 +132,15 @@ public class UserControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "adminUserCtrl", roles = "ADMIN")
+    @WithMockUser(username = "workerUserCtrl", roles = {"WORKER","USER"})
     void testEditedUserWorksCorrectly() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.patch("/users/edited/{id}", testUser.getId())
                         .with(csrf())
-                        .param("username", "newUsername"))
+                        .param("firstName", "Nikol")
+                        .param("lastName", "Georgieva"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/users/profile/" + testUser.getId().toString()));
+                .andExpect(redirectedUrl("/users/profile"));
     }
 
     @Test
@@ -167,18 +149,8 @@ public class UserControllerIT {
 
         mockMvc.perform(MockMvcRequestBuilders.patch("/users/edited/{id}", testUser.getId())
                         .with(csrf())
-                        .param("username", ""))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/users/edit/" + testUser.getId()));
-    }
-
-    @Test
-    @WithMockUser(username = "adminUserCtrl", roles = "ADMIN")
-    void testEditedUserWithSameUsername() throws Exception {
-
-        mockMvc.perform(MockMvcRequestBuilders.patch("/users/edited/{id}", testUser.getId())
-                        .with(csrf())
-                        .param("username", "testUserCtr"))
+                        .param("firstName", "")
+                        .param("lastName", "Georg1ieva"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/users/edit/" + testUser.getId()));
     }

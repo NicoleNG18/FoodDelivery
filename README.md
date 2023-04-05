@@ -173,7 +173,8 @@ SoftUni additional requirements:
 - Error handling: global controller advice for not found object, specific controller exception for wrong menu category.
 Whitelabel error page replaced with custom error.html page.
 - Scheduled jobs - Every day, there are promotions. Depending on the day of week, some products have lower prices.
-- Test coverage: 44%
+- Test coverage: 
+![img_29.png](img_29.png)
 
 
 

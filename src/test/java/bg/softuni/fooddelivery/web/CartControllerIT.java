@@ -50,11 +50,11 @@ public class CartControllerIT {
     @Test
     @WithMockUser(username = "user1", roles = "USER")
     void testGetCart_ShowsUp() throws Exception {
+
         mockMvc.perform(MockMvcRequestBuilders.get("/cart"))
                 .andExpect(view().name("order-cart"))
-                .andExpect(model().attributeExists("cartProducts", "productsPrice"))
+                .andExpect(model().attributeExists("cartProducts", "productsPrice", "countProducts"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
