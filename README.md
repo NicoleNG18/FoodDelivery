@@ -6,9 +6,8 @@ Overview:
 -----------------
 
 Food Delivery is a web application for making food orders from restaurants.
-Before registration, you can only view the menu and maybe choose a dish or dishes.
-After registration and login you can add some products to your cart, contact number and address for delivery and
-make an order. If you have discount code, you can use it for 10% discount.(valid codes at the moment: "FOOD23", "PIZZA4", "EASTER")
+After registration and login you can add some products to your cart and make an order. 
+If you have discount code, you can use it for 10% discount.(valid codes at the moment: "FOOD23", "PIZZA4", "EASTER")
 
 Functionalities:
 -----------------------------------------------------
@@ -32,17 +31,17 @@ WORKER functionalities:
 - Manually set up workers are two - with usernames "workerOne" and "workerTwo"
 - Only view the menu
 - View all orders' history and finish or cancel orders
-- View its personal information and edit username
+- View its personal information and edit names
 
 USER functionalities:
 
-- Manually set up workers are two - with usernames "workerOne" and "workerTwo"
+- Manually set up plain users are two - with usernames "nikol" and "ivan"
 - Add products to the cart
 - Remove products from the cart
 - Make orders
 - View its own orders' history and orders' details
 - View its own cart
-- View its own personal information and edit username
+- View its own personal information and edit names
 - View contact form and submit some message
 
 
@@ -100,10 +99,6 @@ Pages:
   - All users page:
 
 ![img_42.png](img_42.png)
-
-  - User's details page with admin logged:
-
-![img_43.png](img_43.png)
 
   - Add product page:
 
